@@ -1,0 +1,24 @@
+ol.page-breadcrumb {
+  position: static;
+}
+.system-spinner {
+  font-weight: bold;
+  color: #1a3462;
+}
+.system-spinner__icon {
+  vertical-align: middle;
+  animation: fa-spin 2s infinite linear;
+}
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+.system-spinner__icon:before {
+  content: '\f1ce';
+  color: #1a3462;
+  font-weight: bold;
+}
