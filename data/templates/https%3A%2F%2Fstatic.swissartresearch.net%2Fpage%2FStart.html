@@ -4,10 +4,28 @@
 <h2>Johannes Itten Linked Archive</h2>
 
 <semantic-table
-    query="SELECT * WHERE {
-        ?subject a crm:E78_Curated_Holding .
-    }"
-></semantic-table>
+    query='SELECT ?subject (GROUP_CONCAT(DISTINCT ?type; SEPARATOR=";") as ?types) WHERE {
+        ?subject a crm:E78_Curated_Holding ;
+            rdfs:label ?label .
+        OPTIONAL {
+            ?subject crm:P2_has_type ?type .
+        }
+    } GROUP BY ?subject
+    ORDER BY ?label'
+    column-configuration='[{
+            "displayName": "Entity",
+            "variableName": "subject"
+        },
+        {
+            "displayName": "Types",
+            "variableName": "types",
+            "cellTemplate": "{{> templateTypes }}"
+        }]'
+>
+        <template id="templateTypes">
+            
+        </template>
+</semantic-table>
 
 [[> partial:contentFooter]]
 [[> partial:pageFooter ]]
