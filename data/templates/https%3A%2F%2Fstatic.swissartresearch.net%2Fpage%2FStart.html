@@ -4,13 +4,13 @@
 <h2>Johannes Itten Linked Archive</h2>
 
 <semantic-table
-    query='SELECT ?subject (GROUP_CONCAT(DISTINCT ?type; SEPARATOR=";") as ?types) WHERE {
+    query='SELECT ?subject ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR=";") as ?types) WHERE {
         ?subject a crm:E78_Curated_Holding ;
             rdfs:label ?label .
         OPTIONAL {
             ?subject crm:P2_has_type ?type .
         }
-    } GROUP BY ?subject
+    } GROUP BY ?subject ?label
     ORDER BY ?label'
     column-configuration='[{
             "displayName": "Entity",
@@ -23,7 +23,9 @@
         }]'
 >
         <template id="templateTypes">
-            
+            {{#each (split types.value ";")}}
+                <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
+            {{/each}}
         </template>
 </semantic-table>
 
