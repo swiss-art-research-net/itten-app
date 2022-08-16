@@ -40,22 +40,36 @@
                 } GROUP BY ?image"
                 template="{{> templateImage }}">
                 <template id="templateImage">
-                    <img src="{{bindings.0.image.value}}/full/,100/0/default.jpg"/>
+                    {{> templateThumbnailWithViewer iri=bindings.0.image.value}}
                     {{#ifCond bindings.0.count.value ">" 1}}
                         <details>
                             <summary>more&hellip;</summary>
                             {{#each bindings}}
                                 {{#if @first}}
                                 {{else}}
-                                    <img src="{{image.value}}/full/,100/0/default.jpg"/>
+                                    {{> templateThumbnailWithViewer iri=image.value}}
                                 {{/if}}
                             {{/each}}
                         </details>
                     {{/ifCond}}
                 </template>
+                <template id="templateThumbnailWithViewer">
+                    <mp-overlay-dialog title="Image Viewer" type="modal" bs-size="xl">
+                        <mp-overlay-dialog-trigger><img src="{{iri}}/full/,100/0/default.jpg"/></mp-overlay-dialog-trigger>
+                        <mp-overlay-dialog-content
+                            id="image-modal">
+                                <mp-page-loader 
+                                    iri="[[ resolvePrefix 'page:viewImage']]"
+                                    urlqueryparam-imageiri="{{iri}}"
+                                    urlqueryparam-overlay="true"
+                                ></mp-page-loader>
+                        </mp-overlay-dialog-content>
+                    </mp-overlay-dialog>
+                </template>
             </semantic-query>
         </template>
 </semantic-table>
+
 
 [[> partial:contentFooter]]
 [[> partial:pageFooter ]]
