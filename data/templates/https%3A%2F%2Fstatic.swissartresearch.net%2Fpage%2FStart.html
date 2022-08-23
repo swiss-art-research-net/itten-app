@@ -28,9 +28,11 @@
         }]'
 >
         <template id="templateTypes">
-            {{#each (split types.value ";")}}
-                <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
-            {{/each}}
+            {{#if types.value}}
+                {{#each (split types.value ";")}}
+                    <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
+                {{/each}}
+            {{/if}}
         </template>
         <template id="templateImages">
             <semantic-query
