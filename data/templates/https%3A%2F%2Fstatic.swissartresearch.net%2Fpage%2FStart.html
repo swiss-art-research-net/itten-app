@@ -4,13 +4,17 @@
 <h2>Johannes Itten Linked Archive</h2>
 
 <semantic-table
-    query='SELECT ?subject ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR=";") as ?types) WHERE {
+    query='SELECT ?subject ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR=";") as ?types) ?hasImage WHERE {
         ?subject a crm:E78_Curated_Holding ;
             rdfs:label ?label .
         OPTIONAL {
             ?subject crm:P2_has_type ?type .
         }
-    } GROUP BY ?subject ?label
+        OPTIONAL {
+            ?subject crm:P46_is_composed_of/crm:P138i_has_representation ?image .
+        }
+        BIND(BOUND(?image) as ?hasImage)
+    } GROUP BY ?subject ?label ?hasImage
     ORDER BY ?label'
     column-configuration='[{
             "displayName": "Entity",
@@ -23,7 +27,7 @@
         },
         {
             "displayName": "Images",
-            "variableName": "subject",
+            "variableName": "hasImage",
             "cellTemplate": "{{> templateImages }}"
         }]'
 >
