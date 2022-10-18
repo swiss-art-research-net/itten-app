@@ -3,79 +3,102 @@
 
 <h2>Johannes Itten Linked Archive</h2>
 
-<semantic-table
-    query='SELECT ?subject ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR=";") as ?types) ?hasImage WHERE {
-        ?subject a crm:E78_Curated_Holding ;
-            rdfs:label ?label .
-        OPTIONAL {
-            ?subject crm:P2_has_type ?type .
-        }
-        OPTIONAL {
-            ?subject crm:P46_is_composed_of/crm:P138i_has_representation ?image .
-        }
-        BIND(BOUND(?image) as ?hasImage)
-    } GROUP BY ?subject ?label ?hasImage
-    ORDER BY ?label'
-    column-configuration='[{
-            "displayName": "Entity",
-            "variableName": "subject"
-        },
-        {
-            "displayName": "Types",
-            "variableName": "types",
-            "cellTemplate": "{{> templateTypes }}"
-        },
-        {
-            "displayName": "Images",
-            "variableName": "hasImage",
-            "cellTemplate": "{{> templateImages }}"
-        }]'
->
-        <template id="templateTypes">
-            {{#if types.value}}
-                {{#each (split types.value ";")}}
-                    <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
-                {{/each}}
-            {{/if}}
-        </template>
-        <template id="templateImages">
-            <semantic-query
-                query="SELECT ?image (COUNT(?imageCount) as ?count) WHERE {
-                    BIND(<{{subject.value}}> as ?subject)
-                    ?subject crm:P46_is_composed_of/crm:P138i_has_representation/la:digitally_shown_by/la:digitally_available_via/la:access_point ?image, ?imageCount .
-                } GROUP BY ?image"
-                template="{{> templateImage }}">
-                <template id="templateImage">
-                    {{> templateThumbnailWithViewer iri=bindings.0.image.value}}
-                    {{#ifCond bindings.0.count.value ">" 1}}
-                        <details>
-                            <summary>more&hellip;</summary>
-                            {{#each bindings}}
-                                {{#if @first}}
-                                {{else}}
-                                    {{> templateThumbnailWithViewer iri=image.value}}
-                                {{/if}}
-                            {{/each}}
-                        </details>
-                    {{/ifCond}}
-                </template>
-                <template id="templateThumbnailWithViewer">
-                    <mp-overlay-dialog title="Image Viewer" type="lightbox" bs-size="xl">
-                        <mp-overlay-dialog-trigger><img src="{{iri}}/full/,70/0/default.jpg"/></mp-overlay-dialog-trigger>
-                        <mp-overlay-dialog-content
-                            id="image-modal">
-                                <mp-page-loader 
-                                    iri="[[ resolvePrefix 'page:viewImage']]"
-                                    urlqueryparam-imageiri="{{iri}}"
-                                    urlqueryparam-overlay="true"
-                                ></mp-page-loader>
-                        </mp-overlay-dialog-content>
-                    </mp-overlay-dialog>
-                </template>
-            </semantic-query>
-        </template>
-</semantic-table>
+<bs-tabs>
+    <bs-tab event-key="table" title="Table">
+        [[> component-table]]
+    </bs-tab>
+    <bs-tab event-key="tree" title="Tree">
+        [[> component-tree]]
+    </bs-tab>
+</bs-tabs>
 
+[[#*inline "component-table"]]
+    <semantic-table
+        query='SELECT ?subject ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR=";") as ?types) ?hasImage WHERE {
+            ?subject a crm:E78_Curated_Holding ;
+                rdfs:label ?label .
+            OPTIONAL {
+                ?subject crm:P2_has_type ?type .
+            }
+            OPTIONAL {
+                ?subject crm:P46_is_composed_of/crm:P138i_has_representation ?image .
+            }
+            BIND(BOUND(?image) as ?hasImage)
+        } GROUP BY ?subject ?label ?hasImage
+        ORDER BY ?label'
+        column-configuration='[{
+                "displayName": "Entity",
+                "variableName": "subject"
+            },
+            {
+                "displayName": "Types",
+                "variableName": "types",
+                "cellTemplate": "{{> templateTypes }}"
+            },
+            {
+                "displayName": "Images",
+                "variableName": "hasImage",
+                "cellTemplate": "{{> templateImages }}"
+            }]'
+    >
+            <template id="templateTypes">
+                {{#if types.value}}
+                    {{#each (split types.value ";")}}
+                        <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
+                    {{/each}}
+                {{/if}}
+            </template>
+            <template id="templateImages">
+                <semantic-query
+                    query="SELECT ?image (COUNT(?imageCount) as ?count) WHERE {
+                        BIND(<{{subject.value}}> as ?subject)
+                        ?subject crm:P46_is_composed_of/crm:P138i_has_representation/la:digitally_shown_by/la:digitally_available_via/la:access_point ?image, ?imageCount .
+                    } GROUP BY ?image"
+                    template="{{> templateImage }}">
+                    <template id="templateImage">
+                        {{> templateThumbnailWithViewer iri=bindings.0.image.value}}
+                        {{#ifCond bindings.0.count.value ">" 1}}
+                            <details>
+                                <summary>more&hellip;</summary>
+                                {{#each bindings}}
+                                    {{#if @first}}
+                                    {{else}}
+                                        {{> templateThumbnailWithViewer iri=image.value}}
+                                    {{/if}}
+                                {{/each}}
+                            </details>
+                        {{/ifCond}}
+                    </template>
+                    <template id="templateThumbnailWithViewer">
+                        <mp-overlay-dialog title="Image Viewer" type="lightbox" bs-size="xl">
+                            <mp-overlay-dialog-trigger><img src="{{iri}}/full/,70/0/default.jpg"/></mp-overlay-dialog-trigger>
+                            <mp-overlay-dialog-content
+                                id="image-modal">
+                                    <mp-page-loader 
+                                        iri="[[ resolvePrefix 'page:viewImage']]"
+                                        urlqueryparam-imageiri="{{iri}}"
+                                        urlqueryparam-overlay="true"
+                                    ></mp-page-loader>
+                            </mp-overlay-dialog-content>
+                        </mp-overlay-dialog>
+                    </template>
+                </semantic-query>
+            </template>
+    </semantic-table>
+[[/inline]]
+
+[[#*inline "component-tree"]]
+    <semantic-tree 
+        collapsed="true"
+        query="
+        SELECT ?node ?parent WHERE {
+            ?node a crm:E78_Curated_Holding ;
+                crm:P46i_forms_part_of ?parent .
+            ?parent a crm:E78_Curated_Holding .
+            FILTER (?parent != collection:jila-859afc5815a047a58569cee9db123f30)
+        }">
+    </semantic-tree>
+[[/inline]]
 
 [[> partial:contentFooter]]
 [[> partial:pageFooter ]]
