@@ -93,10 +93,11 @@
         query="
         SELECT ?node ?parent WHERE {
             ?node a crm:E78_Curated_Holding ;
+                rdfs:label ?label ;
                 crm:P46i_forms_part_of ?parent .
             ?parent a crm:E78_Curated_Holding .
             FILTER (?parent != collection:jila-859afc5815a047a58569cee9db123f30)
-        }">
+        } ORDER BY ?label">
     </semantic-tree>
 [[/inline]]
 
