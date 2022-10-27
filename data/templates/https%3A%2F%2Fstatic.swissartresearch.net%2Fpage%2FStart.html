@@ -13,6 +13,9 @@
     <bs-tab event-key="persons" title="Persons">
         [[> component-persons]]
     </bs-tab>
+    <bs-tab event-key="search" title="Search">
+        [[> partial:simpleSearchInclude]]
+    </bs-tab>
 </bs-tabs>
 
 [[#*inline "component-table"]]
@@ -96,6 +99,10 @@
             ?subject a crm:E21_Person .
         } ORDER BY ?subject">
     </semantic-table>
+[[/inline]]
+
+[[#*inline "component-search"]]
+    [[]]
 [[/inline]]
 
 [[#*inline "component-tree"]]

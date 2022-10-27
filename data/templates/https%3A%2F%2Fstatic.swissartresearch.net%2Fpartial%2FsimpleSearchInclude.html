@@ -1,0 +1,25 @@
+<semantic-search limit=[[#if searchLimit]][[searchLimit]][[else]]10[[/if]]>
+    <semantic-search-query-keyword
+      [[#if searchPlaceholder]]placeholder='[[searchPlaceholder]]'[[/if]]
+      tokenize-lucene-query="false"
+      domain='<http://www.w3.org/2000/01/rdf-schema#Resource>'
+      query='SELECT ?subject ?type ?score WHERE {
+            ?subject a ?type ; 
+              rdfs:label|crm:P190_has_symbolic_content ?searchTerm . 
+            ?type rdfs:label ?typeLabel . 
+            ?type rdfs:subClassOf* crm:E1_CRM_Entity .
+            ?searchTerm bds:search ?__token__ ;
+              bds:relevance ?score ; 
+              bds:matchAllTerms "true"
+          } ORDER BY DESC(?score)'
+    ></semantic-search-query-keyword>
+        <semantic-search-result-holder>
+            <semantic-search-result>
+                <semantic-table
+                    id="searchResultTable"
+                    query="SELECT DISTINCT ?subject WHERE {
+                        ?subject a ?type .
+                    }"            
+            </semantic-search-result>
+        </semantic-search-result-holder>
+</semantic-search>
