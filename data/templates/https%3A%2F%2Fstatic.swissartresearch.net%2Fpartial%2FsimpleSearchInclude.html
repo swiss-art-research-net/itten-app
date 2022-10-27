@@ -1,4 +1,4 @@
-<semantic-search limit=[[#if searchLimit]][[searchLimit]][[else]]10[[/if]]>
+<semantic-search limit=[[#if searchLimit]][[searchLimit]][[else]]99999[[/if]]>
     <semantic-search-query-keyword
       [[#if searchPlaceholder]]placeholder='[[searchPlaceholder]]'[[/if]]
       tokenize-lucene-query="false"
@@ -17,9 +17,26 @@
             <semantic-search-result>
                 <semantic-table
                     id="searchResultTable"
-                    query="SELECT DISTINCT ?subject WHERE {
+                    query="SELECT DISTINCT ?subject (GROUP_CONCAT(DISTINCT ?type;SEPARATOR=';') as ?types) WHERE {
                         ?subject a ?type .
-                    }"            
+                    } GROUP BY ?subject"
+                    column-configuration='[{
+                        "displayName": "Entity",
+                        "variableName": "subject"
+                    },{
+                        "displayName": "Types",
+                        "variableName": "types",
+                        "cellTemplate": "{{> template-types }}"
+                    }]'
+                >
+                    <template id="template-types">
+                        {{#if types.value}}
+                            {{#each (split types.value ";")}}
+                                <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
+                            {{/each}}
+                        {{/if}}
+                    </template>
+                </semantic-table> 
             </semantic-search-result>
         </semantic-search-result-holder>
 </semantic-search>

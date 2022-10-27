@@ -19,6 +19,12 @@
 </bs-tabs>
 
 [[#*inline "component-table"]]
+    <semantic-query
+        query="SELECT (COUNT(?subject) as ?num) WHERE {
+            ?subject a crm:E78_Curated_Holding .
+        }"
+        template="<p>{{bindings.0.num.value}} Items</p>"
+    ></semantic-query>
     <semantic-table
         query='SELECT ?subject ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR=";") as ?types) ?hasImage WHERE {
             ?subject a crm:E78_Curated_Holding ;
@@ -99,10 +105,6 @@
             ?subject a crm:E21_Person .
         } ORDER BY ?subject">
     </semantic-table>
-[[/inline]]
-
-[[#*inline "component-search"]]
-    [[]]
 [[/inline]]
 
 [[#*inline "component-tree"]]
