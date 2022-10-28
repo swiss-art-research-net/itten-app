@@ -101,9 +101,14 @@
 
 [[#*inline "component-persons"]]
     <semantic-table
-        query="SELECT ?subject WHERE {
-            ?subject a crm:E21_Person .
-        } ORDER BY ?subject">
+        query="SELECT ?subject ?label WHERE {
+            ?subject a crm:E21_Person ;
+                rdfs:label ?label.
+        } ORDER BY ?label ?subject"
+        column-configuration='[{
+            "displayName": "Person",
+            "variableName": "subject"
+        }]'>
     </semantic-table>
 [[/inline]]
 
