@@ -100,6 +100,12 @@
 [[/inline]]
 
 [[#*inline "component-persons"]]
+    <semantic-query
+        query="SELECT (COUNT(?subject) as ?num) WHERE {
+            ?subject a crm:E21_Person .
+        }"
+        template="<p>{{bindings.0.num.value}} Persons</p>">
+    </semantic-query>
     <semantic-table
         query="SELECT ?subject ?label WHERE {
             ?subject a crm:E21_Person ;
