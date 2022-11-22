@@ -25,7 +25,7 @@
 
             "label": "Pfad Bestand",
             "xsdDatatype" : "xsd:string",
-                "selectPattern" : "SELECT (GROUP_CONCAT(?sub; SEPARATOR=\" / \") as ?value) WHERE { { SELECT ?sub (count(?mid) as ?distance) { $subject crm:P46i_forms_part_of* ?mid . ?mid crm:P46i_forms_part_of+/rdfs:label ?sub . } GROUP BY ?sub ORDER BY DESC(?distance) } }",
+                "selectPattern" : "SELECT (GROUP_CONCAT(?sub; SEPARATOR=\" / \") as ?value) ?dummy WHERE { { SELECT ?sub (count(?mid) as ?distance) { $subject crm:P46i_forms_part_of* ?mid . ?mid crm:P46i_forms_part_of+/rdfs:label ?sub . } GROUP BY ?sub ORDER BY DESC(?distance) } } GROUP BY ?dummy",
         "iri" : "https://platform.swissartresearch.net/instances/fields/display_path"
     }
 [[/inline]]

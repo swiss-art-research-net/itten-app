@@ -34,7 +34,7 @@ fields:
       label: Pfad Bestand
       datatype: xsd:string
       queries:
-        - select: 'SELECT (GROUP_CONCAT(?sub; SEPARATOR=" / ") as ?value) WHERE {
+        - select: 'SELECT (GROUP_CONCAT(?sub; SEPARATOR=" / ") as ?value) ?dummy WHERE {
             {
               SELECT ?sub (count(?mid) as ?distance) { 
                 $subject crm:P46i_forms_part_of* ?mid .
@@ -43,7 +43,7 @@ fields:
               GROUP BY ?sub 
               ORDER BY DESC(?distance)
             } 
-          }'
+          } GROUP BY ?dummy'
 
     - id: display_production_date
       label: Entstehungszeitraum
