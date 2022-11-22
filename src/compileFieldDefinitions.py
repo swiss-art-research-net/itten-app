@@ -19,7 +19,7 @@ def addLocalisation(jsonString, bundle="bso"):
 model = generator.loadSourceFromFile(inputFile)
 
 output = generator.generate(model, generator.JSON)
-output = addLocalisation(output)
+#output = addLocalisation(output)
 
 with open(outputFile, 'w') as f:
     f.write(output)
