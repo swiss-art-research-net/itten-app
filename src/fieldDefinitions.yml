@@ -13,6 +13,15 @@ namespaces:
 
 fields:
 
+    - id: display_archival_level
+      label: Verzeichnungsstufe
+      datatype: xsd:anyURI
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P2_has_type ?value .
+            ?value crm:P127_has_broader_term aat:300241507 .
+          }'
+
     - id: display_part_count
       label: Bemerkungen zum Umfang
       datatype: xsd:string

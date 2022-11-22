@@ -1,5 +1,14 @@
 [
     {
+        "id" : "display_archival_level",
+
+            "label": "Verzeichnungsstufe",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P2_has_type ?value . ?value crm:P127_has_broader_term aat:300241507 . }",
+        "iri" : "https://platform.swissartresearch.net/instances/fields/display_archival_level"
+    },
+
+    {
         "id" : "display_part_count",
 
             "label": "Bemerkungen zum Umfang",
