@@ -1,5 +1,14 @@
 [
     {
+        "id" : "display_part_count",
+
+            "label": "Bemerkungen zum Umfang",
+            "xsdDatatype" : "xsd:string",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P57_has_number_of_parts ?value . }",
+        "iri" : "https://platform.swissartresearch.net/instances/fields/display_part_count"
+    },
+
+    {
         "id" : "display_production_date",
 
             "label": "Entstehungszeitraum",

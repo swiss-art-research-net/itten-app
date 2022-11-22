@@ -13,6 +13,14 @@ namespaces:
 
 fields:
 
+    - id: display_part_count
+      label: Bemerkungen zum Umfang
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P57_has_number_of_parts ?value .
+          }'
+
     - id: display_production_date
       label: Entstehungszeitraum
       datatype: xsd:string
