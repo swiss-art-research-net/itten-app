@@ -1,5 +1,14 @@
 [
     {
+        "id" : "display_production_date",
+
+            "label": "Entstehungszeitraum",
+            "xsdDatatype" : "xsd:string",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P108i_was_produced_by/crm:P4_has_time-span ?production_date . ?production_date rdfs:label ?date_label . OPTIONAL { ?production_date crm:P82a_begin_of_the_begin ?begin . } OPTIONAL { ?production_date crm:P82b_end_of_the_end ?end . } BIND(IF(BOUND(?begin) || BOUND(?end), CONCAT(?date_label, \" (\", STR(?begin), \" - \", STR(?end), \")\"), ?date_label) AS ?value) }",
+        "iri" : "https://platform.swissartresearch.net/instances/fields/display_production_date"
+    },
+
+    {
         "id" : "label",
 
             "label": "Label",
