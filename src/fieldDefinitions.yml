@@ -29,6 +29,18 @@ fields:
             BIND(IF(BOUND(?begin) || BOUND(?end), CONCAT(?date_label, " (", STR(?begin), " - ", STR(?end), ")"), ?date_label) AS ?value)
           }'
 
+    - id: display_production_date_remarks
+      label: Bemerkungen zur Datierung
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P108i_was_produced_by ?production .
+            ?production crm:P4_has_time-span ?production_date .
+            ?attribute_assignment crm:P141_assigned ?production_date ;
+              crm:P140_assigned_attribute_to ?production ;
+              crm:P3_has_note ?value .
+          }'
+
     - id: label
       label: Label
       description: A human-readable label for the entity
