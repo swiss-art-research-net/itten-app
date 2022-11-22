@@ -1,0 +1,13 @@
+
+ [[#*inline "label"]]
+    {
+        "id" : "label",
+
+            "label": "Label",
+            "description" : "A human-readable label for the entity",
+            "xsdDatatype" : "xsd:langString",
+                "insertPattern" : "INSERT { $subject rdfs:label $value . } WHERE {}",
+                "selectPattern" : "SELECT ?value WHERE { $subject rdfs:label ?value . }",
+        "iri" : "https://platform.swissartresearch.net/instances/fields/label"
+    }
+[[/inline]]

@@ -1,0 +1,26 @@
+prefix: https://platform.swissartresearch.net/instances/fields/
+container: http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer
+namespaces:
+  aat: http://vocab.getty.edu/aat/
+  crm: http://www.cidoc-crm.org/cidoc-crm/
+  crmdig: http://www.ics.forth.gr/isl/CRMdig/
+  crminf: http://www.ics.forth.gr/isl/CRMinf/
+  frbroo: http://iflastandards.info/ns/fr/frbr/frbroo/
+  la: http://www.linkedart.org/schema/
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  prov: http://www.w3.org/ns/prov#
+  search: https://platform.swissartresearch.net/search/
+
+fields:
+
+    - id: label
+      label: Label
+      description: A human-readable label for the entity
+      datatype: xsd:langString
+      queries:
+        - insert: 'INSERT {
+            $subject rdfs:label $value .
+          } WHERE {}'
+        - select: 'SELECT ?value WHERE {
+            $subject rdfs:label ?value .
+          }'
