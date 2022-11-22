@@ -9,6 +9,16 @@
         "iri" : "https://platform.swissartresearch.net/instances/fields/display_part_count"
     }
 [[/inline]]
+ [[#*inline "display_path"]]
+    {
+        "id" : "display_path",
+
+            "label": "Pfad Bestand",
+            "xsdDatatype" : "xsd:string",
+                "selectPattern" : "SELECT (GROUP_CONCAT(?sub; SEPARATOR=\" / \") as ?value) WHERE { { SELECT ?sub (count(?mid) as ?distance) { $subject crm:P46i_forms_part_of* ?mid . ?mid crm:P46i_forms_part_of+/rdfs:label ?sub . } GROUP BY ?sub ORDER BY DESC(?distance) } }",
+        "iri" : "https://platform.swissartresearch.net/instances/fields/display_path"
+    }
+[[/inline]]
  [[#*inline "display_production_date"]]
     {
         "id" : "display_production_date",

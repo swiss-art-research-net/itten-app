@@ -21,6 +21,21 @@ fields:
             $subject crm:P57_has_number_of_parts ?value .
           }'
 
+    - id: display_path
+      label: Pfad Bestand
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT (GROUP_CONCAT(?sub; SEPARATOR=" / ") as ?value) WHERE {
+            {
+              SELECT ?sub (count(?mid) as ?distance) { 
+                $subject crm:P46i_forms_part_of* ?mid .
+                ?mid crm:P46i_forms_part_of+/rdfs:label ?sub .
+              }
+              GROUP BY ?sub 
+              ORDER BY DESC(?distance)
+            } 
+          }'
+
     - id: display_production_date
       label: Entstehungszeitraum
       datatype: xsd:string
