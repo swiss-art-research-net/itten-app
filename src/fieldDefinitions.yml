@@ -22,6 +22,23 @@ fields:
             ?value crm:P127_has_broader_term aat:300241507 .
           }'
 
+    - id: display_archival_type
+      label: Archivalienart
+      datatype: xsd:anyURI
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P2_has_type ?value .
+            ?value crm:P127_has_broader_term aat:300026031 .
+          }'
+
+    - id: display_language
+      label: Sprache
+      datatype: xsd:anyURI
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P128_carries/crm:P72_has_language ?value .
+          }'
+    
     - id: display_part_count
       label: Bemerkungen zum Umfang
       datatype: xsd:string

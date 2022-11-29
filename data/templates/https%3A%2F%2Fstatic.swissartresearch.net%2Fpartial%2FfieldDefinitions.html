@@ -9,6 +9,24 @@
     },
 
     {
+        "id" : "display_archival_type",
+
+            "label": "Archivalienart",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P2_has_type ?value . ?value crm:P127_has_broader_term aat:300026031 . }",
+        "iri" : "https://platform.swissartresearch.net/instances/fields/display_archival_type"
+    },
+
+    {
+        "id" : "display_language",
+
+            "label": "Sprache",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P128_carries/crm:P72_has_language ?value . }",
+        "iri" : "https://platform.swissartresearch.net/instances/fields/display_language"
+    },
+
+    {
         "id" : "display_part_count",
 
             "label": "Bemerkungen zum Umfang",
