@@ -63,6 +63,15 @@
     },
 
     {
+        "id" : "display_remarks_general",
+
+            "label": "Allgemeine Anmerkungen",
+            "xsdDatatype" : "xsd:string",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P129i_is_subject_of ?remark . ?remark crm:P2_has_type aat:300435415 ; crm:P190_has_symbolic_content ?value . }",
+        "iri" : "https://platform.swissartresearch.net/instances/fields/display_remarks_general"
+    },
+
+    {
         "id" : "label",
 
             "label": "Label",
