@@ -21,13 +21,13 @@
 [[#*inline "component-table"]]
     <semantic-query
         query="SELECT (COUNT(?subject) as ?num) WHERE {
-            ?subject a crm:E78_Curated_Holding .
+            ?subject a search:Collection .
         }"
         template="<p>{{bindings.0.num.value}} Items</p>"
     ></semantic-query>
     <semantic-table
         query='SELECT ?subject ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR=";") as ?types) ?hasImage WHERE {
-            ?subject a crm:E78_Curated_Holding ;
+            ?subject a search:Collection ;
                 rdfs:label ?label .
             OPTIONAL {
                 ?subject crm:P2_has_type ?type .
@@ -102,13 +102,13 @@
 [[#*inline "component-persons"]]
     <semantic-query
         query="SELECT (COUNT(?subject) as ?num) WHERE {
-            ?subject a crm:E21_Person .
+            ?subject a search:Person .
         }"
         template="<p>{{bindings.0.num.value}} Persons</p>">
     </semantic-query>
     <semantic-table
         query="SELECT ?subject ?label WHERE {
-            ?subject a crm:E21_Person ;
+            ?subject a search:Person ;
                 rdfs:label ?label.
         } ORDER BY ?label ?subject"
         column-configuration='[{
@@ -123,10 +123,10 @@
         collapsed="true"
         query="
         SELECT ?node ?parent WHERE {
-            ?node a crm:E78_Curated_Holding ;
+            ?node a search:Collection ;
                 rdfs:label ?label ;
                 crm:P46i_forms_part_of ?parent .
-            ?parent a crm:E78_Curated_Holding .
+            ?parent a search:Collection .
             FILTER (?parent != collection:jila-859afc5815a047a58569cee9db123f30)
         } ORDER BY ?label">
     </semantic-tree>
