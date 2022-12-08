@@ -1,7 +1,8 @@
 sari=https://platform.swissartresearch.net/
 search=https://platform.swissartresearch.net/search/
-la=https://linked.art/ns/terms/
-collection=https://resource.swissartresearch.net/collection/
-type=https://resource.swissartresearch.net/type/
-gndo=https://d-nb.info/standards/elementset/gnd#
 aat=http://vocab.getty.edu/aat/
+collection=https://resource.swissartresearch.net/collection/
+gndo=https://d-nb.info/standards/elementset/gnd#
+la=https://linked.art/ns/terms/
+loc=http://id.loc.gov/vocabulary/relators/
+type=https://resource.swissartresearch.net/type/
