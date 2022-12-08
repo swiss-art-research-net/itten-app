@@ -99,6 +99,15 @@
     },
 
     {
+        "id" : "display_title",
+
+            "label": "Titel",
+            "xsdDatatype" : "xsd:string",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P1_is_identified_by ?title . ?title crm:P2_has_type aat:300404670 ; crm:P190_has_symbolic_content ?value . }",
+        "iri" : "https://platform.swissartresearch.net/instances/fields/display_title"
+    },
+
+    {
         "id" : "label",
 
             "label": "Label",

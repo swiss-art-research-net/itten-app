@@ -132,6 +132,16 @@ fields:
               crm:P190_has_symbolic_content ?value .
           }'
 
+    - id: display_title
+      label: Titel
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P1_is_identified_by ?title .
+            ?title crm:P2_has_type aat:300404670 ;
+              crm:P190_has_symbolic_content ?value .
+          }'
+
     - id: label
       label: Label
       description: A human-readable label for the entity
