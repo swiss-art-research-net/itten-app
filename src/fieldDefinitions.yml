@@ -90,6 +90,14 @@ fields:
               crm:P3_has_note ?value .
           }'
 
+    - id: display_production_place
+      label: Entstehungsort
+      datatype: xsd:anyURI
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P108i_was_produced_by/crm:P7_took_place_at ?value .
+          }'
+    
     - id: display_remarks_general
       label: Allgemeine Anmerkungen
       datatype: xsd:string
