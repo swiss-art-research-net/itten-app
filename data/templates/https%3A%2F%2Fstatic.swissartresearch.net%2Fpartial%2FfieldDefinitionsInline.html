@@ -29,6 +29,16 @@
         "iri" : "https://platform.swissartresearch.net/instances/fields/display_form_and_content"
     }
 [[/inline]]
+ [[#*inline "display_identifier"]]
+    {
+        "id" : "display_identifier",
+
+            "label": "Identifikator",
+            "xsdDatatype" : "xsd:string",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P1_is_identified_by ?identifier . ?identifier a crm:E42_Identifier ; crm:P190_has_symbolic_content ?identifierValue . OPTIONAL { ?identifier crm:P2_has_type/rdfs:label ?identifierType . } BIND(IF(BOUND(?identifierType), CONCAT(?identifierType, \": \", ?identifierValue), ?identifierValue) AS ?value) }",
+        "iri" : "https://platform.swissartresearch.net/instances/fields/display_identifier"
+    }
+[[/inline]]
  [[#*inline "display_language"]]
     {
         "id" : "display_language",
