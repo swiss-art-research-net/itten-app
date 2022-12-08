@@ -18,6 +18,15 @@
     },
 
     {
+        "id" : "display_form_and_content",
+
+            "label": "Form und Inhalt",
+            "xsdDatatype" : "xsd:string",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P129i_is_subject_of ?remark . ?remark crm:P2_has_type aat:300435416 ; crm:P190_has_symbolic_content ?value . }",
+        "iri" : "https://platform.swissartresearch.net/instances/fields/display_form_and_content"
+    },
+
+    {
         "id" : "display_language",
 
             "label": "Sprache",

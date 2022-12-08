@@ -31,6 +31,16 @@ fields:
             ?value crm:P127_has_broader_term aat:300026031 .
           }'
 
+    - id: display_form_and_content
+      label: Form und Inhalt
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P129i_is_subject_of ?remark .
+            ?remark crm:P2_has_type aat:300435416 ;
+              crm:P190_has_symbolic_content ?value .
+          }'
+
     - id: display_language
       label: Sprache
       datatype: xsd:anyURI
