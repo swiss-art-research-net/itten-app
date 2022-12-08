@@ -1,0 +1,155 @@
+prefix: https://platform.swissartresearch.net/instances/fields/
+container: http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer
+namespaces:
+  aat: http://vocab.getty.edu/aat/
+  crm: http://www.cidoc-crm.org/cidoc-crm/
+  crmdig: http://www.ics.forth.gr/isl/CRMdig/
+  crminf: http://www.ics.forth.gr/isl/CRMinf/
+  frbroo: http://iflastandards.info/ns/fr/frbr/frbroo/
+  la: http://www.linkedart.org/schema/
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  prov: http://www.w3.org/ns/prov#
+  search: https://platform.swissartresearch.net/search/
+
+fields:
+
+    - id: display_archival_level
+      label: Verzeichnungsstufe
+      datatype: xsd:anyURI
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P2_has_type ?value .
+            ?value crm:P127_has_broader_term aat:300241507 .
+          }'
+
+    - id: display_archival_type
+      label: Archivalienart
+      datatype: xsd:anyURI
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P2_has_type ?value .
+            ?value crm:P127_has_broader_term aat:300026031 .
+          }'
+
+    - id: display_form_and_content
+      label: Form und Inhalt
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P129i_is_subject_of ?remark .
+            ?remark crm:P2_has_type aat:300435416 ;
+              crm:P190_has_symbolic_content ?value .
+          }'
+
+    - id: display_identifier
+      label: Identifikator
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P1_is_identified_by ?identifier .
+            ?identifier a crm:E42_Identifier ;
+              crm:P190_has_symbolic_content ?identifierValue .
+            OPTIONAL {
+              ?identifier crm:P2_has_type/rdfs:label ?identifierType .
+            }
+            BIND(IF(BOUND(?identifierType), CONCAT(?identifierType, ": ", ?identifierValue), ?identifierValue) AS ?value)
+          }'
+
+    - id: display_language
+      label: Sprache
+      datatype: xsd:anyURI
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P128_carries/crm:P72_has_language ?value .
+          }'
+    
+    - id: display_part_count
+      label: Bemerkungen zum Umfang
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P57_has_number_of_parts ?value .
+          }'
+
+    - id: display_path
+      label: Pfad Bestand
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT (GROUP_CONCAT(?sub; SEPARATOR=" / ") as ?value) ?dummy WHERE {
+            {
+              SELECT ?sub (count(?mid) as ?distance) { 
+                $subject crm:P46i_forms_part_of* ?mid .
+                ?mid crm:P46i_forms_part_of+/rdfs:label ?sub .
+              }
+              GROUP BY ?sub 
+              ORDER BY DESC(?distance)
+            } 
+          } GROUP BY ?dummy'
+
+    - id: display_production_date
+      label: Entstehungszeitraum
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P108i_was_produced_by/crm:P4_has_time-span ?production_date .
+            ?production_date rdfs:label ?date_label .
+            OPTIONAL {
+              ?production_date crm:P82a_begin_of_the_begin ?begin .
+            }
+            OPTIONAL {
+              ?production_date crm:P82b_end_of_the_end ?end .
+            }
+            BIND(IF(BOUND(?begin) || BOUND(?end), CONCAT(?date_label, " (", STR(?begin), " - ", STR(?end), ")"), ?date_label) AS ?value)
+          }'
+
+    - id: display_production_date_remarks
+      label: Bemerkungen zur Datierung
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P108i_was_produced_by ?production .
+            ?production crm:P4_has_time-span ?production_date .
+            ?attribute_assignment crm:P141_assigned ?production_date ;
+              crm:P140_assigned_attribute_to ?production ;
+              crm:P3_has_note ?value .
+          }'
+
+    - id: display_production_place
+      label: Entstehungsort
+      datatype: xsd:anyURI
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P108i_was_produced_by/crm:P7_took_place_at ?value .
+          }'
+    
+    - id: display_remarks_general
+      label: Allgemeine Anmerkungen
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P129i_is_subject_of ?remark .
+            ?remark crm:P2_has_type aat:300435415 ;
+              crm:P190_has_symbolic_content ?value .
+          }'
+
+    - id: display_title
+      label: Titel
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P1_is_identified_by ?title .
+            ?title crm:P2_has_type aat:300404670 ;
+              crm:P190_has_symbolic_content ?value .
+          }'
+
+    - id: label
+      label: Label
+      description: A human-readable label for the entity
+      datatype: xsd:langString
+      queries:
+        - insert: 'INSERT {
+            $subject rdfs:label $value .
+          } WHERE {}'
+        - select: 'SELECT ?value WHERE {
+            $subject rdfs:label ?value .
+          }'

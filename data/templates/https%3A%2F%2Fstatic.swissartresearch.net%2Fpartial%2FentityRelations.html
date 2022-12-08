@@ -1,0 +1,49 @@
+[[#*inline "thisIri"]][[#if entityiri]][[entityiri]][[else]][[urlParam "entityiri"]][[/if]][[/inline]]
+
+[[#*inline "thisForQuery"]]
+    <[[> thisIri]]>
+[[/inline]]
+
+<semantic-graph height='600px' query='
+      prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      prefix person: <http://example.com/person/> 
+      prefix org: <http://example.com/org/> 
+      prefix foaf: <http://xmlns.com/foaf/0.1/>
+
+      CONSTRUCT {
+        ?subject ?relation ?object .
+      } WHERE {
+
+        [[> queryPartRelations bind="subject"]]
+        
+        UNION
+
+        [[> queryPartRelations bind="object"]]
+
+      }'>
+  <semantic-graph-layout-cose ideal-edge-length=30></semantic-graph-layout-cose>
+</semantic-graph>
+
+[[#*inline "queryPartRelations"]]
+    {
+        {
+            BIND([[> thisForQuery]] AS ?[[bind]])
+            ?subject crm:P108i_was_produced_by/crm:P9_consists_of ?event .
+            ?event crm:P14_carried_out_by ?object ;
+                crm:P2_has_type ?relation .
+        } UNION {
+            BIND([[> thisForQuery]] AS ?[[bind]])
+            ?subject crm:P128_carries/crm:P67_refers_to ?object .
+            BIND(crm:P67_refers_to AS ?relation)
+        } UNION {
+            BIND([[> thisForQuery]] AS ?[[bind]])
+            ?subject crm:P62_depicts ?object .
+            BIND(crm:P62_depicts AS ?relation)
+        } UNION {
+            BIND([[> thisForQuery]] AS ?[[bind]])
+            ?subject crm:P30i_custody_transferred_through/crm:P29_custody_received_by ?object .
+            BIND(loc:rcp as ?relation)
+        }
+    }
+[[/inline]]
