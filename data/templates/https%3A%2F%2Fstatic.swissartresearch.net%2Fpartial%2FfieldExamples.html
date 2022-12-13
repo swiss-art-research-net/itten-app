@@ -1,0 +1,78 @@
+
+<h3>Allgemeine Anmerkungen</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject crm:P129i_is_subject_of ?remark . ?remark crm:P2_has_type aat:300435415 ; crm:P190_has_symbolic_content ?value . } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Archivalienart</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject crm:P2_has_type ?value . ?value crm:P127_has_broader_term aat:300026031 . } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Bemerkungen zum Umfang</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject crm:P57_has_number_of_parts ?value . } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Bemerkungen zur Datierung</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject crm:P108i_was_produced_by ?production . ?production crm:P4_has_time-span ?production_date . ?attribute_assignment crm:P141_assigned ?production_date ; crm:P140_assigned_attribute_to ?production ; crm:P3_has_note ?value . } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Entstehungsort</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject crm:P108i_was_produced_by/crm:P7_took_place_at ?value . } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Entstehungszeitraum</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject crm:P108i_was_produced_by/crm:P4_has_time-span ?production_date . ?production_date rdfs:label ?date_label . OPTIONAL { ?production_date crm:P82a_begin_of_the_begin ?begin . } OPTIONAL { ?production_date crm:P82b_end_of_the_end ?end . } BIND(IF(BOUND(?begin) || BOUND(?end), CONCAT(?date_label, " (", STR(?begin), " - ", STR(?end), ")"), ?date_label) AS ?value) } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Form und Inhalt</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject crm:P129i_is_subject_of ?remark . ?remark crm:P2_has_type aat:300435416 ; crm:P190_has_symbolic_content ?value . } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Identifikator</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject crm:P1_is_identified_by ?identifier . ?identifier a crm:E42_Identifier ; crm:P190_has_symbolic_content ?identifierValue . OPTIONAL { ?identifier crm:P2_has_type/rdfs:label ?identifierType . } BIND(IF(BOUND(?identifierType), CONCAT(?identifierType, ": ", ?identifierValue), ?identifierValue) AS ?value) } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Label</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject rdfs:label ?value . } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Pfad Bestand</h3>
+<semantic-query
+    query='SELECT DISTINCT (GROUP_CONCAT(?sub; SEPARATOR=" / ") as ?value) ?dummy WHERE { { SELECT DISTINCT ?sub (count(?mid) as ?distance) { $subject crm:P46i_forms_part_of* ?mid . ?mid crm:P46i_forms_part_of+/rdfs:label ?sub . } GROUP BY ?sub ORDER BY DESC(?distance) } } GROUP BY ?dummy LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Sprache</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject crm:P128_carries/crm:P72_has_language ?value . } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Titel</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject crm:P1_is_identified_by ?title . ?title crm:P2_has_type aat:300404670 ; crm:P190_has_symbolic_content ?value . } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
+
+<h3>Verzeichnungsstufe</h3>
+<semantic-query
+    query='SELECT DISTINCT ?value WHERE { $subject crm:P2_has_type ?value . ?value crm:P127_has_broader_term aat:300241507 . } LIMIT 10'
+    template='<ul>{{#each bindings}}<li>{{#if (isIri value)}}<semantic-link iri="{{value.value}}"></semantic-link>{{else}}{{value.value}}{{/if}}</li>{{/each}}</ul>'
+></semantic-query>
