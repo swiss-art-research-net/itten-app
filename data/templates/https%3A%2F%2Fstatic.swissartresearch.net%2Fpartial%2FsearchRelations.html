@@ -13,6 +13,12 @@
             FILTER(STRDT(STR(?date), xsd:date) >= ?__dateBeginValue__) .
         }"
     }],
+    "<https://platform.swissartresearch.net/search/Person_died_at_Place>": [{
+        "kind": "resource",
+        "queryPattern": "{
+            ?subject crmdig:L54_is_same-as/gndo:placeOfDeath ?__value__ .
+        }"
+    }],
     "<https://platform.swissartresearch.net/search/Person_died_at_Time>": [{
         "kind": "date-range",
         "queryPattern": "{

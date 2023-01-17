@@ -5,7 +5,6 @@
         { "iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>", "label": "Place", "thumbnail": "../images/fcs/places.svg" },
         { "iri": "<https://platform.swissartresearch.net/search/Person>", "label": "Person", "thumbnail": "../images/fcs/actors.svg"},
         { "iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>", "label": "Time", "thumbnail": "../images/fcs/dates.svg" }
-
     ],
     "relations": [
         {
@@ -19,6 +18,12 @@
             "hasDomain": "<https://platform.swissartresearch.net/search/Person>",
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>",
             "label": "[[> label_person_born]]"
+        },
+        {
+            "iri": "<https://platform.swissartresearch.net/search/Person_died_at_Place>",
+            "hasDomain": "<https://platform.swissartresearch.net/search/Person>",
+            "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",
+            "label": "[[> label_person_died]]"
         },
         {
             "iri": "<https://platform.swissartresearch.net/search/Person_died_at_Time>",
