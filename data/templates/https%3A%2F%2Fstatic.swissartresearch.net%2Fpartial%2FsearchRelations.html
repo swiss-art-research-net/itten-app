@@ -5,6 +5,13 @@
             ?subject crmdig:L54_is_same-as/gndo:placeOfActivity ?__value__ .
         }"
     }],
+    "<https://platform.swissartresearch.net/search/Person_appears_as_Type>": [{
+        "kind": "resource",
+        "queryPattern": "{
+            ?event crm:P14_carried_out_by ?subject ;
+                crm:P2_has_type ?__value__ .
+        }"
+    }],
     "<https://platform.swissartresearch.net/search/Person_born_at_Place>": [{
         "kind": "resource",
         "queryPattern": "{

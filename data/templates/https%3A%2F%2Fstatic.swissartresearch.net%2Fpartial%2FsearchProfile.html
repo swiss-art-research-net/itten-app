@@ -4,7 +4,8 @@
     "categories": [
         { "iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>", "label": "Place", "thumbnail": "../images/fcs/places.svg" },
         { "iri": "<https://platform.swissartresearch.net/search/Person>", "label": "Person", "thumbnail": "../images/fcs/actors.svg"},
-        { "iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>", "label": "Time", "thumbnail": "../images/fcs/dates.svg" }
+        { "iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>", "label": "Time", "thumbnail": "../images/fcs/dates.svg" },
+        { "iri": "<http://www.cidoc-crm.org/cidoc-crm/E55_Type>", "label": "Type", "thumbnail": "../images/fcs/concepts.svg" }
     ],
     "relations": [
         {
@@ -12,6 +13,12 @@
             "hasDomain": "<https://platform.swissartresearch.net/search/Person>",
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",
             "label": "[[> label_person_active]]"
+        },
+        {
+            "iri": "<https://platform.swissartresearch.net/search/Person_appears_as_Type>",
+            "hasDomain": "<https://platform.swissartresearch.net/search/Person>",
+            "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E55_Type>",
+            "label": "[[> label_person_role]]"
         },
         {
             "iri": "<https://platform.swissartresearch.net/search/Person_born_at_Place>",
