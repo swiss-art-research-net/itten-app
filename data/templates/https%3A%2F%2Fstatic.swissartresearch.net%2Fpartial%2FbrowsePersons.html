@@ -12,33 +12,50 @@
         }'
     ></semantic-search-query-constant>
     
-    <semantic-search-result-holder>
-        <div data-flex-self="md-full">
-            <semantic-search-facet-breadcrumbs></semantic-search-facet-breadcrumbs>
-            <semantic-search-result id='semantic-search-result'>
-                <mp-sparql-result-counts id='semantic-search-result-count' query="SELECT DISTINCT ?subject {}"
-                                        template='{{> template}}'
-                >
-                  <template id='template'>
-                    <div>
-                      <span class="num-results">Found <span class="num-results-color">{{#if hasLimit}}{{totalNumberOfResults}}{{else}}{{numberOfResults}}{{/if}}</span> results</span>
-                    </div>
-                  </template>
-                </mp-sparql-result-counts>
-            </semantic-search-result>
     
-            <semantic-search-result>
-                <div class="jila-component card-container">
-                    <semantic-table 
-                        id='grid-result'
-                        query='SELECT * WHERE {
-                            ?subject rdfs:label ?label .
-                        } ORDER BY ?label'
-                        tuple-template='{{> partial:entityCard type="person" subject=subject}}'
-                    >    
-                    </semantic-table>
+    <bs-row>
+        <bs-col md="3" sm="12">
+            <semantic-search-facet
+                open-by-default="false"
+                facet-values-threshold="1000"
+            >
+            </semantic-search-facet>
+        </bs-col>
+
+        <bs-col md="9" sm="12">
+
+            <semantic-search-facet-breadcrumbs>
+            </semantic-search-facet-breadcrumbs>
+
+            <semantic-search-result-holder>
+                <div data-flex-self="md-full">
+                    <semantic-search-facet-breadcrumbs></semantic-search-facet-breadcrumbs>
+                    <semantic-search-result id='semantic-search-result'>
+                        <mp-sparql-result-counts id='semantic-search-result-count' query="SELECT DISTINCT ?subject {}"
+                                                template='{{> template}}'
+                        >
+                        <template id='template'>
+                            <div>
+                            <span class="num-results">Found <span class="num-results-color">{{#if hasLimit}}{{totalNumberOfResults}}{{else}}{{numberOfResults}}{{/if}}</span> results</span>
+                            </div>
+                        </template>
+                        </mp-sparql-result-counts>
+                    </semantic-search-result>
+            
+                    <semantic-search-result>
+                        <div class="jila-component card-container">
+                            <semantic-table 
+                                id='grid-result'
+                                query='SELECT * WHERE {
+                                    ?subject rdfs:label ?label .
+                                } ORDER BY ?label'
+                                tuple-template='{{> partial:entityCard type="person" subject=subject}}'
+                            >    
+                            </semantic-table>
+                        </div>
+                    </semantic-search-result>
                 </div>
-            </semantic-search-result>
-        </div>
-    </semantic-search-result-holder>
+            </semantic-search-result-holder>
+        </bs-col>
+    </bs-row>
 </semantic-search>
