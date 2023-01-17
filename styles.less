@@ -1,6 +1,29 @@
 // out: assets/styles.css
 
 @col-brand: #1a3462;
+@col-lightgrey: #e0e0e0;
+
+.jila-component {
+  &.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    .card {
+      border: 1px solid @col-lightgrey;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+      flex: 0 1 20rem;
+      margin-right: 1%;
+      margin-bottom: 1%;
+      &:hover {
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+      }
+    }
+    .semantic-table-holder {
+      width: 100%;
+    }
+  }
+}
 
 // Overrides
 

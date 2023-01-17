@@ -103,22 +103,7 @@
 [[/inline]]
 
 [[#*inline "component-persons"]]
-    <semantic-query
-        query="SELECT (COUNT(?subject) as ?num) WHERE {
-            ?subject a search:Person .
-        }"
-        template="<p>{{bindings.0.num.value}} Persons</p>">
-    </semantic-query>
-    <semantic-table
-        query="SELECT ?subject ?label WHERE {
-            ?subject a search:Person ;
-                rdfs:label ?label.
-        } ORDER BY ?label ?subject"
-        column-configuration='[{
-            "displayName": "Person",
-            "variableName": "subject"
-        }]'>
-    </semantic-table>
+    [[> partial:browsePersons]]
 [[/inline]]
 
 [[#*inline "component-tree"]]
