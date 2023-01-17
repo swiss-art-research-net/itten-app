@@ -1,0 +1,10 @@
+{
+    "<https://platform.swissartresearch.net/search/Person_born_at_Time>": [{
+        "kind": "date-range",
+        "queryPattern": "{
+            ?subject crm:P98i_was_born/crm:P4_has_time-span/crm:P82_at_some_time_within ?date .
+            FILTER(STRDT(STR(?date), xsd:date) <= ?__dateEndValue__) .
+            FILTER(STRDT(STR(?date), xsd:date) >= ?__dateBeginValue__) .
+        }"
+    }]
+}

@@ -1,9 +1,7 @@
 <semantic-search
-    search-profile='{
-        "categories": [
-            {"iri": "<https://platform.swissartresearch.net/search/Person>", "label": "Person", "thumbnail": "../images/fcs/actors.svg"}
-        ]
-    }'
+    categories='[[> partial:searchCategories ]]'
+    search-profile='[[> partial:searchProfile ]]'
+    relations='[[> partial:searchRelations ]]'
 >
     <semantic-search-query-constant 
         domain='<https://platform.swissartresearch.net/search/Person>'
