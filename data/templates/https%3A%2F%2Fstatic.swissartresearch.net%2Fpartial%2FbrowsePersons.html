@@ -40,7 +40,7 @@
                         <div class="jila-component card-container">
                             <semantic-table 
                                 id='grid-result'
-                                query='SELECT * WHERE {
+                                query='SELECT DISTINCT ?subject WHERE {
                                     ?subject rdfs:label ?label .
                                 } ORDER BY ?label'
                                 tuple-template='{{> partial:entityCard type="person" subject=subject}}'
