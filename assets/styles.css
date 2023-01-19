@@ -17,6 +17,7 @@
 .jila-component.card-container .card .card-image {
   max-width: 100%;
   max-height: 20rem;
+  overflow: hidden;
 }
 .jila-component.card-container .card .card-image img {
   max-width: 100%;
