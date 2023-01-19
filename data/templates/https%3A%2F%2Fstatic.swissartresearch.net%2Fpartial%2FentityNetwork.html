@@ -4,6 +4,45 @@
     <[[> thisIri]]>
 [[/inline]]
 
+<semantic-table
+  query="SELECT ?subject ?predicate (GROUP_CONCAT(?object;SEPARATOR=';') as ?objects) WHERE {
+    BIND(<[[> thisIri]]> AS ?entity)
+    {
+      [[> relation-creators-of-entity]]
+    } UNION {
+      [[> relation-documents-created-by-entity]]
+    } UNION {
+      [[> relation-documents-referring-to-entity]]
+    } UNION {
+      [[> relation-entities-referred-to-by-entity]]
+    } UNION {
+      [[> relation-familial-via-gnd]]
+    }
+  } 
+  GROUP BY ?subject ?predicate
+  "
+  column-configuration='[
+    {
+      "displayName": "Subject",
+      "variableName": "subject"
+    },
+    {
+      "displayName": "Predicate",
+      "variableName": "predicate"
+    },
+    {
+      "displayName": "Object",
+      "variableName": "objects",
+      "cellTemplate": "{{> template-object }}"
+    }
+  ]'  
+>
+    <template id="template-object">
+      {{#each (split objects.value ";")}}
+        <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
+      {{/each}}
+    </template>"
+</semantic-table>
 
 <div style="height: 500px">
     <ontodia
