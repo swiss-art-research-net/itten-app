@@ -43,6 +43,7 @@
                                 query='SELECT DISTINCT ?subject WHERE {
                                     ?subject rdfs:label ?label .
                                 } ORDER BY ?label'
+                                number-of-displayed-rows="50"
                                 tuple-template='{{> partial:entityCard type="person" subject=subject}}'
                             >    
                             </semantic-table>
