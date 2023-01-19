@@ -6,3 +6,5 @@ gndo=https://d-nb.info/standards/elementset/gnd#
 la=https://linked.art/ns/terms/
 loc=http://id.loc.gov/vocabulary/relators/
 type=https://resource.swissartresearch.net/type/
+wd=http://www.wikidata.org/entity/
+wdt=http://www.wikidata.org/prop/direct/
