@@ -1,0 +1,76 @@
+[[#*inline "thisIri"]][[#if entityiri]][[entityiri]][[else]][[urlParam "entityiri"]][[/if]][[/inline]]
+
+[[#*inline "thisForQuery"]]
+    <[[> thisIri]]>
+[[/inline]]
+
+
+<div style="height: 500px">
+    <ontodia
+      readonly="true"
+      settings="nostats"
+      hide-panels="true"
+      hide-toolbar="true"
+      hide-navigator="true"
+      query='
+        CONSTRUCT {
+          ?subject ?predicate ?object
+        } WHERE {
+          BIND(<[[> thisIri]]> AS ?entity)
+          {
+            [[> relation-creators-of-entity]]
+          } UNION {
+            [[> relation-documents-created-by-entity]]
+          } UNION {
+            [[> relation-documents-referring-to-entity]]
+          } UNION {
+            [[> relation-entities-referred-to-by-entity]]
+          } UNION {
+            [[> relation-familial-via-gnd]]
+          }
+        }
+      '
+    ></ontodia>
+  </div>
+
+[[#*inline "relation-creators-of-entity"]]
+  ?entity a search:Collection ;
+    crm:P108i_was_produced_by/crm:P9_consists_of ?event .
+    ?event crm:P2_has_type ?predicate ;
+    crm:P14_carried_out_by ?object .
+    BIND(?entity as ?subject)
+[[/inline]]
+
+[[#*inline "relation-documents-created-by-entity"]]
+  ?subject a search:Collection ;
+    crm:P108i_was_produced_by/crm:P9_consists_of ?event .
+    ?event crm:P2_has_type ?predicate;
+      crm:P14_carried_out_by ?entity .
+    BIND(?entity as ?object)
+[[/inline]]
+
+[[#*inline "relation-documents-referring-to-entity"]]
+  ?subject a search:Collection ;
+      crm:P128_carries/crm:P67_refers_to ?entity .
+  BIND(crm:P67_refers_to as ?predicate)
+  BIND(?entity as ?object)
+[[/inline]]
+
+[[#*inline "relation-entities-referred-to-by-entity"]]
+  ?entity a search:Collection ;
+    crm:P128_carries/crm:P67_refers_to ?object .
+  BIND(crm:P67_refers_to as ?predicate)
+  BIND(?entity as ?subject)
+[[/inline]]
+
+[[#*inline "relation-familial-via-gnd"]]
+  {
+    ?entity crmdig:L54_is_same-as/gndo:familialRelationship/^crmdig:L54_is_same-as? ?object .
+    BIND(gndo:familialRelationship as ?predicate)
+    BIND(?entity as ?subject)
+  } UNION {
+    ?object crmdig:L54_is_same-as/gndo:familialRelationship/^crmdig:L54_is_same-as? ?entity .
+    BIND(gndo:familialRelationship as ?predicate)
+    BIND(?entity as ?subject)
+  }
+[[/inline]]
