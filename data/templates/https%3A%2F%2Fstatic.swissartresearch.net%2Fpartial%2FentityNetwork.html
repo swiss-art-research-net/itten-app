@@ -11,7 +11,7 @@
 
 [[#*inline "component-relations-table"]]
   <semantic-table
-    query="SELECT ?subject ?predicate (GROUP_CONCAT(?object;SEPARATOR=';') as ?objects) WHERE {
+    query="SELECT (GROUP_CONCAT(DISTINCT ?subject;SEPARATOR=';') as ?subjects) ?predicate (GROUP_CONCAT(DISTINCT ?object;SEPARATOR=';') as ?objects) WHERE {
       BIND(<[[entityiri]]> AS ?entity)
       {
         [[> relation-creators-of-entity]]
@@ -25,12 +25,13 @@
         [[> relation-familial-via-gnd]]
       }
     } 
-    GROUP BY ?subject ?predicate
+    GROUP BY ?predicate
     "
     column-configuration='[
       {
         "displayName": "Subject",
-        "variableName": "subject"
+        "variableName": "subject",
+        "cellTemplate": "{{> template-split-entities entities=subjects}}"
       },
       {
         "displayName": "Predicate",
@@ -39,12 +40,12 @@
       {
         "displayName": "Object",
         "variableName": "objects",
-        "cellTemplate": "{{> template-object }}"
+        "cellTemplate": "{{> template-split-entities entities=objects}}"
       }
     ]'  
   >
-      <template id="template-object">
-        {{#each (split objects.value ";")}}
+      <template id="template-split-entities">
+        {{#each (split entities.value ";")}}
           <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
         {{/each}}
       </template>"
