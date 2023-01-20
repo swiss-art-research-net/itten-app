@@ -54,9 +54,11 @@
         {{#ifCond numEntities ">" 3}}
           <details>
             <summary>{{numEntities}} entries&hellip;</summary>
-            {{#each (split entities.value ";")}}
-              <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
-            {{/each}}
+            <ul>
+              {{#each (split entities.value ";")}}
+                <li><semantic-link uri="{{this}}"></semantic-link></li>
+              {{/each}}
+            </ul>
           </details>
         {{else}}
           {{#each (split entities.value ";")}}
