@@ -11,27 +11,33 @@
 
 [[#*inline "component-relations-table"]]
   <semantic-table
-    query="SELECT (GROUP_CONCAT(DISTINCT ?subject;SEPARATOR=';') as ?subjects) ?predicate (GROUP_CONCAT(DISTINCT ?object;SEPARATOR=';') as ?objects) WHERE {
-      BIND(<[[entityiri]]> AS ?entity)
-      {
-        [[> relation-creators-of-entity]]
-      } UNION {
-        [[> relation-documents-created-by-entity]]
-      } UNION {
-        [[> relation-documents-referring-to-entity]]
-      } UNION {
-        [[> relation-entities-referred-to-by-entity]]
-      } UNION {
-        [[> relation-familial-via-gnd]]
-      }
-    } 
-    GROUP BY ?predicate
+    query="SELECT 
+        (GROUP_CONCAT(DISTINCT ?subject;SEPARATOR=';') as ?subjects) 
+        (COUNT(DISTINCT ?subject) as ?num_subjects) 
+        ?predicate 
+        (GROUP_CONCAT(DISTINCT ?object;SEPARATOR=';') as ?objects) 
+        (COUNT(DISTINCT ?object) as ?num_objects) 
+      WHERE {
+        BIND(<[[entityiri]]> AS ?entity)
+        {
+          [[> relation-creators-of-entity]]
+        } UNION {
+          [[> relation-documents-created-by-entity]]
+        } UNION {
+          [[> relation-documents-referring-to-entity]]
+        } UNION {
+          [[> relation-entities-referred-to-by-entity]]
+        } UNION {
+          [[> relation-familial-via-gnd]]
+        }
+      } 
+      GROUP BY ?predicate
     "
     column-configuration='[
       {
         "displayName": "Subject",
         "variableName": "subject",
-        "cellTemplate": "{{> template-split-entities entities=subjects}}"
+        "cellTemplate": "{{> template-split-entities entities=subjects numEntities=num_subjects.value}}"
       },
       {
         "displayName": "Predicate",
@@ -40,14 +46,23 @@
       {
         "displayName": "Object",
         "variableName": "objects",
-        "cellTemplate": "{{> template-split-entities entities=objects}}"
+        "cellTemplate": "{{> template-split-entities entities=objects numEntities=num_objects.value}}"
       }
     ]'  
   >
       <template id="template-split-entities">
-        {{#each (split entities.value ";")}}
-          <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
-        {{/each}}
+        {{#ifCond numEntities ">" 3}}
+          <details>
+            <summary>{{numEntities}} entries&hellip;</summary>
+            {{#each (split entities.value ";")}}
+              <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
+            {{/each}}
+          </details>
+        {{else}}
+          {{#each (split entities.value ";")}}
+            <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
+          {{/each}}
+        {{/ifCond}}
       </template>"
   </semantic-table>
 [[/inline]]
