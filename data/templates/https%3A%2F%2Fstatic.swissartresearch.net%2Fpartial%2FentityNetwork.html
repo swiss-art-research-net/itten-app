@@ -72,16 +72,35 @@
             </summary>
             <ul>
               {{#each (split entities.value ";")}}
-                <li><semantic-link uri="{{this}}"></semantic-link></li>
+                <li>{{> template-entity-tag}}</li>
               {{/each}}
             </ul>
           </details>
         {{else}}
           {{#each (split entities.value ";")}}
-            <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
+            {{> template-entity-tag}}{{#if @last}}{{else}}, {{/if}}
           {{/each}}
         {{/ifCond}}
-      </template>"
+      </template>
+      <template id="template-entity-tag">
+        <semantic-link iri="{{this}}"></semantic-link>
+        <semantic-query
+          query="SELECT ?type WHERE {
+            BIND(<{{this}}> AS ?entity)
+            ?entity a ?type .
+            VALUES(?type) {
+              (search:Actor)
+              (search:Event)
+              (search:Person)
+              (search:Place)
+            }
+          } LIMIT 1"
+          template="{{> template-type-label type=bindings.0.type.value}}">
+            <template id="template-type-label">
+              &nbsp;(<mp-label iri="{{type}}"></mp-label>)
+            </template>
+          </semantic-query>
+      </template>
   </semantic-table>
 [[/inline]]
 
