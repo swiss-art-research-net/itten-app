@@ -8,7 +8,6 @@
 
 [[> component-relations-ontodia entityiri=entityiri]]
 
-
 [[#*inline "component-relations-table"]]
   <semantic-table
     query="SELECT 
@@ -53,7 +52,24 @@
       <template id="template-split-entities">
         {{#ifCond numEntities ">" 3}}
           <details>
-            <summary>{{numEntities}} entries&hellip;</summary>
+            <summary>
+              <semantic-query
+                query="SELECT DISTINCT ?type WHERE {
+                  ?entity a ?type .
+                  ?type rdfs:subClassOf* crm:E1_CRM_Entity .
+                  VALUES (?entity) {
+                    {{#each (split entities.value ';') }}
+                      (<{{this}}>)
+                    {{/each}}
+                  }
+                }"
+                template="{{> template-types}}"
+              >
+                <template id="template-types">
+                  <div>{{#each bindings}}<mp-label iri="{{type.value}}"></mp-label>{{#if @last}}{{else}}, {{/if}}{{/each}} ({{numEntities}})</div>
+                </template>
+              </semantic-query> 
+            </summary>
             <ul>
               {{#each (split entities.value ";")}}
                 <li><semantic-link uri="{{this}}"></semantic-link></li>
