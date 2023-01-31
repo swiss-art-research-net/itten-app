@@ -83,7 +83,7 @@
         {{/ifCond}}
       </template>
       <template id="template-entity-tag">
-        <semantic-link iri="page:ittenGraph" urlqueryparam-entityiri="{{this}}"><mp-label iri="{{this}}"></mp-label></semantic-link>
+        <semantic-link iri="{{this}}"><mp-label iri="{{this}}"></mp-label></semantic-link>
         <semantic-query
           query="SELECT ?type WHERE {
             BIND(<{{this}}> AS ?entity)
