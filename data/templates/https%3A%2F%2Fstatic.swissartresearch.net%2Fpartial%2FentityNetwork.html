@@ -5,8 +5,7 @@
 [[/inline]]
 
 [[> component-relations-table entityiri=entityiri]]
-
-[[> component-relations-ontodia entityiri=entityiri]]
+[[> component-relations-sigma entityiri=entityiri]]
 
 [[#*inline "component-relations-table"]]
   <semantic-table
@@ -84,7 +83,7 @@
         {{/ifCond}}
       </template>
       <template id="template-entity-tag">
-        <semantic-link iri="{{this}}"></semantic-link>
+        <semantic-link iri="page:ittenGraph" urlqueryparam-entityiri="{{this}}"><mp-label iri="{{this}}"></mp-label></semantic-link>
         <semantic-query
           query="SELECT ?type WHERE {
             BIND(<{{this}}> AS ?entity)
@@ -105,14 +104,18 @@
   </semantic-table>
 [[/inline]]
 
-[[#*inline "component-relations-ontodia"]]
+[[#*inline "component-relations-sigma"]]
   <div style="height: 500px">
-      <ontodia
-        readonly="true"
-        settings="nostats"
-        hide-panels="true"
-        hide-toolbar="true"
-        hide-navigator="true"
+      <semantic-sigma-graph
+        group-nodes="true"
+        sizes='{"nodes": 10, "edges": 2}'
+        colours='{
+          "[[resolvePrefix "search:Person"]]": "#ff0000",
+          "[[resolvePrefix "search:Actor"]]": "#ff0000",
+          "[[resolvePrefix "search:Place"]]": "#00ff00",
+          "[[resolvePrefix "search:Collection"]]": "#0000ff",
+          "[[resolvePrefix "search:Event"]]": "#ffff00"
+        }'
         query='
           CONSTRUCT {
             ?subject ?predicate ?object .
@@ -121,6 +124,20 @@
           } WHERE {
             BIND(<[[entityiri]]> AS ?subject)
             ?subject a ?typeSubject .
+            VALUES(?typeSubject) {
+              (search:Person)
+              (search:Actor)
+              (search:Place)
+              (search:Event)
+              (search:Collection)
+            }
+            VALUES(?typeObject) {
+              (search:Person)
+              (search:Actor)
+              (search:Place)
+              (search:Event)
+              (search:Collection)
+            }
             {
               [[> relation-creators-of-subject]]
             } UNION {
@@ -134,7 +151,7 @@
             }
           }
         '
-      ></ontodia>
+      ></semantic-sigma-graph>
     </div>
 [[/inline]]
 
