@@ -17,17 +17,10 @@
         (COUNT(DISTINCT ?object) as ?num_objects) 
       WHERE {
         BIND(<[[entityiri]]> AS ?subject)
-        ?subject a ?typeSubject .
-        {
-          [[> relation-creators-of-subject]]
-        } UNION {
-          [[> relation-documents-created-by-subject]]
-        } UNION {
-          [[> relation-documents-referring-to-subject]]
-        } UNION {
-          [[> relation-entities-referred-to-by-subject]]
-        } UNION {
-          [[> relation-familial-via-gnd]]
+        GRAPH <https://resource.swissartresearch.net/graph/network> {
+          ?subject a ?typeSubject .
+          ?subject ?predicate ?object .
+          ?object a ?typeObject .
         }
       } 
       GROUP BY ?predicate
@@ -123,80 +116,13 @@
             ?object a ?typeObject .
           } WHERE {
             BIND(<[[entityiri]]> AS ?subject)
-            ?subject a ?typeSubject .
-            VALUES(?typeSubject) {
-              (search:Person)
-              (search:Actor)
-              (search:Place)
-              (search:Event)
-              (search:Collection)
-            }
-            VALUES(?typeObject) {
-              (search:Person)
-              (search:Actor)
-              (search:Place)
-              (search:Event)
-              (search:Collection)
-            }
-            {
-              [[> relation-creators-of-subject]]
-            } UNION {
-              [[> relation-documents-created-by-subject]]
-            } UNION {
-              [[> relation-documents-referring-to-subject]]
-            } UNION {
-              [[> relation-entities-referred-to-by-subject]]
-            } UNION {
-              [[> relation-familial-via-gnd]]
+            GRAPH <https://resource.swissartresearch.net/graph/network> {
+              ?subject a ?typeSubject .
+              ?subject ?predicate ?object .
+              ?object a ?typeObject .
             }
           }
         '
       ></semantic-sigma-graph>
     </div>
-[[/inline]]
-
-[[#*inline "relation-creators-of-subject"]]
-  ?subject a search:Collection ;
-    crm:P108i_was_produced_by/crm:P9_consists_of ?event .
-    ?event crm:P2_has_type ?predicate ;
-    crm:P14_carried_out_by ?object .
-  ?object a ?typeObject .
-  VALUES (?typeObject) {
-    (search:Actor)
-    (search:Person)
-  }
-[[/inline]]
-
-[[#*inline "relation-documents-created-by-subject"]]
-    BIND(search:Collection AS ?typeObject)
-    ?object a ?typeObject ;
-      crm:P108i_was_produced_by/crm:P9_consists_of ?event .
-    ?event crm:P2_has_type ?predicate;
-      crm:P14_carried_out_by ?subject .
-[[/inline]]
-
-[[#*inline "relation-documents-referring-to-subject"]]
-  BIND(search:Collection AS ?typeObject)
-  ?object a ?typeObject ;
-      crm:P128_carries/crm:P67_refers_to ?subject .
-  BIND(crm:P67i_is_referred_to_by as ?predicate)
-[[/inline]]
-
-[[#*inline "relation-entities-referred-to-by-subject"]]
-  ?subject a search:Collection ;
-    crm:P128_carries/crm:P67_refers_to ?object .
-  BIND(crm:P67_refers_to as ?predicate)
-  BIND(?entity as ?subject)
-  ?subject a ?typeSubject .
-  ?object a ?typeObject .
-[[/inline]]
-
-[[#*inline "relation-familial-via-gnd"]]
-  {
-    ?subject crmdig:L54_is_same-as/gndo:familialRelationship/^crmdig:L54_is_same-as? ?object .
-    BIND(gndo:familialRelationship as ?predicate)
-  } UNION {
-    ?object crmdig:L54_is_same-as/gndo:familialRelationship/^crmdig:L54_is_same-as? ?subject .
-    BIND(gndo:familialRelationship as ?predicate)
-  }
 [[/inline]]
