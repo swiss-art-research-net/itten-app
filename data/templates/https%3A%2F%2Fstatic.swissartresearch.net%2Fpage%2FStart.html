@@ -29,7 +29,7 @@
         template="<p>{{bindings.0.num.value}} Items</p>"
     ></semantic-query>
     <semantic-table
-        query='SELECT ?subject ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR=";") as ?types) ?hasImage WHERE {
+        query='SELECT ?subject ?label (GROUP_CONCAT(DISTINCT ?type; SEPARATOR=";") as ?types) ?hasImage (COUNT(DISTINCT ?relation) as ?num_relations) WHERE {
             ?subject a search:Collection ;
                 rdfs:label ?label .
             OPTIONAL {
@@ -37,6 +37,11 @@
             }
             OPTIONAL {
                 ?subject crm:P46_is_composed_of/crm:P138i_has_representation ?image .
+            }
+            OPTIONAL {
+                GRAPH <https://resource.swissartresearch.net/graph/network> {
+                    ?subject ?predicate ?relation .
+                }
             }
             BIND(BOUND(?image) as ?hasImage)
         } GROUP BY ?subject ?label ?hasImage
@@ -54,6 +59,10 @@
                 "displayName": "Images",
                 "variableName": "hasImage",
                 "cellTemplate": "{{> templateImages }}"
+            },
+            {
+                "displayName": "Relations",
+                "variableName": "num_relations"
             }]'
     >
             <template id="templateTypes">
