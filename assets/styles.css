@@ -1,10 +1,14 @@
+html,
+body {
+  font-family: 'Montserrat', sans-serif;
+}
 .jila-component.card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
 .jila-component.card-container .card {
-  border: 1px solid #e0e0e0;
+  border: 1px solid #F8F8F8;
   border-radius: 4px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   flex: 0 1 20rem;
@@ -28,9 +32,23 @@
 ol.page-breadcrumb {
   position: static;
 }
+.navbar {
+  height: 4rem;
+  min-height: 4rem;
+  background-color: #F8F8F8;
+}
+.navbar .navbar-nav li a {
+  color: #707070;
+}
+.navbar .navbar-nav li a:hover {
+  color: #8a8a8a;
+}
+.rs-header-logo {
+  color: #4C45FF;
+}
 .system-spinner {
   font-weight: bold;
-  color: #1a3462;
+  color: #4C45FF;
 }
 .system-spinner__icon {
   vertical-align: middle;
@@ -46,6 +64,6 @@ ol.page-breadcrumb {
 }
 .system-spinner__icon:before {
   content: '\f1ce';
-  color: #1a3462;
+  color: #4C45FF;
   font-weight: bold;
 }

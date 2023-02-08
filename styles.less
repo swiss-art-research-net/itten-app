@@ -1,7 +1,13 @@
 // out: assets/styles.css
 
-@col-brand: #1a3462;
-@col-lightgrey: #e0e0e0;
+@col-white: #fefefe;
+@col-brand: #4C45FF;
+@col-lightgrey: #F8F8F8;
+@col-grey: #707070;
+
+html, body {
+  font-family: 'Montserrat', sans-serif;
+}
 
 .jila-component {
   &.card-container {
@@ -37,6 +43,26 @@
 
 ol.page-breadcrumb {
     position: static;
+}
+
+.navbar {
+  height: 4rem;
+  min-height: 4rem;
+  background-color: @col-lightgrey;
+  .navbar-nav {
+    li {
+      a {
+        color: @col-grey;
+      }
+      a:hover {
+        color: lighten(@col-grey, 10%)
+      }
+    }
+  }
+}
+
+.rs-header-logo {
+  color: @col-brand;
 }
 
 .system-spinner {

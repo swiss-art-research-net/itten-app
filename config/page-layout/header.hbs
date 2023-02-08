@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="rs-header">
+        <div class="navbar-header rs-xs-none">
+            <a class="rs-header-logo" href="/">{{deploymentTitle}}</a>
+        </div>
+        <div class="navbar-header" id="rs-navbar">
+            <ul class="nav navbar-nav rs-xs-none">
+                <li class="vl"></li>
+                <li><semantic-link iri="page:persons">Personen</semantic-link></li>
+                <li><semantic-link iri="page:ittenArchive">Itten-Archiv</semantic-link></li>
+                <li><semantic-link iri="page:about">Über uns</semantic-link></li>
+            </ul>
+            <bs-nav-dropdown title="{{deploymentTitle}}" id="basic-nav-dropdown"  class="rs-only-xs">
+                <bs-menu-item><semantic-link iri="page:persons">Personen</semantic-link></bs-menu-item>
+                <bs-menu-item><semantic-link iri="page:ittenArchive">Itten-Archiv</semantic-link></bs-menu-item>
+                <bs-menu-item><semantic-link iri="page:about">Über uns</semantic-link></bs-menu-item>
+            </bs-nav-dropdown>
+        </div>
+    </div>
+</nav>
