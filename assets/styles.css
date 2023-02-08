@@ -2,6 +2,11 @@ html,
 body {
   font-family: 'Montserrat', sans-serif;
 }
+h1,
+h2,
+h3 {
+  color: #4C45FF;
+}
 .jila-component.card-container {
   display: flex;
   flex-wrap: wrap;
@@ -45,6 +50,9 @@ ol.page-breadcrumb {
 }
 .rs-header-logo {
   color: #4C45FF;
+}
+.semantic-facet-holder .show-facet-button {
+  display: none;
 }
 .system-spinner {
   font-weight: bold;
