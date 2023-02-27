@@ -31,7 +31,7 @@
         "threshold": 5
     }'
     search-box="true"
-    sizes='{"nodes": 10, "edges": 2}'
+    sizes='{"nodes": 100, "edges": 2}'
     colours='{
         "[[resolvePrefix "search:Person"]]": "#ff0000",
         "[[resolvePrefix "search:Actor"]]": "#ff0000",
@@ -95,7 +95,6 @@
   template="{{> template}}"
 >
   <template id="template">
-    {{log nodes}}
     {{#if nodes}}
         {{#if nodes.[1] }}
             <h2>Select</h2>
