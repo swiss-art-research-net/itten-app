@@ -100,7 +100,11 @@
 [[#*inline "component-relations-sigma"]]
   <div style="height: 500px">
       <semantic-sigma-graph
-        group-nodes="true"
+        grouping='{
+          "enabled": true,
+          "threshold": 5,
+          "behaviour": "expand"
+        }'
         sizes='{"nodes": 10, "edges": 2}'
         colours='{
           "[[resolvePrefix "search:Person"]]": "#ff0000",

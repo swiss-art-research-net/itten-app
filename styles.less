@@ -1,7 +1,17 @@
 // out: assets/styles.css
 
-@col-brand: #1a3462;
-@col-lightgrey: #e0e0e0;
+@col-white: #fefefe;
+@col-brand: #4C45FF;
+@col-lightgrey: #F8F8F8;
+@col-grey: #707070;
+
+html, body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3 {
+  color: @col-brand;
+}
 
 .jila-component {
   &.card-container {
@@ -17,6 +27,12 @@
       margin-bottom: 1%;
       &:hover {
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+      }
+      .card-body {
+        min-height: 4rem;
+        padding: 4px;
+        padding-top:8px;
+        text-align: center;
       }
       .card-image {
         max-width: 100%;
@@ -37,6 +53,35 @@
 
 ol.page-breadcrumb {
     position: static;
+}
+
+.navbar {
+  height: 4rem;
+  min-height: 4rem;
+  background-color: @col-lightgrey;
+  .navbar-nav {
+    li {
+      a {
+        color: @col-grey;
+      }
+      a:hover {
+        color: lighten(@col-grey, 10%)
+      }
+    }
+  }
+}
+
+.rs-header-logo {
+  color: @col-brand;
+}
+
+.semantic-facet-holder {
+  .show-facet-button {
+    display: none;
+  }
+  .facet-relations {
+    width: auto;
+  }
 }
 
 .system-spinner {

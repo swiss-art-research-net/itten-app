@@ -1,0 +1,93 @@
+[[> partial:pageHeader]]
+
+[[#*inline "thisIri"]][[#if (urlParam "entityiri") ]][[urlParam "entityiri"]][[else]][[entityiri]][[/if]][[/inline]]
+[[#*inline "thisForQuery"]]
+    <[[> thisIri]]>
+[[/inline]]
+
+<div style="margin-top:5px">
+    [[#if (urlParam "entityiri")]][[> module-network entityiri=(urlParam "entityiri")]][[else]][[> module-network entityiri=entityiri]][[/if]]
+</div>
+
+<div>
+
+</div>
+
+[[> partial:pageFooter]]
+
+[[#*inline "component-entity-panel"]]
+
+  <mp-event-proxy 
+    id='some-refresh' 
+    on-event-type='Sigma.NodeClicked'
+    proxy-event-type='Component.TemplateUpdate' 
+    proxy-targets='["target-template"]'
+  ></mp-event-proxy>
+
+  <mp-event-target-template-render
+    id="target-template"
+    template="{{> template}}"
+  >
+    <template id="template">
+      {{#if nodes}}
+        {{#if nodes.[1]}}
+          <ol>
+          {{#each nodes}}
+            <li>
+              <mp-label iri="{{this}}"></mp-label>
+              <div style="max-width:100px;">
+                <mp-resource-thumbnail iri="{{this}}"></mp-resource-thumbnail>
+              </div>
+            </li>
+          {{/each}}
+          </ol>
+        {{else}}
+          <mp-page-loader iri="page:viewEntity" urlqueryparam-entityiri="{{nodes.[0]}}"></mp-page-loader>
+      {{/if}}
+    </template>
+  </mp-event-target-template-render>
+[[/inline]]
+
+[[#*inline "module-network"]]
+    <semantic-sigma-graph
+        group-nodes="true"
+        width="100%"
+        height="600"
+        sizes='{"nodes": 10, "edges": 2}'
+        colours='{
+          "[[resolvePrefix "search:Person"]]": "#ff0000",
+          "[[resolvePrefix "search:Actor"]]": "#ff0000",
+          "[[resolvePrefix "search:Place"]]": "#00ff00",
+          "[[resolvePrefix "search:Collection"]]": "#0000ff",
+          "[[resolvePrefix "search:Event"]]": "#ffff00"
+        }'
+        query='
+          CONSTRUCT {
+            ?subject ?predicate ?object .
+            ?subject a ?typeSubject .
+            ?object a ?typeObject .
+          } WHERE {
+            BIND(<[[entityiri]]> AS ?subject)
+            GRAPH <https://resource.swissartresearch.net/graph/network> {
+              ?subject ?predicate ?object .
+            }
+            ?subject a ?typeSubject .
+            ?object a ?typeObject .
+            VALUES (?typeSubject) {
+              (search:Person)
+              (search:Actor)
+              (search:Place)
+              (search:Collection)
+              (search:Event)
+            }
+            VALUES (?typeObject) {
+              (search:Person)
+              (search:Actor)
+              (search:Place)
+              (search:Collection)
+              (search:Event)
+            }
+          }
+        '
+    ></semantic-sigma-graph>
+[[/inline]]

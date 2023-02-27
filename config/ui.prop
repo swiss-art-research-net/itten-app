@@ -1,3 +1,3 @@
-deploymentTitle=JILA - Johannes Itten Linked Archive
+deploymentTitle=JILA
 preferredLabels=<http://www.w3.org/2004/02/skos/core#prefLabel>,<http://www.w3.org/2000/01/rdf-schema#label>,<http://www.cidoc-crm.org/cidoc-crm/P190_has_symbolic_content>,<https://d-nb.info/standards/elementset/gnd#preferredName>
 preferredThumbnails = <http://schema.org/thumbnail>,{ $subject crmdig:L54_is_same-as/wdt:P18 ?value }
