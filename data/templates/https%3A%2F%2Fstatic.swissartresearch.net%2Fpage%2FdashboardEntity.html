@@ -69,9 +69,23 @@
           } WHERE {
             BIND(<[[entityiri]]> AS ?subject)
             GRAPH <https://resource.swissartresearch.net/graph/network> {
-              ?subject a ?typeSubject .
               ?subject ?predicate ?object .
-              ?object a ?typeObject .
+            }
+            ?subject a ?typeSubject .
+            ?object a ?typeObject .
+            VALUES (?typeSubject) {
+              (search:Person)
+              (search:Actor)
+              (search:Place)
+              (search:Collection)
+              (search:Event)
+            }
+            VALUES (?typeObject) {
+              (search:Person)
+              (search:Actor)
+              (search:Place)
+              (search:Collection)
+              (search:Event)
             }
           }
         '
