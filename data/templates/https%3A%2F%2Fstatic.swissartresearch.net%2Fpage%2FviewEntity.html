@@ -31,7 +31,7 @@
         "threshold": 5
     }'
     search-box="true"
-    sizes='{"nodes": 100, "edges": 2}'
+    sizes='{"nodes": 10, "edges": 2}'
     colours='{
         "[[resolvePrefix "search:Person"]]": "#ff0000",
         "[[resolvePrefix "search:Actor"]]": "#ff0000",
@@ -70,12 +70,26 @@
         ?subject a ?typeSubject .
         ?object a ?typeObject .
         } WHERE {
-        BIND(<[[entityiri]]> AS ?subject)
-        GRAPH <https://resource.swissartresearch.net/graph/network> {
+            BIND(<[[entityiri]]> AS ?subject)
+            GRAPH <https://resource.swissartresearch.net/graph/network> {
+                ?subject ?predicate ?object .
+            }
             ?subject a ?typeSubject .
-            ?subject ?predicate ?object .
             ?object a ?typeObject .
-        }
+            VALUES (?typeSubject) {
+            (search:Person)
+            (search:Actor)
+            (search:Place)
+            (search:Collection)
+            (search:Event)
+            }
+            VALUES (?typeObject) {
+            (search:Person)
+            (search:Actor)
+            (search:Place)
+            (search:Collection)
+            (search:Event)
+            }
         }
     '
     ></semantic-sigma-graph>
