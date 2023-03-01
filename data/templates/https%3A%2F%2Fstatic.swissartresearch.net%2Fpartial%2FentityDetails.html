@@ -170,7 +170,16 @@
         {{/ifCond}}
       </template>
       <template id="template-entity-tag">
-        <semantic-link iri="page:viewEntity" urlqueryparam-entityiri="{{this}}"><mp-label iri="{{this}}"></mp-label></semantic-link>
+
+        <mp-event-trigger 
+            id='node-highlight-{{this}}'
+            type="Sigma.TriggerNodeClicked"
+            targets='["sigma-graph"]'
+            data='{"node": "<{{this}}>"}'
+        >
+
+          <a href="#"><mp-label iri="{{this}}"></mp-label></a>
+        </mp-event-trigger>
         <semantic-query
           query="SELECT ?type WHERE {
             BIND(<{{this}}> AS ?entity)
