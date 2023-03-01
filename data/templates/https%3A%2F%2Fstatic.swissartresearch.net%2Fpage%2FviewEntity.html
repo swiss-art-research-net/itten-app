@@ -139,9 +139,9 @@
             {{/if}}
         {{else}}
             [[#if entityiri]]
-                {{> partial:entityDetails entityiri='[[entityiri]]' graph-id='sigma-graph' panel-id='panel-template'}}
+                {{> partial:entityDetails entityiri='[[entityiri]]' }}
             [[else]]
-                {{> partial:entityDetails entityiri='[[urlParam "entityiri"]]' graph-id='sigma-graph' panel-id='panel-template'}}
+                {{> partial:entityDetails entityiri='[[urlParam "entityiri"]]' }}
             [[/if]]
         {{/if}}
     </template>
