@@ -97,48 +97,55 @@
 
 [[#*inline "component-entity-panel"]]
 
-<mp-event-proxy 
-    id='node-refresh' 
-    on-event-type='Sigma.NodeClicked'
-    proxy-event-type='Component.TemplateUpdate' 
-    proxy-targets='["target-template"]'
-></mp-event-proxy>
+    <mp-event-proxy 
+        id='node-refresh' 
+        on-event-type='Sigma.NodeClicked'
+        proxy-event-type='Component.TemplateUpdate' 
+        proxy-targets='["panel-template"]'
+    ></mp-event-proxy>
 
-<mp-event-target-template-render
-  id="target-template"
-  template="{{> template}}"
->
-  <template id="template">
-    {{#if nodes}}
-        {{#if nodes.[1] }}
-            <h2>Select</h2>
-            <ol>
-            {{#each nodes}}
-                <li>
-                    <mp-event-trigger 
-                        id='node-refresh-{{this}}'
-                        type="Component.TemplateUpdate"
-                        targets='["target-template"]'
-                        data='{"nodes": ["{{this}}"]}'
-                    >
+    <mp-event-proxy 
+        id='node-highlight' 
+        on-event-type='Sigma.NodeClicked'
+        proxy-event-type='Sigma.FocusNode' 
+        proxy-targets='["sigma-graph"]'
+    ></mp-event-proxy>
 
-                        <a href="#"><mp-label iri="{{this}}"></mp-label></a>
-                    </mp-event-trigger>
-                </li>
-            {{/each}}
-            </ol>
+    <mp-event-target-template-render
+    id="panel-template"
+    template="{{> template}}"
+    >
+    <template id="template">
+        {{#if nodes}}
+            {{#if nodes.[1] }}
+                <h2>Select</h2>
+                <ol>
+                {{#each nodes}}
+                    <li>
+                        <mp-event-trigger 
+                            id='node-refresh-{{this}}'
+                            type="Component.TemplateUpdate"
+                            targets='["panel-template"]'
+                            data='{"nodes": ["{{this}}"]}'
+                        >
+
+                            <a href="#"><mp-label iri="{{this}}"></mp-label></a>
+                        </mp-event-trigger>
+                    </li>
+                {{/each}}
+                </ol>
+            {{else}}
+                {{> partial:entityDetails entityiri=nodes.[0]}}
+            {{/if}}
         {{else}}
-            {{> partial:entityDetails entityiri=nodes.[0]}}
+            [[#if entityiri]]
+                {{> partial:entityDetails entityiri='[[entityiri]]' graph-id='sigma-graph' panel-id='panel-template'}}
+            [[else]]
+                {{> partial:entityDetails entityiri='[[urlParam "entityiri"]]' graph-id='sigma-graph' panel-id='panel-template'}}
+            [[/if]]
         {{/if}}
-    {{else}}
-        [[#if entityiri]]
-            {{> partial:entityDetails entityiri='[[entityiri]]'}}
-        [[else]]
-            {{> partial:entityDetails entityiri='[[urlParam "entityiri"]]'}}
-        [[/if]]
-    {{/if}}
-  </template>
-</mp-event-target-template-render>
+    </template>
+    </mp-event-target-template-render>
 [[/inline]]
 [[> partial:contentFooter]]
 [[> partial:pageFooter]]
