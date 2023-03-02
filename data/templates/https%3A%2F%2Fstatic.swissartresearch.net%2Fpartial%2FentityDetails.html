@@ -180,6 +180,16 @@
 
           <a href="#"><mp-label iri="{{this}}"></mp-label></a>
         </mp-event-trigger>
+        <mp-event-proxy 
+          id='external-node-click-refresh-{{this}}' 
+          on-event-type='Sigma.TriggerNodeClicked'
+          on-event-source='node-highlight-{{this}}'
+          proxy-event-type='Component.TemplateUpdate' 
+          proxy-targets='["panel-template"]'
+          data='{"nodes": [
+            "{{this}}"
+          ]}'
+        ></mp-event-proxy>
         <semantic-query
           query="SELECT ?type WHERE {
             BIND(<{{this}}> AS ?entity)
