@@ -1,0 +1,174 @@
+[[#*inline "thisIri"]][[entityiri]][[/inline]]
+
+[[#*inline "thisForQuery"]]
+    <[[> thisIri]]>
+[[/inline]]
+
+[[> partial:pageHeader ]]
+[[> partial:contentHeader]]
+
+[[> component-events-controller]]
+
+<bs-row>
+    <bs-col md="7" sm="12">
+        [[> component-relations-sigma entityiri=entityiri]]
+    </bs-col>
+
+    <bs-col md="5" sm="12">
+        [[> component-entity-panel]]
+    </bs-col>
+</bs-row>
+
+[[> partial:contentFooter]]
+[[> partial:pageFooter]]
+
+[[#*inline "component-events-controller"]]
+
+    <mp-event-proxy 
+        on-event-type='Sigma.NodeClicked'
+        proxy-event-type='Component.TemplateUpdate' 
+        proxy-targets='["entity-view-panel"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy
+        on-event-type='JILA.PanelNodeClicked'
+        proxy-event-type='Component.TemplateUpdate'
+        proxy-targets='["entity-view-panel"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy
+        on-event-type='JILA.PanelNodeClicked'
+        proxy-event-type='Sigma.TriggerNodeClicked'
+        proxy-targets='["entity-view-graph"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy 
+        on-event-type='Sigma.NodeClicked'
+        proxy-event-type='Component.TemplateUpdate' 
+        proxy-targets='["event-monitor"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy 
+        on-event-type='JILA.PanelNodeClicked'
+        proxy-event-type='Component.TemplateUpdate' 
+        proxy-targets='["event-monitor"]'
+    ></mp-event-proxy>
+<!-- 
+    <mp-event-target-template-render
+        id="event-monitor"
+        template="{{> template}}"
+    >
+        <template id="template">
+            <ul>
+                <li>Nodes: {{nodes}}</li>
+                <li>Node: {{node}}</li>
+            </ul>
+        </template>
+    </mp-event-target-template-render> -->
+
+[[/inline]]
+
+[[#*inline "component-relations-sigma"]]
+    <semantic-sigma-graph
+        id="entity-view-graph"
+        width="100%"
+        grouping='{
+            "behaviour": "none",
+            "enabled": true,
+            "threshold": 5
+        }'
+        search-box="true"
+        sizes='{"nodes": 10, "edges": 2}'
+        colours='{
+                "[[resolvePrefix "search:Person"]]": "#ff0000",
+                "[[resolvePrefix "crm:E21_Person"]]": "#ff0000",
+                "[[resolvePrefix "search:Actor"]]": "#ff0000",
+                "[[resolvePrefix "search:Place"]]": "#00ff00",
+                "[[resolvePrefix "search:Collection"]]": "#0000ff",
+                "[[resolvePrefix "search:Event"]]": "#ffff00"
+            }'
+        node-query='CONSTRUCT {
+            ?subject ?predicate ?object .
+            ?subject a ?typeSubject .
+            ?object a ?typeObject .
+        } WHERE {
+            GRAPH <https://resource.swissartresearch.net/graph/network> {
+            ?subject ?predicate ?object .
+            }
+            ?subject a ?typeSubject .
+            ?object a ?typeObject .
+            VALUES (?typeSubject) {
+                [[> query-partial-entity-types]]
+            }
+            VALUES (?typeObject) {
+                [[> query-partial-entity-types]]
+            }
+        }'
+        query='
+            CONSTRUCT {
+            ?subject ?predicate ?object .
+            ?subject a ?typeSubject .
+            ?object a ?typeObject .
+            } WHERE {
+                BIND(<[[entityiri]]> AS ?subject)
+                GRAPH <https://resource.swissartresearch.net/graph/network> {
+                    ?subject ?predicate ?object .
+                }
+                ?subject a ?typeSubject .
+                ?object a ?typeObject .
+                VALUES (?typeSubject) {
+                    [[> query-partial-entity-types]]
+                }
+                VALUES (?typeObject) {
+                    [[> query-partial-entity-types]]
+                }
+            }'
+    ></semantic-sigma-graph>
+[[/inline]]
+
+[[#*inline "component-entity-panel"]]
+
+    <mp-event-target-template-render
+        id="entity-view-panel"
+        template="{{> template}}"
+    >
+    <template id="template">
+        {{#if nodes}}
+            {{#if nodes.[1] }}
+                <h2>Select</h2>
+                <ol>
+                {{#each nodes}}
+                    <li>
+                        <mp-event-trigger 
+                            id='node-highlight-{{this}}'
+                            type="JILA.PanelNodeClicked"
+                            data='{"node": "{{this}}"}'
+                        >
+                          <a href="#"><mp-label iri="{{this}}"></mp-label></a>
+                        </mp-event-trigger
+                    </li>
+                {{/each}}
+                </ol>
+            {{else}}
+                {{> partial:entityDetails entityiri=nodes.[0]}}
+            {{/if}}
+        {{else}}
+            {{#if node}}
+                {{> partial:entityDetails entityiri=node }}
+            {{else}}
+                {{> partial:entityDetails entityiri='[[entityiri]]' }}
+            {{/if}}
+        {{/if}}
+    </template>
+    </mp-event-target-template-render>
+[[/inline]]
+
+[[#*inline "query-partial-entity-types"]]
+    (search:Person)
+    (search:Actor)
+    (search:Place)
+    (search:Collection)
+    (search:Event)
+    (crm:E21_Person)
+    (crm:E53_Place)
+[[/inline]]
