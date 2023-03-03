@@ -132,34 +132,36 @@
         id="entity-view-panel"
         template="{{> template}}"
     >
-    <template id="template">
-        {{#if nodes}}
-            {{#if nodes.[1] }}
-                <h2>Select</h2>
-                <ol>
-                {{#each nodes}}
-                    <li>
-                        <mp-event-trigger 
-                            id='node-highlight-{{this}}'
-                            type="JILA.PanelNodeClicked"
-                            data='{"node": "{{this}}"}'
-                        >
-                          <a href="#"><mp-label iri="{{this}}"></mp-label></a>
-                        </mp-event-trigger
-                    </li>
-                {{/each}}
-                </ol>
-            {{else}}
-                {{> partial:entityDetails entityiri=nodes.[0]}}
-            {{/if}}
-        {{else}}
-            {{#if node}}
-                {{> partial:entityDetails entityiri=node }}
-            {{else}}
-                {{> partial:entityDetails entityiri='[[entityiri]]' }}
-            {{/if}}
-        {{/if}}
-    </template>
+        <template id="template">
+                <div>
+                {{#if nodes}}
+                    {{#if nodes.[1] }}
+                        <h2>Select</h2>
+                        <ol>
+                        {{#each nodes}}
+                            <li>
+                                <mp-event-trigger 
+                                    id='node-highlight-{{this}}'
+                                    type="JILA.PanelNodeClicked"
+                                    data='{"node": "{{this}}"}'
+                                >
+                                <a href="#"><mp-label iri="{{this}}"></mp-label></a>
+                                </mp-event-trigger
+                            </li>
+                        {{/each}}
+                        </ol>
+                    {{else}}
+                        {{> partial:entityDetails entityiri=nodes.[0]}}
+                    {{/if}}
+                {{else}}
+                    {{#if node}}
+                        {{> partial:entityDetails entityiri=node }}
+                    {{else}}
+                        {{> partial:entityDetails entityiri='[[entityiri]]' }}
+                    {{/if}}
+                {{/if}}
+                </div>
+        </template>
     </mp-event-target-template-render>
 [[/inline]]
 

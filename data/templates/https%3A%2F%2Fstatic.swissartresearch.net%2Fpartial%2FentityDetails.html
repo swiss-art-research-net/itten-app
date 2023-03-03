@@ -35,6 +35,7 @@
                               <th scope="col">Value</th>
                           </tr>
                       </thead>
+                      <tbody>
                       {{#each fields as |field|}}
                           {{#if field.values}}
                               <tr>
@@ -60,6 +61,7 @@
                           {{/if}}
                                           
                       {{/each}}
+                      </tbody>
                   </table>
               </div>
           {{/if}}
