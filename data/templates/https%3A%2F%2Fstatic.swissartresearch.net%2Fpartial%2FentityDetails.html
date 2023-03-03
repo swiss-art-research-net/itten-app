@@ -12,14 +12,16 @@
   
 </div>
 <div>        
+
   [[> component-fields-visualisation]]
+
 </div>
 
 [[#*inline "component-fields-visualisation"]]
   <mp-field-visualization
-  subject="{{entityiri}}"
-  fields='[[> partial:fieldDefinitions]]'
-  template='{{> field-table-template }}'
+    subject="{{entityiri}}"
+    fields='[[> partial:fieldDefinitions]]'
+    template='{{> field-table-template }}'
   >
       <template id="field-table-template">
           {{#if noData}}
@@ -173,23 +175,11 @@
 
         <mp-event-trigger 
             id='node-highlight-{{this}}'
-            type="Sigma.TriggerNodeClicked"
-            targets='["sigma-graph"]'
+            type="JILA.PanelNodeClicked"
             data='{"node": "<{{this}}>"}'
         >
-
           <a href="#"><mp-label iri="{{this}}"></mp-label></a>
         </mp-event-trigger>
-        <mp-event-proxy 
-          id='external-node-click-refresh-{{this}}' 
-          on-event-type='Sigma.TriggerNodeClicked'
-          on-event-source='node-highlight-{{this}}'
-          proxy-event-type='Component.TemplateUpdate' 
-          proxy-targets='["panel-template"]'
-          data='{"nodes": [
-            "{{this}}"
-          ]}'
-        ></mp-event-proxy>
         <semantic-query
           query="SELECT ?type WHERE {
             BIND(<{{this}}> AS ?entity)
