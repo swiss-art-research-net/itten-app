@@ -2,11 +2,13 @@
 
 @col-white: #fefefe;
 @col-brand: #4C45FF;
+@col-panel: #F8F4FF;
 @col-lightgrey: #F8F8F8;
 @col-grey: #707070;
 
 html, body {
   font-family: 'Montserrat', sans-serif;
+  height: 100%;
 }
 
 h1, h2, h3 {
@@ -47,7 +49,21 @@ h1, h2, h3 {
       width: 100%;
     }
   }
+  &.entity-view-container {
+    .panel-view {
+      background-color: @col-panel;
+      margin-top: -10px;
+      margin-right: -15px;
+      margin-left:-15px;
+      margin-bottom: 0;
+      padding:4rem 1rem;
+    }
+    .graph-view {
+      height: 96vh
+    }
+  }
 }
+
 
 // Overrides
 

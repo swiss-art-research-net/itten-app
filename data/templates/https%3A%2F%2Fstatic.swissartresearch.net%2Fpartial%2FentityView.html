@@ -5,21 +5,27 @@
 [[/inline]]
 
 [[> partial:pageHeader ]]
-[[> partial:contentHeader]]
 
 [[> component-events-controller]]
 
-<bs-row>
-    <bs-col md="7" sm="12">
-        [[> component-relations-sigma entityiri=entityiri]]
-    </bs-col>
+<div class="container-fluid">
+    <div class="jila-component entity-view-container">
+        <bs-row>
+            <bs-col md="7" sm="12" class-name="graph-view-container">
+                <div class="jila-component graph-view">
+                    [[> component-relations-sigma entityiri=entityiri]]
+                </div>
+            </bs-col>
+            
+            <bs-col md="5" sm="12" class-name="panel-view-container">
+                <div class="jila-component panel-view">
+                    [[> component-entity-panel]]
+                </div>
+            </bs-col>
+        </bs-row>
+    </div>
+</div>
 
-    <bs-col md="5" sm="12">
-        [[> component-entity-panel]]
-    </bs-col>
-</bs-row>
-
-[[> partial:contentFooter]]
 [[> partial:pageFooter]]
 
 [[#*inline "component-events-controller"]]
@@ -71,6 +77,7 @@
 [[#*inline "component-relations-sigma"]]
     <semantic-sigma-graph
         id="entity-view-graph"
+        height="100%"
         width="100%"
         grouping='{
             "behaviour": "none",
