@@ -24,23 +24,47 @@
 
 [[#*inline "component-events-controller"]]
 
-
-
     <mp-event-proxy 
         on-event-type='Sigma.NodeClicked'
         proxy-event-type='Component.TemplateUpdate' 
         proxy-targets='["entity-view-panel"]'
     ></mp-event-proxy>
 
+    <mp-event-proxy
+        on-event-type='JILA.PanelNodeClicked'
+        proxy-event-type='Component.TemplateUpdate'
+        proxy-targets='["entity-view-panel"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy
+        on-event-type='JILA.PanelNodeClicked'
+        proxy-event-type='Sigma.TriggerNodeClicked'
+        proxy-targets='["entity-view-graph"]'
+    ></mp-event-proxy>
+
     <mp-event-proxy 
         on-event-type='Sigma.NodeClicked'
-        proxy-event-type='Component.Refresh' 
+        proxy-event-type='Component.TemplateUpdate' 
         proxy-targets='["event-monitor"]'
     ></mp-event-proxy>
 
-    <mp-event-target-refresh id="event-monitor">
-        <semantic-query query="SELECT * {BIND(NOW() as ?update)}"></semantic-query>
-    </mp-event-target-refresh>
+    <mp-event-proxy 
+        on-event-type='JILA.PanelNodeClicked'
+        proxy-event-type='Component.TemplateUpdate' 
+        proxy-targets='["event-monitor"]'
+    ></mp-event-proxy>
+
+    <mp-event-target-template-render
+        id="event-monitor"
+        template="{{> template}}"
+    >
+        <template id="template">
+            <ul>
+                <li>Nodes: {{nodes}}</li>
+                <li>Node: {{node}}</li>
+            </ul>
+        </template>
+    </mp-event-target-template-render>
 
 [[/inline]]
 
@@ -118,10 +142,10 @@
                         <mp-event-trigger 
                             id='node-highlight-{{this}}'
                             type="JILA.PanelNodeClicked"
-                            data='{"node": "<{{this}}>"}'
+                            data='{"node": "{{this}}"}'
                         >
-                        <a href="#"><mp-label iri="{{this}}"></mp-label></a>
-                        </mp-event-trigger>
+                          <a href="#"><mp-label iri="{{this}}"></mp-label></a>
+                        </mp-event-trigger
                     </li>
                 {{/each}}
                 </ol>
@@ -129,11 +153,11 @@
                 {{> partial:entityDetails entityiri=nodes.[0]}}
             {{/if}}
         {{else}}
-            [[#if entityiri]]
+            {{#if node}}
+                {{> partial:entityDetails entityiri=node }}
+            {{else}}
                 {{> partial:entityDetails entityiri='[[entityiri]]' }}
-            [[else]]
-                {{> partial:entityDetails entityiri='[[urlParam "entityiri"]]' }}
-            [[/if]]
+            {{/if}}
         {{/if}}
     </template>
     </mp-event-target-template-render>
