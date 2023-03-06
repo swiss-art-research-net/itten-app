@@ -91,7 +91,8 @@
 [[/inline]]
 
 [[#*inline "component-relations-table"]]
-  <semantic-table
+  <h3>Beziehungen</h3>
+  <semantic-query
     query="SELECT 
         (GROUP_CONCAT(DISTINCT ?subject;SEPARATOR=';') as ?subjects) 
         (COUNT(DISTINCT ?subject) as ?num_subjects) 
@@ -125,6 +126,7 @@
       } 
       GROUP BY ?predicate
     "
+    template='{{> template-relations-table}}'
     column-configuration='[
       {
         "displayName": "Predicate",
@@ -137,6 +139,18 @@
       }
     ]'  
   >
+      <template id="template-relations-table">
+        <table class="jila-component relations-table">
+          <tbody>
+            {{#each bindings}}
+              <tr>
+                <th><mp-label iri="{{predicate.value}}"></mp-label></th>
+                <td>{{> template-split-entities entities=objects numEntities=num_objects.value}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </template>
       <template id="template-split-entities">
         {{#ifCond numEntities ">" 3}}
           <details>
@@ -158,7 +172,7 @@
                 </template>
               </semantic-query> 
             </summary>
-            <ul>
+            <ul class="jila-component entities-list">
               {{#each (split entities.value ";")}}
                 <li>{{> template-entity-tag}}</li>
               {{/each}}
@@ -196,5 +210,5 @@
             </template>
           </semantic-query>
       </template>
-    </semantic-table>
+    </semantic-query>
 [[/inline]]

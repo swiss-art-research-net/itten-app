@@ -2,7 +2,11 @@
 [[> partial:contentHeader padding=true]]
 
 <h2>Johannes Itten Linked Archive</h2>
-
+<semantic-table 
+    query="SELECT * WHERE {
+        BIND(?__userPreferredLanguage__ AS ?lang)
+        BIND('t' as ?test)
+    }"></semantic-table>
 <bs-tabs>
     <bs-tab event-key="table" title="Collections">
         [[> component-table]]

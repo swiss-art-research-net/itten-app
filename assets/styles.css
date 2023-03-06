@@ -41,6 +41,9 @@ h3 {
 .jila-component.card-container .semantic-table-holder {
   width: 100%;
 }
+.jila-component.entities-list li {
+  list-style: none;
+}
 .jila-component.entity-view-container .panel-view {
   background-color: #F8F4FF;
   margin-top: -10px;
