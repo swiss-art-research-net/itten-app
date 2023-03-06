@@ -5,14 +5,15 @@
 @col-panel: #F8F4FF;
 @col-lightgrey: #F8F8F8;
 @col-grey: #707070;
-@col-red: #FF4C4C;
-@col-green: #00CC66;
 @col-blue: #0099FF;
-@col-purple: #A64AC9;
-@col-orange: #FF9900;
 @col-yellow: #FFD966;
 @col-pink: #FF66B3;
 @col-brown: #8B4513;
+
+@col-event: #FF9900;
+@col-person: #FF4C4C;
+@col-place: #00CC66;
+@col-collection: #A64AC9;
 
 html, body {
   font-family: 'Montserrat', sans-serif;
@@ -58,8 +59,11 @@ h1, h2, h3 {
     }
   }
   &.entities-list {
+    padding: 0;
+    margin-top: 1rem;
     li {
       list-style: none;
+      margin-bottom: 1.5rem;
     }
   }
   &.entity-view-container {
@@ -73,6 +77,29 @@ h1, h2, h3 {
     }
     .graph-view {
       height: 96vh
+    }
+  }
+  .tag {
+    text-decoration: none;
+    a {
+      text-decoration: none;
+    }
+    > a > span, span {
+      padding: 4px;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+    &.collection, &.collection > span {
+      background-color: @col-collection;
+    }
+    &.event, &.event > span {
+      background-color: @col-event;
+    }
+    &.place, &.place > span {
+      background-color: @col-place;
+    }
+    &.person, &.person > span {
+      background-color: @col-person;
     }
   }
 }

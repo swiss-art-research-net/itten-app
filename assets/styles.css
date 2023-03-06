@@ -41,8 +41,13 @@ h3 {
 .jila-component.card-container .semantic-table-holder {
   width: 100%;
 }
+.jila-component.entities-list {
+  padding: 0;
+  margin-top: 1rem;
+}
 .jila-component.entities-list li {
   list-style: none;
+  margin-bottom: 1.5rem;
 }
 .jila-component.entity-view-container .panel-view {
   background-color: #F8F4FF;
@@ -54,6 +59,34 @@ h3 {
 }
 .jila-component.entity-view-container .graph-view {
   height: 96vh;
+}
+.jila-component .tag {
+  text-decoration: none;
+}
+.jila-component .tag a {
+  text-decoration: none;
+}
+.jila-component .tag > a > span,
+.jila-component .tag span {
+  padding: 4px;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+}
+.jila-component .tag.collection,
+.jila-component .tag.collection > span {
+  background-color: #A64AC9;
+}
+.jila-component .tag.event,
+.jila-component .tag.event > span {
+  background-color: #FF9900;
+}
+.jila-component .tag.place,
+.jila-component .tag.place > span {
+  background-color: #00CC66;
+}
+.jila-component .tag.person,
+.jila-component .tag.person > span {
+  background-color: #FF4C4C;
 }
 ol.page-breadcrumb {
   position: static;
