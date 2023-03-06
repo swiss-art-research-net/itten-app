@@ -7,14 +7,14 @@
     <mp-resource-thumbnail iri="{{entityiri}}"></mp-resource-thumbnail>
 </div>
 <div>
-
-  [[> component-relations-table]]
-  
-</div>
-<div>        
-
-  [[> component-fields-visualisation]]
-
+  <bs-tabs>
+    <bs-tab event-key="relations" title="Beziehungen">
+      [[> component-relations-table]]
+    </bs-tab>
+    <bs-tab event-key="fields" title="Details">
+      [[> component-fields-visualisation]]
+    </bs-tab>
+  </bs-tabs>
 </div>
 
 [[#*inline "component-fields-visualisation"]]
@@ -124,20 +124,8 @@
         }
 
       } 
-      GROUP BY ?predicate
-    "
-    template='{{> template-relations-table}}'
-    column-configuration='[
-      {
-        "displayName": "Predicate",
-        "variableName": "predicate"
-      },
-      {
-        "displayName": "Object",
-        "variableName": "objects",
-        "cellTemplate": "{{> template-split-entities entities=objects numEntities=num_objects.value}}"
-      }
-    ]'  
+      GROUP BY ?predicate"
+    template='{{> template-relations-table}}' 
   >
       <template id="template-relations-table">
         <table class="jila-component relations-table">
@@ -151,6 +139,7 @@
           </tbody>
         </table>
       </template>
+
       <template id="template-split-entities">
         {{#ifCond numEntities ">" 3}}
           <details>
@@ -168,45 +157,53 @@
                 template="{{> template-types}}"
               >
                 <template id="template-types">
-                  <div>{{#each bindings}}<mp-label iri="{{type.value}}"></mp-label>{{#if @last}}{{else}}, {{/if}}{{/each}} ({{numEntities}})</div>
+                  <div>
+                    {{#each bindings}}
+                      <mp-label iri="{{type.value}}"></mp-label>{{#if @last}}{{else}}, {{/if}}
+                    {{/each}} ({{numEntities}})
+                  </div>
                 </template>
               </semantic-query> 
             </summary>
             <ul class="jila-component entities-list">
               {{#each (split entities.value ";")}}
-                <li>{{> template-entity-tag}}</li>
+                <li class="tag">{{> template-entity-tag}}</li>
               {{/each}}
             </ul>
           </details>
         {{else}}
           {{#each (split entities.value ";")}}
-            {{> template-entity-tag}}{{#if @last}}{{else}}, {{/if}}
+            <ul class="jila-component entities-list">
+              <li>{{> template-entity-tag}}</li>
+            </ul>
           {{/each}}
         {{/ifCond}}
       </template>
-      <template id="template-entity-tag">
 
-        <mp-event-trigger 
-            id='node-highlight-{{this}}'
-            type="JILA.PanelNodeClicked"
-            data='{"node": "{{this}}"}'
-        >
-          <a href="#"><mp-label iri="{{this}}"></mp-label></a>
-        </mp-event-trigger>
-        <semantic-query
-          query="SELECT ?type WHERE {
-            BIND(<{{this}}> AS ?entity)
-            ?entity a ?type .
-            VALUES(?type) {
-              (search:Actor)
-              (search:Event)
-              (search:Person)
-              (search:Place)
-            }
-          } LIMIT 1"
-          template="{{> template-type-label type=bindings.0.type.value}}">
-            <template id="template-type-label">
-              &nbsp;(<mp-label iri="{{type}}"></mp-label>)
+      <template id="template-entity-tag">
+          <semantic-query
+            query='SELECT ?entity ?typeClass WHERE {
+              BIND(<{{this}}> AS ?entity)
+              ?entity a ?type .
+              VALUES(?type ?typeClass) {
+                (crm:E21_Person "person")
+                (crm:E39_Actor "person")
+                (crm:E5_Event "event")
+                (crm:E53_Place "place")
+                (crm:E78_Curated_Holding "collection")
+              }
+            } LIMIT 1'
+            template="{{> template-tag-event-trigger}}">
+              <template id="template-tag-event-trigger">
+                <mp-event-trigger 
+                  id='node-highlight-{{bindings.0.entity.value}}'
+                  type="JILA.PanelNodeClicked"
+                  data='{"node": "{{bindings.0.entity.value}}"}'
+                >
+                  <a href="#" class="jila-component tag {{bindings.0.typeClass.value}}">
+                    <mp-label iri="{{bindings.0.entity.value}}"></mp-label>
+                </a>
+              </mp-event-trigger>
             </template>
           </semantic-query>
       </template>
