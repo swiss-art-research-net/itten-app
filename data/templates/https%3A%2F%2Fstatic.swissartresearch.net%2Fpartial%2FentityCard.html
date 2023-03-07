@@ -1,33 +1,41 @@
+{{#if onlybody}}
+    [[> component-card-body]]
+{{else}}
 <div class="jila-component card">
-    <semantic-link iri="page:viewEntity" urlqueryparam-entityiri="{{subject.value}}">
-        <div class="jila-component card-image">
-            <mp-resource-thumbnail iri={{subject.value}}>
-                <mp-resource-thumbnail-fallback>
-                    <semantic-query
-                        query="SELECT ?type ?image WHERE {
-                            <{{subject.value}}> a ?type .
-                            VALUES (?type ?image) {
-                                (search:Person '../images/fcs/actors.svg')
-                                (search:Object '../assets/icons/image.svg')
-                                (search:Place '../images/fcs/places.svg')
-                                (search:Type '../images/fcs/concepts.svg')
-                            }
-                        }"
-                        template="{{> template}}"
-                    >
-                        <template id="template">
-                            <div class="bso-component icon">
-                                {{#each bindings}}
-                                    <img src="{{image.value}}" style="opacity:0.1;">
-                                {{/each}}
-                            </div>
-                        </template>
-                    </semantic-query>
-                </mp-resource-thumbnail-fallback>
-            </mp-resource-thumbnail>
-        </div>
-        <div class="jila-component card-body">
-            <mp-label iri="{{subject.value}}"></mp-label>
-        </div>
+    <semantic-link iri="page:viewEntity" urlqueryparam-entityiri="{{subject}}">
+        [[> component-card-body subject=subject]]
     </semantic-link>
 </div>
+{{/if}}
+
+[[#*inline "component-card-body"]]
+<div class="jila-component card-image">
+    <mp-resource-thumbnail iri={{subject}}>
+        <mp-resource-thumbnail-fallback>
+            <semantic-query
+                query="SELECT ?type ?image WHERE {
+                    <{{subject}}> a ?type .
+                    VALUES (?type ?image) {
+                        (search:Person '../images/fcs/actors.svg')
+                        (search:Object '../assets/icons/image.svg')
+                        (search:Place '../images/fcs/places.svg')
+                        (search:Type '../images/fcs/concepts.svg')
+                    }
+                }"
+                template="{{> template}}"
+            >
+                <template id="template">
+                    <div class="bso-component icon">
+                        {{#each bindings}}
+                            <img src="{{image.value}}" style="opacity:0.1;">
+                        {{/each}}
+                    </div>
+                </template>
+            </semantic-query>
+        </mp-resource-thumbnail-fallback>
+    </mp-resource-thumbnail>
+</div>
+<div class="jila-component card-body">
+    <mp-label iri="{{subject}}"></mp-label>
+</div>
+[[/inline]]

@@ -144,19 +144,18 @@
                 {{#if nodes}}
                     {{#if nodes.[1] }}
                         <h2>Select</h2>
-                        <ol>
-                        {{#each nodes}}
-                            <li>
-                                <mp-event-trigger 
-                                    id='node-highlight-{{this}}'
-                                    type="JILA.PanelNodeClicked"
-                                    data='{"node": "{{this}}"}'
-                                >
-                                <a href="#"><mp-label iri="{{this}}"></mp-label></a>
-                                </mp-event-trigger
-                            </li>
-                        {{/each}}
-                        </ol>
+                        <div class="jila-component card-container">
+                            {{#each nodes}}
+                                    <mp-event-trigger 
+                                        id='node-highlight-{{this}}'
+                                        type="JILA.PanelNodeClicked"
+                                        data='{"node": "{{this}}"}'
+                                    >
+                                    <a href="#" class="jila-component card">{{> partial:entityCard subject=this onlybody=true}}</a>
+                                    </mp-event-trigger
+                                </li>
+                            {{/each}}
+                        </div>
                     {{else}}
                         {{> partial:entityDetails entityiri=nodes.[0]}}
                     {{/if}}
