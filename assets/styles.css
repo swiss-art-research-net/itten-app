@@ -66,11 +66,13 @@ h3 {
 .jila-component .tag a {
   text-decoration: none;
 }
+.jila-component .tag > span {
+  display: inline-block;
+}
 .jila-component .tag > a > span,
 .jila-component .tag span {
   padding: 4px;
   border-radius: 6px;
-  margin-bottom: 1.5rem;
 }
 .jila-component .tag.collection,
 .jila-component .tag.collection > span {
