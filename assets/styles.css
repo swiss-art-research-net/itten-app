@@ -62,16 +62,23 @@ h3 {
   list-style: none;
   margin-bottom: 1.5rem;
 }
-.jila-component.entity-view-container .panel-view {
+.jila-component.entity-view-container .panel-view-container::after {
+  content: '.';
+  display: block;
+  height: 20rem;
+  background-image: linear-gradient(to bottom, #F8F4FF, transparent);
+}
+.jila-component.entity-view-container .panel-view-container .panel-view {
   background-color: #F8F4FF;
   margin-top: -10px;
-  margin-right: -15px;
-  margin-left: -15px;
   margin-bottom: 0;
   padding: 4rem 1rem;
 }
 .jila-component.entity-view-container .graph-view {
   height: 96vh;
+}
+.jila-component.panel-entity-details .image img {
+  max-width: 100%;
 }
 .jila-component .tag {
   text-decoration: none;
