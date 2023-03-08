@@ -109,6 +109,20 @@ h1, h2, h3 {
       }
     }
   }
+  .relations-table {
+    .griddle-container {
+      .griddle-custom-row {
+        display: block !important;
+      }
+      > div > div > a {
+        display: block;
+        margin-bottom:5px
+      }
+    }
+    summary {
+      margin-bottom: 1rem;
+    }
+  }
   .tag {
     text-decoration: none;
     a {
@@ -121,16 +135,16 @@ h1, h2, h3 {
       padding: 4px;
       border-radius: 6px;
     }
-    &.collection, &.collection > span {
+    &.collection > span {
       background-color: @col-collection;
     }
-    &.event, &.event > span {
+    &.event > span {
       background-color: @col-event;
     }
-    &.place, &.place > span {
+    &.place > span {
       background-color: @col-place;
     }
-    &.person, &.person > span {
+    &.person > span {
       background-color: @col-person;
     }
   }

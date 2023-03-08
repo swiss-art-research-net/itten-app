@@ -80,6 +80,16 @@ h3 {
 .jila-component.panel-entity-details .image img {
   max-width: 100%;
 }
+.jila-component .relations-table .griddle-container .griddle-custom-row {
+  display: block !important;
+}
+.jila-component .relations-table .griddle-container > div > div > a {
+  display: block;
+  margin-bottom: 5px;
+}
+.jila-component .relations-table summary {
+  margin-bottom: 1rem;
+}
 .jila-component .tag {
   text-decoration: none;
 }
@@ -94,19 +104,15 @@ h3 {
   padding: 4px;
   border-radius: 6px;
 }
-.jila-component .tag.collection,
 .jila-component .tag.collection > span {
   background-color: #A64AC9;
 }
-.jila-component .tag.event,
 .jila-component .tag.event > span {
   background-color: #FF9900;
 }
-.jila-component .tag.place,
 .jila-component .tag.place > span {
   background-color: #00CC66;
 }
-.jila-component .tag.person,
 .jila-component .tag.person > span {
   background-color: #FF4C4C;
 }
