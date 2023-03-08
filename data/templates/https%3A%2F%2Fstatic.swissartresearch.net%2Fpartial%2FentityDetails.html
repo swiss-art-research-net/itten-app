@@ -3,8 +3,15 @@
   <button><semantic-link iri="page:viewEntity" urlqueryparam-entityiri="{{entityiri}}">Focus</semantic-link></button>
   <button><semantic-link iri="{{entityiri}}">Source</semantic-link></button>
 </p>
-<div>
-    <mp-resource-thumbnail iri="{{entityiri}}"></mp-resource-thumbnail>
+<div class="jila-component panel-entity-details">
+    <bs-row>
+      <bs-col md="6">
+
+      </bs-col>
+      <bs-col md="6" class-name="image">
+        <mp-resource-thumbnail iri="{{entityiri}}"></mp-resource-thumbnail>
+      </bs-col>
+    </bs-row>
 </div>
 <div>
   <bs-tabs>

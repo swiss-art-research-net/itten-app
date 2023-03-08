@@ -16,10 +16,11 @@
                 query="SELECT ?type ?image WHERE {
                     <{{subject}}> a ?type .
                     VALUES (?type ?image) {
-                        (search:Person '../images/fcs/actors.svg')
-                        (search:Object '../assets/icons/image.svg')
-                        (search:Place '../images/fcs/places.svg')
-                        (search:Type '../images/fcs/concepts.svg')
+                        (search:Person '/images/fcs/actors.svg')
+                        (search:Object '/assets/icons/image.svg')
+                        (search:Place '/images/fcs/places.svg')
+                        (search:Type '/images/fcs/concepts.svg')
+                        (search:Collection '/assets/icons/folder-open.svg')
                     }
                 }"
                 template="{{> template}}"
