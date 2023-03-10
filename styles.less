@@ -11,9 +11,10 @@
 @col-brown: #8B4513;
 
 @col-event: #FF9900;
-@col-person: #FF4C4C;
+@col-person: #FF66B3;
+@col-actor: #FF66B3;
 @col-place: #00CC66;
-@col-collection: #A64AC9;
+@col-collection: #FFD966;
 
 html, body {
   font-family: 'Montserrat', sans-serif;
@@ -134,6 +135,9 @@ h1, h2, h3 {
     > a > span, span {
       padding: 4px;
       border-radius: 6px;
+    }
+    &.actor > span {
+      background-color: @col-actor;
     }
     &.collection > span {
       background-color: @col-collection;

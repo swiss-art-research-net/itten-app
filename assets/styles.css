@@ -104,8 +104,11 @@ h3 {
   padding: 4px;
   border-radius: 6px;
 }
+.jila-component .tag.actor > span {
+  background-color: #FF66B3;
+}
 .jila-component .tag.collection > span {
-  background-color: #A64AC9;
+  background-color: #FFD966;
 }
 .jila-component .tag.event > span {
   background-color: #FF9900;
@@ -114,7 +117,7 @@ h3 {
   background-color: #00CC66;
 }
 .jila-component .tag.person > span {
-  background-color: #FF4C4C;
+  background-color: #FF66B3;
 }
 ol.page-breadcrumb {
   position: static;
