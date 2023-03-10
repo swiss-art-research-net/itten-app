@@ -1,5 +1,10 @@
 
-<h2><mp-label iri="{{entityiri}}"></mp-label></h2>
+<h2><mp-label iri="{{entityiri}}"></mp-label>
+  {{#if initial}}
+  {{else}}
+      &nbsp;<semantic-link iri="page:viewEntity" urlqueryparam-entityiri="{{entityiri}}"><i title="Fokussieren" class="fa fa-dot-circle-o"></i></semantic-link>
+  {{/if}}
+</h2>
 <div class="jila-component panel-entity-details">
     <bs-row>
       <bs-col md="8">
@@ -11,8 +16,6 @@
     </bs-row>
 </div>
 <div>
-    <button><semantic-link iri="page:viewEntity" urlqueryparam-entityiri="{{entityiri}}">Focus</semantic-link></button>
-    <button><semantic-link iri="{{entityiri}}">Source</semantic-link></button>
 </div>
 <div>
   <bs-tabs>
@@ -21,6 +24,9 @@
     </bs-tab>
     <bs-tab event-key="fields" title="Details">
       [[> component-fields-visualisation]]
+      <p>
+        <semantic-link iri="{{entityiri}}">Quelldaten anzeigen <i class="fa fa-external-link"></i></semantic-link>
+      </p>
     </bs-tab>
   </bs-tabs>
 </div>
@@ -99,7 +105,6 @@
 [[/inline]]
 
 [[#*inline "component-relations-table"]]
-  <h3>Beziehungen</h3>
   <semantic-query
     query="SELECT 
         (GROUP_CONCAT(DISTINCT ?subject;SEPARATOR=';') as ?subjects) 

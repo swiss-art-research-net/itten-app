@@ -143,7 +143,7 @@
                 <div>
                 {{#if nodes}}
                     {{#if nodes.[1] }}
-                        <h2>Select</h2>
+                        <h2>Auswahl</h2>
                         <div class="jila-component card-container">
                             <semantic-table 
                                 id='grid-result'
@@ -179,7 +179,7 @@
                     {{#if node}}
                         {{> partial:entityDetails entityiri=node }}
                     {{else}}
-                        {{> partial:entityDetails entityiri='[[entityiri]]' }}
+                        {{> partial:entityDetails entityiri='[[entityiri]]' initial=true }}
                     {{/if}}
                 {{/if}}
                 </div>
