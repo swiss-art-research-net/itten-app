@@ -122,13 +122,14 @@ ol.page-breadcrumb {
 .navbar {
   height: 4rem;
   min-height: 4rem;
-  background-color: #F8F8F8;
+  background-color: #e9e8ff;
 }
 .navbar .navbar-nav li a {
-  color: #707070;
+  color: #4C45FF;
 }
-.navbar .navbar-nav li a:hover {
-  color: #8a8a8a;
+.navbar .navbar-nav li a:hover,
+.navbar .navbar-nav li a:active {
+  color: #7d78ff;
 }
 .rs-header-logo {
   color: #4C45FF;

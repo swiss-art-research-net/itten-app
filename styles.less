@@ -160,14 +160,14 @@ ol.page-breadcrumb {
 .navbar {
   height: 4rem;
   min-height: 4rem;
-  background-color: @col-lightgrey;
+  background-color: lighten(@col-brand, 32%);
   .navbar-nav {
     li {
       a {
-        color: @col-grey;
+        color: @col-brand;
       }
-      a:hover {
-        color: lighten(@col-grey, 10%)
+      a:hover, a:active {
+        color: lighten(@col-brand, 10%)
       }
     }
   }
