@@ -1,4 +1,4 @@
 deploymentTitle=JILA
-preferredLabels={ GRAPH <https://resource.swissartresearch.net/graph/network/vocab> { $subject <http://www.w3.org/2004/02/skos/core#prefLabel> ?value }},<http://www.w3.org/2004/02/skos/core#prefLabel>,<http://www.w3.org/2000/01/rdf-schema#label>,<http://www.cidoc-crm.org/cidoc-crm/P190_has_symbolic_content>,<https://d-nb.info/standards/elementset/gnd#preferredName>
+preferredLabels=<http://www.researchspace.org/ontology/displayLabel>,<http://www.w3.org/2004/02/skos/core#prefLabel>,<http://www.w3.org/2000/01/rdf-schema#label>,<http://www.cidoc-crm.org/cidoc-crm/P190_has_symbolic_content>,<https://d-nb.info/standards/elementset/gnd#preferredName>
 preferredThumbnails = <http://schema.org/thumbnail>,{ $subject crmdig:L54_is_same-as/wdt:P18 ?value },{ $subject crm:P46_is_composed_of/crm:P138i_has_representation/la:digitally_shown_by/la:digitally_available_via/la:access_point ?iiif . BIND(URI(CONCAT(STR(?iiif), "/full/300,/0/default.jpg")) as ?value) }
 preferredLanguages = de

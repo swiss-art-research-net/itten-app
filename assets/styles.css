@@ -129,6 +129,7 @@ ol.page-breadcrumb {
 }
 .navbar .navbar-nav li a {
   color: #4C45FF;
+  font-weight: bold;
 }
 .navbar .navbar-nav li a:hover,
 .navbar .navbar-nav li a:active {
