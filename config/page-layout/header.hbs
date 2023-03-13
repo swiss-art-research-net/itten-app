@@ -10,16 +10,18 @@
                 <li><semantic-link iri="page:ittenArchive">Itten-Archiv</semantic-link></li>
                 <li><semantic-link iri="page:about">Über uns</semantic-link></li>
                 <li><a href="/sparql">SPARQL</a></li>
-                <li><semantic-link iri="rsp:admin">Admin</semantic-link></li>
-                <li><a href="/login">Login</a></li>
+                <mp-anonymous-hidden alt='<li><a href="/login" title="login">Login</a></li>'>
+                    <li><semantic-link iri="rsp:admin">Admin</semantic-link></li>
+                </mp-anonymous-hidden>
             </ul>
             <bs-nav-dropdown title="{{deploymentTitle}}" id="basic-nav-dropdown"  class="rs-only-xs">
                 <bs-menu-item><semantic-link iri="page:persons">Personen</semantic-link></bs-menu-item>
                 <bs-menu-item><semantic-link iri="page:ittenArchive">Itten-Archiv</semantic-link></bs-menu-item>
                 <bs-menu-item><semantic-link iri="page:about">Über uns</semantic-link></bs-menu-item>
                 <bs-menu-item><a href="/sparql">SPARQL</a></bs-menu-item>
-                <bs-menu-item><semantic-link iri="rsp:admin">Admin</semantic-link></bs-menu-item>
-                <bs-menu-item><a href="/login">Login</a></bs-menu-item>
+                <mp-anonymous-hidden alt=<bs-menu-item><a href="/login">Login</a></bs-menu-item>'>
+                    <bs-menu-item><semantic-link iri="rsp:admin">Admin</semantic-link></bs-menu-item>
+                </mp-anonymous-hidden>
             </bs-nav-dropdown>
         </div>
     </div>
