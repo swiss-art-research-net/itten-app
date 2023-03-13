@@ -84,6 +84,11 @@ h3 {
   display: inline-block;
   margin-left: 1rem;
 }
+.jila-component .relations-table td,
+.jila-component .relations-table th {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 .jila-component .relations-table .entity-tag-row {
   margin-bottom: 0.5rem;
 }
