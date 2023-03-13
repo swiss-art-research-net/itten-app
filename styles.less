@@ -10,11 +10,12 @@
 @col-pink: #FF66B3;
 @col-brown: #8B4513;
 
-@col-event: #0099FF;
-@col-person: #FF66B3;
 @col-actor: #fb644d;
-@col-place: #00CC66;
 @col-collection: #FFD966;
+@col-event: #0099FF;
+@col-object: #B0927A;
+@col-person: #FF66B3;
+@col-place: #00CC66;
 
 html, body {
   font-family: 'Montserrat', sans-serif;
@@ -152,6 +153,9 @@ h1, h2, h3 {
     }
     &.event > span {
       background-color: @col-event;
+    }
+    &.object > span {
+      background-color: @col-object;
     }
     &.place > span {
       background-color: @col-place;
