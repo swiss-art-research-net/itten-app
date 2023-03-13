@@ -198,16 +198,18 @@
                 tuple-template='{{> template-entity-tag subject=subject.value}}'
             >
               <template id="template-entity-tag">
-                  [[> template-entity-tag]]
+                  <div class="jila-component entity-tag-row">
+                      [[> template-entity-tag]]
+                  </div>
               </template>
             </semantic-table>
           </details>
         {{else}}
+          <ul class="jila-component entities-list">
           {{#each (split entities.value ";")}}
-            <ul class="jila-component entities-list">
-              <li>{{> template-entity-tag subject=this}}</li>
-            </ul>
+            <li>{{> template-entity-tag subject=this}}</li>
           {{/each}}
+          </ul>
         {{/ifCond}}
       </template>
 
@@ -299,14 +301,21 @@
     template="{{> template-tag-event-trigger}}">
       <template id="template-tag-event-trigger">
         <mp-event-trigger 
-          id='node-highlight-{{bindings.0.entity.value}}'
+          id='node-click-{{bindings.0.entity.value}}'
           type="JILA.PanelNodeClicked"
           data='{"node": "{{bindings.0.entity.value}}"}'
         >
           <a href="#" class="jila-component tag {{bindings.0.typeClass.value}}">
             <mp-label iri="{{bindings.0.entity.value}}"></mp-label>
-        </a>
+          </a>
       </mp-event-trigger>
+      <mp-event-trigger 
+        id='node-add-{{bindings.0.entity.value}}'
+        type="JILA.PanelNodeAdd"
+        data='{"node": "{{bindings.0.entity.value}}"}'
+      >
+        <div class="jila-component plus-button show-on-hover"><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></div>
+    </mp-event-trigger>
     </template>
   </semantic-query>
   [[/inline]]

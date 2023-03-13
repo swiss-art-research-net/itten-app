@@ -48,6 +48,12 @@
         proxy-targets='["entity-view-graph"]'
     ></mp-event-proxy>
 
+    <mp-event-proxy
+        on-event-type='JILA.PanelNodeAdd'
+        proxy-event-type='Sigma.TriggerNodeClicked'
+        proxy-targets='["entity-view-graph"]'
+    ></mp-event-proxy>
+
     <mp-event-proxy 
         on-event-type='Sigma.NodeClicked'
         proxy-event-type='Component.TemplateUpdate' 

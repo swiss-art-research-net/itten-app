@@ -60,7 +60,7 @@ h3 {
 }
 .jila-component.entities-list li {
   list-style: none;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 .jila-component.entity-view-container .panel-view-container::after {
   content: '.';
@@ -80,12 +80,15 @@ h3 {
 .jila-component.panel-entity-details .image img {
   max-width: 100%;
 }
+.jila-component.plus-button {
+  display: inline-block;
+  margin-left: 1rem;
+}
+.jila-component .relations-table .entity-tag-row {
+  margin-bottom: 0.5rem;
+}
 .jila-component .relations-table .griddle-container .griddle-custom-row {
   display: block !important;
-}
-.jila-component .relations-table .griddle-container > div > div > a {
-  display: block;
-  margin-bottom: 5px;
 }
 .jila-component .relations-table summary {
   margin-bottom: 1rem;
@@ -98,6 +101,7 @@ h3 {
 }
 .jila-component .tag > span {
   display: inline-block;
+  max-width: 90%;
 }
 .jila-component .tag > a > span,
 .jila-component .tag span {
@@ -111,7 +115,6 @@ h3 {
   background-color: #FFD966;
 }
 .jila-component .tag.event > span {
-  background-color: #FF9900;
   background-color: #0099FF;
 }
 .jila-component .tag.place > span {
@@ -119,6 +122,12 @@ h3 {
 }
 .jila-component .tag.person > span {
   background-color: #FF66B3;
+}
+* > .jila-component.show-on-hover {
+  visibility: hidden;
+}
+*:hover > .jila-component.show-on-hover {
+  visibility: visible;
 }
 ol.page-breadcrumb {
   position: static;
