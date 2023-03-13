@@ -47,7 +47,8 @@
         ORDER BY ?label'
         column-configuration='[{
                 "displayName": "Entity",
-                "variableName": "subject"
+                "variableName": "subject",
+                "cellTemplate": "{{> templateEntity }}"
             },
             {
                 "displayName": "Types",
@@ -64,10 +65,13 @@
                 "variableName": "num_relations"
             }]'
     >
+            <template id="templateEntity">
+                <semantic-link iri="page:viewEntity" urlqueryparam-entityiri="{{subject.value}}"><mp-label iri="{{subject.value}}"></mp-label></semantic-link>
+            </template>
             <template id="templateTypes">
                 {{#if types.value}}
                     {{#each (split types.value ";")}}
-                        <semantic-link uri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
+                        <semantic-link iri="{{this}}"></semantic-link>{{#if @last}}{{else}}, {{/if}}
                     {{/each}}
                 {{/if}}
             </template>
