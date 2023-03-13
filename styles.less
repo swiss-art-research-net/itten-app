@@ -5,14 +5,16 @@
 @col-panel: #F8F4FF;
 @col-lightgrey: #F8F8F8;
 @col-grey: #707070;
-@col-red: #FF4C4C;
-@col-green: #00CC66;
 @col-blue: #0099FF;
-@col-purple: #A64AC9;
-@col-orange: #FF9900;
 @col-yellow: #FFD966;
 @col-pink: #FF66B3;
 @col-brown: #8B4513;
+
+@col-event: #0099FF;
+@col-person: #FF66B3;
+@col-actor: #fb644d;
+@col-place: #00CC66;
+@col-collection: #FFD966;
 
 html, body {
   font-family: 'Montserrat', sans-serif;
@@ -32,24 +34,37 @@ h1, h2, h3 {
       border: 1px solid @col-lightgrey;
       border-radius: 4px;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+      background-color: @col-white;
       flex: 0 1 20rem;
       margin-right: 1%;
       margin-bottom: 1%;
+      position: relative;
       &:hover {
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
       }
       .card-body {
+        background-color: @col-white;
+        bottom: 0;
         min-height: 4rem;
         padding: 4px;
         padding-top:8px;
         text-align: center;
+        position: absolute;
+        width: 100%;
       }
       .card-image {
         max-width: 100%;
-        max-height: 20rem;
+        height: 25rem;
         overflow: hidden;
         img {
           max-width: 100%;
+        }
+        .icon {
+          text-align: center; 
+          padding-top: 5rem;
+          img {
+            max-width: 60%;
+          }
         }
       }
     }
@@ -57,22 +72,103 @@ h1, h2, h3 {
       width: 100%;
     }
   }
+  &.entities-list {
+    padding: 0;
+    margin-top: 1rem;
+    li {
+      list-style: none;
+      margin-bottom: .5rem;
+    }
+  }
   &.entity-view-container {
-    .panel-view {
-      background-color: @col-panel;
-      margin-top: -10px;
-      margin-right: -15px;
-      margin-left:-15px;
-      margin-bottom: 0;
-      padding:4rem 1rem;
+    .panel-view-container {
+      &::after {
+        content: '.';
+        display: block;
+        height: 20rem;
+        // margin-right: -15px;
+        // margin-left:-15px;
+        background-image: linear-gradient(to bottom, @col-panel, transparent);
+      }
+      .panel-view {
+        background-color: @col-panel;
+        margin-top: -10px;
+        // margin-right: -15px;
+        // margin-left:-15px;
+        margin-bottom: 0;
+        padding:4rem 1rem;
+      }
     }
     .graph-view {
       height: 96vh
     }
   }
+  &.panel-entity-details {
+    .image {
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+  &.plus-button {
+    display: inline-block;
+    margin-left: 1rem;
+  }
+  .relations-table {
+    .entity-tag-row {
+      margin-bottom: .5rem;
+    }
+    .griddle-container {
+      .griddle-custom-row {
+        display: block !important;
+      }
+    }
+    summary {
+      margin-bottom: 1rem;
+    }
+  }
+  .tag {
+    text-decoration: none;
+    a {
+      text-decoration: none;
+    }
+    > span {
+      display: inline-block;
+      max-width: 90%;
+    }
+    > a > span, span {
+      padding: 4px;
+      border-radius: 6px;
+    }
+    &.actor > span {
+      background-color: @col-actor;
+    }
+    &.collection > span {
+      background-color: @col-collection;
+    }
+    &.event > span {
+      background-color: @col-event;
+    }
+    &.place > span {
+      background-color: @col-place;
+    }
+    &.person > span {
+      background-color: @col-person;
+    }
+  }
 }
 
+* > .jila-component {
+  &.show-on-hover {
+    visibility: hidden;
+  }
+}
 
+*:hover > .jila-component {
+  &.show-on-hover {
+    visibility: visible;
+  }
+}
 // Overrides
 
 ol.page-breadcrumb {
@@ -82,14 +178,15 @@ ol.page-breadcrumb {
 .navbar {
   height: 4rem;
   min-height: 4rem;
-  background-color: @col-lightgrey;
+  background-color: lighten(@col-brand, 32%);
   .navbar-nav {
     li {
       a {
-        color: @col-grey;
+        color: @col-brand;
+        font-weight: bold;
       }
-      a:hover {
-        color: lighten(@col-grey, 10%)
+      a:hover, a:active {
+        color: lighten(@col-brand, 10%)
       }
     }
   }

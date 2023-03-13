@@ -48,6 +48,12 @@
         proxy-targets='["entity-view-graph"]'
     ></mp-event-proxy>
 
+    <mp-event-proxy
+        on-event-type='JILA.PanelNodeAdd'
+        proxy-event-type='Sigma.TriggerNodeClicked'
+        proxy-targets='["entity-view-graph"]'
+    ></mp-event-proxy>
+
     <mp-event-proxy 
         on-event-type='Sigma.NodeClicked'
         proxy-event-type='Component.TemplateUpdate' 
@@ -87,12 +93,12 @@
         search-box="true"
         sizes='{"nodes": 10, "edges": 2}'
         colours='{
-                "[[resolvePrefix "search:Person"]]": "#FF4C4C",
-                "[[resolvePrefix "crm:E21_Person"]]": "#FF4C4C",
-                "[[resolvePrefix "search:Actor"]]": "#FF4C4C",
-                "[[resolvePrefix "search:Place"]]": "#0099FF",
-                "[[resolvePrefix "search:Collection"]]": "#A64AC9",
-                "[[resolvePrefix "search:Event"]]": "#FF9900"
+                "[[resolvePrefix "search:Person"]]": "#FF66B3",
+                "[[resolvePrefix "crm:E21_Person"]]": "#FF66B3",
+                "[[resolvePrefix "search:Actor"]]": "#fb644d",
+                "[[resolvePrefix "search:Place"]]": "#00CC66",
+                "[[resolvePrefix "search:Collection"]]": "#FFD966",
+                "[[resolvePrefix "search:Event"]]": "#0099FF"
             }'
         node-query='CONSTRUCT {
             ?subject ?predicate ?object .
@@ -143,20 +149,35 @@
                 <div>
                 {{#if nodes}}
                     {{#if nodes.[1] }}
-                        <h2>Select</h2>
-                        <ol>
-                        {{#each nodes}}
-                            <li>
-                                <mp-event-trigger 
-                                    id='node-highlight-{{this}}'
-                                    type="JILA.PanelNodeClicked"
-                                    data='{"node": "{{this}}"}'
-                                >
-                                <a href="#"><mp-label iri="{{this}}"></mp-label></a>
-                                </mp-event-trigger
-                            </li>
-                        {{/each}}
-                        </ol>
+                        <h2>Auswahl</h2>
+                        <div class="jila-component card-container">
+                            <semantic-table 
+                                id='grid-result'
+                                query='SELECT?subject ?label WHERE {
+                                    ?subject rdfs:label ?label
+                                    VALUES (?subject) {
+                                        {{#each nodes}}
+                                            (<{{this}}>)
+                                        {{/each}}
+                                    }
+                                } ORDER BY ?label'
+                                number-of-displayed-rows="10"
+                                options='{
+                                    "sorting": {"label": "asc"}
+                                }'
+                                tuple-template='{{> event-card-template}}'
+                            >
+                                <template id="event-card-template">
+                                    <mp-event-trigger 
+                                        id='node-highlight-{{subject.value}}'
+                                        type="JILA.PanelNodeClicked"
+                                        data='{"node": "{{subject.value}}"}'
+                                    >
+                                    <a href="#" class="jila-component card">{{> partial:entityCard subject=subject.value onlybody=true}}</a>
+                                    </mp-event-trigger
+                                </template>    
+                            </semantic-table>
+                        </div>
                     {{else}}
                         {{> partial:entityDetails entityiri=nodes.[0]}}
                     {{/if}}
@@ -164,7 +185,7 @@
                     {{#if node}}
                         {{> partial:entityDetails entityiri=node }}
                     {{else}}
-                        {{> partial:entityDetails entityiri='[[entityiri]]' }}
+                        {{> partial:entityDetails entityiri='[[entityiri]]' initial=true }}
                     {{/if}}
                 {{/if}}
                 </div>

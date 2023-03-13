@@ -1,20 +1,34 @@
-<h2><mp-label iri="{{entityiri}}"></mp-label></h2>
-<p>
-  <button><semantic-link iri="page:viewEntity" urlqueryparam-entityiri="{{entityiri}}">Focus</semantic-link></button>
-  <button><semantic-link iri="{{entityiri}}">Source</semantic-link></button>
-</p>
-<div>
-    <mp-resource-thumbnail iri="{{entityiri}}"></mp-resource-thumbnail>
+
+<h2><mp-label iri="{{entityiri}}"></mp-label>
+  {{#if initial}}
+  {{else}}
+      &nbsp;<semantic-link iri="page:viewEntity" urlqueryparam-entityiri="{{entityiri}}"><i title="Fokussieren" class="fa fa-dot-circle-o"></i></semantic-link>
+  {{/if}}
+</h2>
+<div class="jila-component panel-entity-details">
+    <bs-row>
+      <bs-col md="8">
+        [[> module-entity-description]]
+      </bs-col>
+      <bs-col md="4" class-name="image">
+        <mp-resource-thumbnail iri="{{entityiri}}"></mp-resource-thumbnail>
+      </bs-col>
+    </bs-row>
 </div>
 <div>
-
-  [[> component-relations-table]]
-  
 </div>
-<div>        
-
-  [[> component-fields-visualisation]]
-
+<div>
+  <bs-tabs>
+    <bs-tab event-key="relations" title="Beziehungen">
+      [[> component-relations-table]]
+    </bs-tab>
+    <bs-tab event-key="fields" title="Details">
+      [[> component-fields-visualisation]]
+      <p>
+        <semantic-link iri="{{entityiri}}">Quelldaten anzeigen <i class="fa fa-external-link"></i></semantic-link>
+      </p>
+    </bs-tab>
+  </bs-tabs>
 </div>
 
 [[#*inline "component-fields-visualisation"]]
@@ -91,7 +105,7 @@
 [[/inline]]
 
 [[#*inline "component-relations-table"]]
-  <semantic-table
+  <semantic-query
     query="SELECT 
         (GROUP_CONCAT(DISTINCT ?subject;SEPARATOR=';') as ?subjects) 
         (COUNT(DISTINCT ?subject) as ?num_subjects) 
@@ -111,6 +125,7 @@
           (search:Place)
           (search:Collection)
           (search:Event)
+          (crm:E21_Person)
         }
         VALUES (?typeObject) {
           (search:Person)
@@ -118,23 +133,26 @@
           (search:Place)
           (search:Collection)
           (search:Event)
+          (crm:E21_Person)
         }
 
       } 
-      GROUP BY ?predicate
-    "
-    column-configuration='[
-      {
-        "displayName": "Predicate",
-        "variableName": "predicate"
-      },
-      {
-        "displayName": "Object",
-        "variableName": "objects",
-        "cellTemplate": "{{> template-split-entities entities=objects numEntities=num_objects.value}}"
-      }
-    ]'  
+      GROUP BY ?predicate"
+    template='{{> template-relations-table}}' 
   >
+      <template id="template-relations-table">
+        <table class="jila-component relations-table">
+          <tbody>
+            {{#each bindings}}
+              <tr>
+                <th><mp-label iri="{{predicate.value}}"></mp-label></th>
+                <td>{{> template-split-entities entities=objects numEntities=num_objects.value}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </template>
+
       <template id="template-split-entities">
         {{#ifCond numEntities ">" 3}}
           <details>
@@ -152,47 +170,152 @@
                 template="{{> template-types}}"
               >
                 <template id="template-types">
-                  <div>{{#each bindings}}<mp-label iri="{{type.value}}"></mp-label>{{#if @last}}{{else}}, {{/if}}{{/each}} ({{numEntities}})</div>
+                  <div>
+                    {{#each bindings}}
+                      <mp-label iri="{{type.value}}"></mp-label>{{#if @last}}{{else}}, {{/if}}
+                    {{/each}} ({{numEntities}})
+                  </div>
                 </template>
               </semantic-query> 
             </summary>
-            <ul>
-              {{#each (split entities.value ";")}}
-                <li>{{> template-entity-tag}}</li>
-              {{/each}}
-            </ul>
+            <semantic-table 
+                id='grid-result'
+                query='SELECT?subject ?label WHERE {
+                    ?subject rdfs:label ?label
+                    VALUES (?subject) {
+                        {{#each (split entities.value ";")}}
+                            (<{{this}}>)
+                        {{/each}}
+                    }
+                } ORDER BY ?label'
+                number-of-displayed-rows="10"
+                options='{
+                  {{#ifCond numEntities "<" 10}}
+                    "showFilter": false,
+                  {{/ifCond}}
+                    "sorting": {"label": "asc"}
+                }'
+                tuple-template='{{> template-entity-tag subject=subject.value}}'
+            >
+              <template id="template-entity-tag">
+                  <div class="jila-component entity-tag-row">
+                      [[> template-entity-tag]]
+                  </div>
+              </template>
+            </semantic-table>
           </details>
         {{else}}
+          <ul class="jila-component entities-list">
           {{#each (split entities.value ";")}}
-            {{> template-entity-tag}}{{#if @last}}{{else}}, {{/if}}
+            <li>{{> template-entity-tag subject=this}}</li>
           {{/each}}
+          </ul>
         {{/ifCond}}
       </template>
-      <template id="template-entity-tag">
 
-        <mp-event-trigger 
-            id='node-highlight-{{this}}'
-            type="JILA.PanelNodeClicked"
-            data='{"node": "{{this}}"}'
-        >
-          <a href="#"><mp-label iri="{{this}}"></mp-label></a>
-        </mp-event-trigger>
-        <semantic-query
-          query="SELECT ?type WHERE {
-            BIND(<{{this}}> AS ?entity)
-            ?entity a ?type .
-            VALUES(?type) {
-              (search:Actor)
-              (search:Event)
-              (search:Person)
-              (search:Place)
-            }
-          } LIMIT 1"
-          template="{{> template-type-label type=bindings.0.type.value}}">
-            <template id="template-type-label">
-              &nbsp;(<mp-label iri="{{type}}"></mp-label>)
-            </template>
-          </semantic-query>
+      <template id="template-entity-tag">
+          [[> template-entity-tag]]
       </template>
-    </semantic-table>
+    </semantic-query>
 [[/inline]]
+
+[[#*inline "module-entity-description"]]
+  <semantic-query
+  query="SELECT 
+      ?description 
+      ?dateOfBirth
+      ?dateOfDeath
+      ?placeOfBirth
+      ?placeOfDeath
+      (GROUP_CONCAT(?profession; SEPARATOR=',') as ?professions) 
+    WHERE {
+    BIND(<{{entityiri}}> as ?subject)
+    OPTIONAL {
+      ?subject crmdig:L54_is_same-as/gndo:professionOrOccupation ?profession .
+    }
+    OPTIONAL {
+      ?subject crmdig:L54_is_same-as/gndo:biographicalOrHistoricalInformation ?description .
+    }
+    OPTIONAL {
+      ?subject crmdig:L54_is_same-as/gndo:dateOfBirth ?dateOfBirth .
+    }
+    OPTIONAL {
+      ?subject crmdig:L54_is_same-as/gndo:dateOfDeath ?dateOfDeath .
+    }
+    OPTIONAL {
+      ?subject crmdig:L54_is_same-as/gndo:placeOfBirth ?placeOfBirth .
+    }
+    OPTIONAL {
+      ?subject crmdig:L54_is_same-as/gndo:placeOfDeath ?placeOfDeath .
+    }
+  } GROUP BY 
+  ?description 
+  ?dateOfBirth
+  ?dateOfDeath
+  ?placeOfBirth
+  ?placeOfDeath
+  LIMIT 1"
+  template="{{> template-description}}"
+  >
+  <template id="template-description">
+    {{#each bindings}}
+      {{#if dateOfBirth.value}}
+        {{#if dateOfDeath.value}}
+          <p>{{dateTimeFormat dateOfBirth.value "DD.MM.YYYY"}}{{#if placeOfBirth.value}} (<mp-label iri="{{placeOfBirth.value}}"></mp-label>){{/if}} - {{dateTimeFormat dateOfDeath.value "DD.MM.YYYY"}}{{#if placeOfDeath.value}} (<mp-label iri="{{placeOfDeath.value}}"></mp-label>){{/if}}</p>
+        {{else}}
+          <p>{{dateTimeFormat dateOfBirth.value "DD.MM.YYYY"}}{{#if placeOfBirth.value}} (<mp-label iri="{{placeOfBirth.value}}"></mp-label>){{/if}} - </p>
+        {{/if}}
+      {{else}}
+        {{#if dateOfDeath.value}}
+          - {{dateTimeFormat dateOfDeath.value "DD.MM.YYYY"}}{{#if placeOfDeath.value}} (<mp-label iri="{{placeOfDeath.value}}"></mp-label>){{/if}}
+        {{/if}}
+      {{/if}}
+      {{#if professions.value}}
+        <p>
+          {{#each (split professions.value ',')}}
+            <mp-label iri="{{this}}"></mp-label>{{#unless @last}}, {{/unless}}
+          {{/each}}
+        </p>
+      {{/if}}
+      {{#if description.value}}
+        <p>{{description.value}}</p>
+      {{/if}}
+    {{/each}}
+  </template>
+  </semantic-query>
+[[/inline]]
+
+[[#*inline "template-entity-tag"]]
+<semantic-query
+    query='SELECT ?entity ?typeClass WHERE {
+      BIND(<{{subject}}> AS ?entity)
+      ?entity a ?type .
+      VALUES(?type ?typeClass) {
+        (crm:E21_Person "person")
+        (crm:E39_Actor "actor")
+        (crm:E5_Event "event")
+        (crm:E53_Place "place")
+        (crm:E78_Curated_Holding "collection")
+      }
+    } LIMIT 1'
+    template="{{> template-tag-event-trigger}}">
+      <template id="template-tag-event-trigger">
+        <mp-event-trigger 
+          id='node-click-{{bindings.0.entity.value}}'
+          type="JILA.PanelNodeClicked"
+          data='{"node": "{{bindings.0.entity.value}}"}'
+        >
+          <a href="#" class="jila-component tag {{bindings.0.typeClass.value}}">
+            <mp-label iri="{{bindings.0.entity.value}}"></mp-label>
+          </a>
+      </mp-event-trigger>
+      <mp-event-trigger 
+        id='node-add-{{bindings.0.entity.value}}'
+        type="JILA.PanelNodeAdd"
+        data='{"node": "{{bindings.0.entity.value}}"}'
+      >
+        <div class="jila-component plus-button show-on-hover"><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></div>
+    </mp-event-trigger>
+    </template>
+  </semantic-query>
+  [[/inline]]

@@ -17,40 +17,117 @@ h3 {
   border: 1px solid #F8F8F8;
   border-radius: 4px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fefefe;
   flex: 0 1 20rem;
   margin-right: 1%;
   margin-bottom: 1%;
+  position: relative;
 }
 .jila-component.card-container .card:hover {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
 .jila-component.card-container .card .card-body {
+  background-color: #fefefe;
+  bottom: 0;
   min-height: 4rem;
   padding: 4px;
   padding-top: 8px;
   text-align: center;
+  position: absolute;
+  width: 100%;
 }
 .jila-component.card-container .card .card-image {
   max-width: 100%;
-  max-height: 20rem;
+  height: 25rem;
   overflow: hidden;
 }
 .jila-component.card-container .card .card-image img {
   max-width: 100%;
 }
+.jila-component.card-container .card .card-image .icon {
+  text-align: center;
+  padding-top: 5rem;
+}
+.jila-component.card-container .card .card-image .icon img {
+  max-width: 60%;
+}
 .jila-component.card-container .semantic-table-holder {
   width: 100%;
 }
-.jila-component.entity-view-container .panel-view {
+.jila-component.entities-list {
+  padding: 0;
+  margin-top: 1rem;
+}
+.jila-component.entities-list li {
+  list-style: none;
+  margin-bottom: 0.5rem;
+}
+.jila-component.entity-view-container .panel-view-container::after {
+  content: '.';
+  display: block;
+  height: 20rem;
+  background-image: linear-gradient(to bottom, #F8F4FF, transparent);
+}
+.jila-component.entity-view-container .panel-view-container .panel-view {
   background-color: #F8F4FF;
   margin-top: -10px;
-  margin-right: -15px;
-  margin-left: -15px;
   margin-bottom: 0;
   padding: 4rem 1rem;
 }
 .jila-component.entity-view-container .graph-view {
   height: 96vh;
+}
+.jila-component.panel-entity-details .image img {
+  max-width: 100%;
+}
+.jila-component.plus-button {
+  display: inline-block;
+  margin-left: 1rem;
+}
+.jila-component .relations-table .entity-tag-row {
+  margin-bottom: 0.5rem;
+}
+.jila-component .relations-table .griddle-container .griddle-custom-row {
+  display: block !important;
+}
+.jila-component .relations-table summary {
+  margin-bottom: 1rem;
+}
+.jila-component .tag {
+  text-decoration: none;
+}
+.jila-component .tag a {
+  text-decoration: none;
+}
+.jila-component .tag > span {
+  display: inline-block;
+  max-width: 90%;
+}
+.jila-component .tag > a > span,
+.jila-component .tag span {
+  padding: 4px;
+  border-radius: 6px;
+}
+.jila-component .tag.actor > span {
+  background-color: #fb644d;
+}
+.jila-component .tag.collection > span {
+  background-color: #FFD966;
+}
+.jila-component .tag.event > span {
+  background-color: #0099FF;
+}
+.jila-component .tag.place > span {
+  background-color: #00CC66;
+}
+.jila-component .tag.person > span {
+  background-color: #FF66B3;
+}
+* > .jila-component.show-on-hover {
+  visibility: hidden;
+}
+*:hover > .jila-component.show-on-hover {
+  visibility: visible;
 }
 ol.page-breadcrumb {
   position: static;
@@ -58,13 +135,15 @@ ol.page-breadcrumb {
 .navbar {
   height: 4rem;
   min-height: 4rem;
-  background-color: #F8F8F8;
+  background-color: #e9e8ff;
 }
 .navbar .navbar-nav li a {
-  color: #707070;
+  color: #4C45FF;
+  font-weight: bold;
 }
-.navbar .navbar-nav li a:hover {
-  color: #8a8a8a;
+.navbar .navbar-nav li a:hover,
+.navbar .navbar-nav li a:active {
+  color: #7d78ff;
 }
 .rs-header-logo {
   color: #4C45FF;
