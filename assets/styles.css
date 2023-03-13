@@ -122,6 +122,9 @@ h3 {
 .jila-component .tag.event > span {
   background-color: #0099FF;
 }
+.jila-component .tag.object > span {
+  background-color: #B0927A;
+}
 .jila-component .tag.place > span {
   background-color: #00CC66;
 }
