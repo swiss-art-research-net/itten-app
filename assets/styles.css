@@ -91,6 +91,9 @@ h3 {
 .jila-component.entity-view-container .panel-view-container .panel-view .tabs {
   margin-top: 2rem;
 }
+.jila-component.entity-view-container .panel-view-container .panel-view .table-hover > tbody > tr:hover {
+  background-color: #fbf9ff;
+}
 .jila-component.panel-entity-details .image img {
   max-width: 100%;
 }

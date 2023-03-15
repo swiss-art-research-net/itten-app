@@ -111,6 +111,13 @@ h1, h2, h3 {
         .tabs {
           margin-top: 2rem;
         }
+        .table-hover {
+          > tbody {
+            > tr:hover {
+              background-color: lighten(@col-panel, 1%)
+            }
+          }
+        }
       }
     }
   }
