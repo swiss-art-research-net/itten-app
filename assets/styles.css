@@ -99,6 +99,9 @@ p {
 .jila-component.entity-view-container .panel-view-container .panel-view .entity-details {
   padding-left: 1rem;
 }
+.jila-component.entity-view-container .panel-view-container .panel-view .entity-details-images {
+  padding: 0 1rem;
+}
 .jila-component.entity-view-container .panel-view-container .panel-view .relations-table {
   margin-left: 1rem;
 }

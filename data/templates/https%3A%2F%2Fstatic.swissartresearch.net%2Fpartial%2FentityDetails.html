@@ -121,7 +121,7 @@
 [[/inline]]
 
 [[#*inline "component-images"]]
-<div class="jila-componen card-container">
+<div class="jila-component card-container entity-details-images">
   <semantic-table
     query="SELECT ?image WHERE {
         BIND(<{{entityiri}}> as ?subject)
@@ -129,12 +129,10 @@
     }"
     tuple-template="{{> templateImage }}">
     <template id="templateImage">
-        <div class="jila-component card">
-          {{> templateThumbnailWithViewer iri=image.value}}
-        </div>
+        {{> templateThumbnailWithViewer iri=image.value}}
     </template>
     <template id="templateThumbnailWithViewer">
-        <mp-overlay-dialog title="Image Viewer" type="lightbox" bs-size="xl">
+        <mp-overlay-dialog title="Image Viewer" type="modal" bs-size="large">
             <mp-overlay-dialog-trigger>
               <a href="#" class="jila-component card">{{> partial:entityCard subject=iri onlybody=true}}</a>
             </mp-overlay-dialog-trigger>
