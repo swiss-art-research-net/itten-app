@@ -247,3 +247,17 @@ ol.page-breadcrumb {
         }
     }
 }
+
+.pagination, .griddle-footer .pagination {
+  justify-content: center;
+  margin-top:1rem;
+  > li {
+    margin: 1.5rem 0;
+    > a {
+      font-weight: bold;
+    }
+    &.active > a {
+      border-radius: .4rem;
+    }
+  }
+}

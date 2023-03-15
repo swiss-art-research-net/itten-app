@@ -198,3 +198,20 @@ ol.page-breadcrumb {
   color: #4C45FF;
   font-weight: bold;
 }
+.pagination,
+.griddle-footer .pagination {
+  justify-content: center;
+  margin-top: 1rem;
+}
+.pagination > li,
+.griddle-footer .pagination > li {
+  margin: 1.5rem 0;
+}
+.pagination > li > a,
+.griddle-footer .pagination > li > a {
+  font-weight: bold;
+}
+.pagination > li.active > a,
+.griddle-footer .pagination > li.active > a {
+  border-radius: 0.4rem;
+}
