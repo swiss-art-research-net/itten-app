@@ -21,7 +21,19 @@
     </bs-row>
   </div>
 </div>
-<div class="tabs">
+<div class="entity-view-tabs">
+  <!-- Hide image tab if no images present -->
+  <semantic-if
+    query="ASK { <{{entityiri}}> crm:P46_is_composed_of/crm:P138i_has_representation ?image . }"
+    then=""
+    else="{{> template-css-hide-images}}">
+    <template id="template-css-hide-images">
+      <style>
+        .entity-view-tabs ul > li:nth-child(3) {
+          display: none;
+        }
+      </style>
+  </semantic-if>
   <bs-tabs>
     <bs-tab event-key="relations" title="Beziehungen">
       [[> component-relations-table]]
@@ -29,6 +41,9 @@
     <bs-tab event-key="fields" title="Details">
       [[> component-fields-visualisation]]
       [[> component-source-link]]
+    </bs-tab>
+    <bs-tab event-key="images" title="Bilder">
+      [[> component-images]]
     </bs-tab>
   </bs-tabs>
 </div>
@@ -103,6 +118,36 @@
           </div>          
       </template>
   </mp-field-visualization>
+[[/inline]]
+
+[[#*inline "component-images"]]
+<div class="jila-componen card-container">
+  <semantic-table
+    query="SELECT ?image WHERE {
+        BIND(<{{entityiri}}> as ?subject)
+        ?subject crm:P46_is_composed_of/crm:P138i_has_representation/la:digitally_shown_by/la:digitally_available_via/la:access_point ?image, ?imageCount .
+    }"
+    tuple-template="{{> templateImage }}">
+    <template id="templateImage">
+        <div class="jila-component card">
+          {{> templateThumbnailWithViewer iri=image.value}}
+        </div>
+    </template>
+    <template id="templateThumbnailWithViewer">
+        <mp-overlay-dialog title="Image Viewer" type="lightbox" bs-size="xl">
+            <mp-overlay-dialog-trigger><img src="{{iri}}/full/,70/0/default.jpg"/></mp-overlay-dialog-trigger>
+            <mp-overlay-dialog-content
+                id="image-modal">
+                    <mp-page-loader 
+                        iri="[[ resolvePrefix 'page:viewImage']]"
+                        urlqueryparam-imageiri="{{iri}}"
+                        urlqueryparam-overlay="true"
+                    ></mp-page-loader>
+            </mp-overlay-dialog-content>
+        </mp-overlay-dialog>
+    </template>
+  </semantic-table>
+</div>
 [[/inline]]
 
 [[#*inline "component-relations-table"]]
