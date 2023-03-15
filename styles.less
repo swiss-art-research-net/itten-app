@@ -2,7 +2,7 @@
 
 @col-white: #fefefe;
 @col-brand: #4C45FF;
-@col-panel: #F8F4FF;
+@col-panel: #f4f8ff;
 @col-lightgrey: #F8F8F8;
 @col-grey: #707070;
 @col-blue: #0099FF;
@@ -26,22 +26,26 @@ h1, h2, h3 {
   color: @col-brand;
 }
 
+.color-background-light {
+  background-color: lighten(@col-panel, 1%);
+}
+
 .jila-component {
   &.card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     .card {
-      border: 1px solid @col-lightgrey;
+      border: 0;
       border-radius: 4px;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.06);
       background-color: @col-white;
       flex: 0 1 20rem;
       margin-right: 1%;
       margin-bottom: 1%;
       position: relative;
       &:hover {
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.2);
       }
       .card-body {
         background-color: @col-white;
@@ -102,6 +106,9 @@ h1, h2, h3 {
         background-color: @col-panel;
         margin-bottom: 0;
         padding-top:2rem;
+        .card {
+          box-shadow: 0 1px 10px 0 rgba(red(darken(@col-panel,60%)),green(darken(@col-panel,60%)),blue(darken(@col-panel,60%)), 0.15);
+        }
         .entity-details {
           padding-left: 1rem;
         }
@@ -120,6 +127,10 @@ h1, h2, h3 {
         }
       }
     }
+  }
+  &.page-title {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
   }
   &.panel-entity-details {
     .image {
@@ -204,7 +215,7 @@ ol.page-breadcrumb {
 .navbar {
   height: 4rem;
   min-height: 4rem;
-  background-color: lighten(@col-brand, 32%);
+  background-color: darken(@col-panel, 5%);
   .navbar-nav {
     li {
       a {
@@ -223,6 +234,29 @@ ol.page-breadcrumb {
 }
 
 .semantic-facet-holder {
+  .facet {
+    border: none;
+    &__category-selector-holder {
+      display: none;
+    }
+    &__relation {
+     &__header {
+        border: 0;
+        border-radius: .4rem;
+        padding-right: .4rem;
+        &:hover {
+        background-color: @col-panel;
+        }
+      }
+      &__body {
+        background-color: @col-white;
+      }
+      &__values {
+        margin-top: 0;
+        padding-top:10px;
+      }
+    }
+  }
   .show-facet-button {
     display: none;
   }
