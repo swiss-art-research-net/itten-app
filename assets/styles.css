@@ -62,6 +62,15 @@ h3 {
   list-style: none;
   margin-bottom: 0.5rem;
 }
+.jila-component.entity-view-container .graph-view-container {
+  padding: 0;
+}
+.jila-component.entity-view-container .graph-view-container .graph-view {
+  height: 90vh;
+}
+.jila-component.entity-view-container .panel-view-container {
+  padding: 0;
+}
 .jila-component.entity-view-container .panel-view-container::after {
   content: '.';
   display: block;
@@ -70,12 +79,17 @@ h3 {
 }
 .jila-component.entity-view-container .panel-view-container .panel-view {
   background-color: #F8F4FF;
-  margin-top: -10px;
   margin-bottom: 0;
-  padding: 4rem 1rem;
+  padding-top: 2rem;
 }
-.jila-component.entity-view-container .graph-view {
-  height: 96vh;
+.jila-component.entity-view-container .panel-view-container .panel-view .entity-details {
+  padding-left: 1rem;
+}
+.jila-component.entity-view-container .panel-view-container .panel-view .relations-table {
+  margin-left: 1rem;
+}
+.jila-component.entity-view-container .panel-view-container .panel-view .tabs {
+  margin-top: 2rem;
 }
 .jila-component.panel-entity-details .image img {
   max-width: 100%;
@@ -88,6 +102,7 @@ h3 {
 .jila-component .relations-table th {
   padding-top: 0;
   padding-bottom: 0;
+  padding-right: 1rem;
 }
 .jila-component .relations-table .entity-tag-row {
   margin-bottom: 0.5rem;

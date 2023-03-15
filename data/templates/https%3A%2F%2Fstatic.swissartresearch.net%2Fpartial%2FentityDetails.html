@@ -1,11 +1,16 @@
 
-<h2><mp-label iri="{{entityiri}}"></mp-label>
-  {{#if initial}}
-  {{else}}
-      &nbsp;<semantic-link iri="page:viewEntity" urlqueryparam-entityiri="{{entityiri}}"><i title="Fokussieren" class="fa fa-dot-circle-o"></i></semantic-link>
-  {{/if}}
-</h2>
 <div class="jila-component panel-entity-details">
+  <div class="container-fluid">
+    <bs-row>
+      <bs-col sm="12">
+        <h2><mp-label iri="{{entityiri}}"></mp-label>
+          {{#if initial}}
+          {{else}}
+              &nbsp;<semantic-link iri="page:viewEntity" urlqueryparam-entityiri="{{entityiri}}"><i title="Fokussieren" class="fa fa-dot-circle-o"></i></semantic-link>
+          {{/if}}
+        </h2>
+      </bs-col>
+    </bs-row>
     <bs-row>
       <bs-col md="8">
         [[> module-entity-description]]
@@ -14,10 +19,9 @@
         <mp-resource-thumbnail iri="{{entityiri}}"></mp-resource-thumbnail>
       </bs-col>
     </bs-row>
+  </div>
 </div>
-<div>
-</div>
-<div>
+<div class="tabs">
   <bs-tabs>
     <bs-tab event-key="relations" title="Beziehungen">
       [[> component-relations-table]]

@@ -82,6 +82,12 @@ h1, h2, h3 {
     }
   }
   &.entity-view-container {
+    .graph-view-container {
+      padding: 0;
+      .graph-view {
+        height: 90vh
+      }
+    }
     .panel-view-container {
       &::after {
         content: '.';
@@ -91,17 +97,21 @@ h1, h2, h3 {
         // margin-left:-15px;
         background-image: linear-gradient(to bottom, @col-panel, transparent);
       }
+      padding: 0;
       .panel-view {
         background-color: @col-panel;
-        margin-top: -10px;
-        // margin-right: -15px;
-        // margin-left:-15px;
         margin-bottom: 0;
-        padding:4rem 1rem;
+        padding-top:2rem;
+        .entity-details {
+          padding-left: 1rem;
+        }
+        .relations-table {
+          margin-left:1rem;
+        }
+        .tabs {
+          margin-top: 2rem;
+        }
       }
-    }
-    .graph-view {
-      height: 96vh
     }
   }
   &.panel-entity-details {
@@ -119,6 +129,7 @@ h1, h2, h3 {
     td, th {
       padding-top: 0;
       padding-bottom: 0;
+      padding-right:1rem;
     }
     .entity-tag-row {
       margin-bottom: .5rem;
