@@ -28,9 +28,7 @@
     </bs-tab>
     <bs-tab event-key="fields" title="Details">
       [[> component-fields-visualisation]]
-      <p>
-        <semantic-link target="_blank" iri="{{entityiri}}">Quelldaten anzeigen <i class="fa fa-external-link"></i></semantic-link>
-      </p>
+      [[> component-source-link]]
     </bs-tab>
   </bs-tabs>
 </div>
@@ -76,8 +74,7 @@
                                       {{/ifCond}}
                                   </td>
                               </tr>
-                          {{/if}}
-                                          
+                          {{/if}}                  
                       {{/each}}
                       </tbody>
                   </table>
@@ -211,6 +208,16 @@
           [[> template-entity-tag]]
       </template>
     </semantic-query>
+[[/inline]]
+
+[[#*inline "component-source-link"]]
+<div class="container-fluid">
+  <bs-row>
+    <bs-col sm="12">
+      <semantic-link target="_blank" iri="{{entityiri}}">Quelldaten anzeigen <i class="fa fa-external-link"></i></semantic-link>
+    </bs-col>
+  </bs-row>
+</div>
 [[/inline]]
 
 [[#*inline "module-entity-description"]]
