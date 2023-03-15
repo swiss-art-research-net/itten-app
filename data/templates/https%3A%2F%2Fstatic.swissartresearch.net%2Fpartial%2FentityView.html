@@ -148,37 +148,44 @@
         template="{{> template}}"
     >
         <template id="template">
-                <div>
+            <div>
                 {{#if nodes}}
                     {{#if nodes.[1] }}
-                        <h2>Auswahl</h2>
-                        <div class="jila-component card-container">
-                            <semantic-table 
-                                id='grid-result'
-                                query='SELECT?subject ?label WHERE {
-                                    ?subject rdfs:label ?label
-                                    VALUES (?subject) {
-                                        {{#each nodes}}
-                                            (<{{this}}>)
-                                        {{/each}}
-                                    }
-                                } ORDER BY ?label'
-                                number-of-displayed-rows="10"
-                                options='{
-                                    "sorting": {"label": "asc"}
-                                }'
-                                tuple-template='{{> event-card-template}}'
-                            >
-                                <template id="event-card-template">
-                                    <mp-event-trigger 
-                                        id='node-highlight-{{subject.value}}'
-                                        type="JILA.PanelNodeClicked"
-                                        data='{"node": "{{subject.value}}"}'
-                                    >
-                                    <a href="#" class="jila-component card">{{> partial:entityCard subject=subject.value onlybody=true}}</a>
-                                    </mp-event-trigger
-                                </template>    
-                            </semantic-table>
+                        <div class="jila-component panel-entity-details">
+                            <div class="container-fluid">
+                                <bs-row>
+                                    <bs-col sm="12">
+                                    <h2>Auswahl</h2>
+                                    <div class="jila-component card-container">
+                                        <semantic-table 
+                                            id='grid-result'
+                                            query='SELECT?subject ?label WHERE {
+                                                ?subject rdfs:label ?label
+                                                VALUES (?subject) {
+                                                    {{#each nodes}}
+                                                        (<{{this}}>)
+                                                    {{/each}}
+                                                }
+                                            } ORDER BY ?label'
+                                            number-of-displayed-rows="10"
+                                            options='{
+                                                "sorting": {"label": "asc"}
+                                            }'
+                                            tuple-template='{{> event-card-template}}'
+                                        >
+                                            <template id="event-card-template">
+                                                <mp-event-trigger 
+                                                    id='node-highlight-{{subject.value}}'
+                                                    type="JILA.PanelNodeClicked"
+                                                    data='{"node": "{{subject.value}}"}'
+                                                >
+                                                <a href="#" class="jila-component card">{{> partial:entityCard subject=subject.value onlybody=true}}</a>
+                                                </mp-event-trigger
+                                            </template>    
+                                        </semantic-table>
+                                    </div>
+                                </bs-col>
+                            </bs-row>
                         </div>
                     {{else}}
                         {{> partial:entityDetails entityiri=nodes.[0]}}
@@ -190,7 +197,7 @@
                         {{> partial:entityDetails entityiri='[[entityiri]]' initial=true }}
                     {{/if}}
                 {{/if}}
-                </div>
+            </div>
         </template>
     </mp-event-target-template-render>
 [[/inline]]
