@@ -8,6 +8,9 @@ h2,
 h3 {
   color: #364bd2;
 }
+p {
+  line-height: 1.4;
+}
 .color-background-light {
   background-color: #f6f7fd;
 }
