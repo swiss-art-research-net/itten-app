@@ -1,18 +1,18 @@
 html,
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   height: 100%;
 }
 h1,
 h2,
 h3 {
-  color: #364bd2;
+  color: #6d9cc6;
 }
 p {
   line-height: 1.4;
 }
 .color-background-light {
-  background-color: #f6f7fd;
+  background-color: #f5f8fb;
 }
 .jila-component.card-container {
   display: flex;
@@ -22,7 +22,7 @@ p {
 .jila-component.card-container .card {
   border: 0;
   border-radius: 4px;
-  box-shadow: 0 1px 4px 0 rgba(20, 30, 91, 0.2);
+  box-shadow: 0 1px 4px 0 rgba(121, 164, 201, 0.2);
   background-color: #fefefe;
   overflow: hidden;
   position: relative;
@@ -34,7 +34,7 @@ p {
   left: 0;
 }
 .jila-component.card-container .card:hover {
-  box-shadow: 0 2px 5px 0 rgba(20, 30, 91, 0.2);
+  box-shadow: 0 2px 5px 0 rgba(121, 164, 201, 0.2);
   position: relative;
   top: -1px;
 }
@@ -86,15 +86,15 @@ p {
   content: '.';
   display: block;
   height: 20rem;
-  background-image: linear-gradient(to bottom, #f2f3fc, transparent);
+  background-image: linear-gradient(to bottom, #f1f5fa, transparent);
 }
 .jila-component.entity-view-container .panel-view-container .panel-view {
-  background-color: #f2f3fc;
+  background-color: #f1f5fa;
   margin-bottom: 0;
   padding-top: 2rem;
 }
 .jila-component.entity-view-container .panel-view-container .panel-view .card {
-  box-shadow: 0 1px 10px 0 rgba(34, 50, 153, 0.15);
+  box-shadow: 0 1px 10px 0 rgba(49, 88, 136, 0.15);
 }
 .jila-component.entity-view-container .panel-view-container .panel-view .entity-details {
   padding-left: 1rem;
@@ -109,7 +109,7 @@ p {
   margin-top: 2rem;
 }
 .jila-component.entity-view-container .panel-view-container .panel-view .table-hover > tbody > tr:hover {
-  background-color: #f6f7fd;
+  background-color: #f5f8fb;
 }
 .jila-component.page-title {
   margin-top: 5rem;
@@ -127,15 +127,13 @@ p {
   padding-top: 0;
   padding-bottom: 0;
   padding-right: 1rem;
+  padding-bottom: 1rem;
 }
 .jila-component .relations-table .entity-tag-row {
   margin-bottom: 0.5rem;
 }
 .jila-component .relations-table .griddle-container .griddle-custom-row {
   display: block !important;
-}
-.jila-component .relations-table summary {
-  margin-bottom: 1rem;
 }
 .jila-component .tag {
   text-decoration: none;
@@ -182,18 +180,18 @@ ol.page-breadcrumb {
 .navbar {
   height: 4rem;
   min-height: 4rem;
-  background-color: #dde0f7;
+  background-color: #e6eef5;
 }
 .navbar .navbar-nav li a {
-  color: #364bd2;
+  color: #3b3a3c;
   font-weight: bold;
 }
 .navbar .navbar-nav li a:hover,
 .navbar .navbar-nav li a:active {
-  color: #6070db;
+  color: #5574bb;
 }
 .rs-header-logo {
-  color: #364bd2;
+  color: #90746d;
 }
 .semantic-facet-holder .facet {
   border: none;
@@ -207,7 +205,7 @@ ol.page-breadcrumb {
   padding-right: 0.4rem;
 }
 .semantic-facet-holder .facet__relation__header:hover {
-  background-color: #f2f3fc;
+  background-color: #f1f5fa;
 }
 .semantic-facet-holder .facet__relation__body {
   background-color: #fefefe;
@@ -224,7 +222,7 @@ ol.page-breadcrumb {
 }
 .system-spinner {
   font-weight: bold;
-  color: #364bd2;
+  color: #6d9cc6;
 }
 .system-spinner__icon {
   vertical-align: middle;
@@ -240,7 +238,7 @@ ol.page-breadcrumb {
 }
 .system-spinner__icon:before {
   content: '\f1ce';
-  color: #364bd2;
+  color: #6d9cc6;
   font-weight: bold;
 }
 .pagination,

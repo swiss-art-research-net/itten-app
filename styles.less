@@ -1,10 +1,18 @@
 // out: assets/styles.css
 
 @col-white: #fefefe;
-@col-brand: #364bd2;
+@col-brand-1: #6d9cc6;
+@col-brand-2: #90746d;
+@col-brand-3: #6a5e5e;
 
-@col-panel: lighten(@col-brand, 45%);
-@col-navbar: lighten(@col-brand, 40%);
+@col-nav-link: #3b3a3c;
+@col-nav-link-hover: #5574bb;
+
+@col-bg-light: #f1f5fa;
+@col-bg-med: #e6eef5;
+
+@col-panel: @col-bg-light;
+@col-navbar: @col-bg-med;
 
 @col-blue: #0099FF;
 @col-yellow: #FFD966;
@@ -19,12 +27,12 @@
 @col-place: #00CC66;
 
 html, body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   height: 100%;
 }
 
 h1, h2, h3 {
-  color: @col-brand;
+  color: @col-brand-1;
 }
 
 p {
@@ -43,7 +51,7 @@ p {
     .card {
       border: 0;
       border-radius: 4px;
-      box-shadow: 0 1px 4px 0 rgba(red(darken(@col-brand,30%)), green(darken(@col-brand,30%)), blue(darken(@col-brand,30%)), 0.2);
+      box-shadow: 0 1px 4px 0 rgba(red(darken(@col-bg-med,30%)), green(darken(@col-bg-med,30%)), blue(darken(@col-bg-med,30%)), 0.2);
       background-color: @col-white;
       overflow: hidden;
       position: relative;
@@ -54,7 +62,7 @@ p {
       top: 0;
       left: 0;
       &:hover {
-        box-shadow: 0 2px 5px 0 rgba(red(darken(@col-brand,30%)), green(darken(@col-brand,30%)), blue(darken(@col-brand,30%)), 0.2);
+        box-shadow: 0 2px 5px 0 rgba(red(darken(@col-bg-med,30%)), green(darken(@col-bg-med,30%)), blue(darken(@col-bg-med,30%)), 0.2);
         position: relative;
         top: -1px;
       }
@@ -161,6 +169,7 @@ p {
       padding-top: 0;
       padding-bottom: 0;
       padding-right:1rem;
+      padding-bottom: 1rem;
     }
     .entity-tag-row {
       margin-bottom: .5rem;
@@ -169,9 +178,6 @@ p {
       .griddle-custom-row {
         display: block !important;
       }
-    }
-    summary {
-      margin-bottom: 1rem;
     }
   }
   .tag {
@@ -232,18 +238,18 @@ ol.page-breadcrumb {
   .navbar-nav {
     li {
       a {
-        color: @col-brand;
+        color: @col-nav-link;
         font-weight: bold;
       }
       a:hover, a:active {
-        color: lighten(@col-brand, 10%)
+        color: @col-nav-link-hover;
       }
     }
   }
 }
 
 .rs-header-logo {
-  color: @col-brand;
+  color: @col-brand-2;
 }
 
 .semantic-facet-holder {
@@ -281,7 +287,7 @@ ol.page-breadcrumb {
 .system-spinner {
 
     font-weight: bold;
-    color: @col-brand;
+    color: @col-brand-1;
     
     &__icon {
         vertical-align: middle;
@@ -296,7 +302,7 @@ ol.page-breadcrumb {
         }
         &:before {
             content: '\f1ce';
-            color: @col-brand;
+            color: @col-brand-1;
             font-weight: bold;
         }
     }
