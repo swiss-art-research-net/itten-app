@@ -273,6 +273,8 @@
   <semantic-query
   query="SELECT 
       ?description 
+      ?assignment_comment
+      ?assignment_collection
       ?dateOfBirth
       ?dateOfDeath
       ?placeOfBirth
@@ -298,8 +300,15 @@
     OPTIONAL {
       ?subject crmdig:L54_is_same-as/gndo:placeOfDeath ?placeOfDeath .
     }
+    OPTIONAL {
+      ?assignment crm:P141_assigned ?subject ;
+        crm:P129i_is_subject_of/crm:P3_has_note ?assignment_comment ;
+        crm:P140_assigned_attribute_to/^crm:P128_carries ?assignment_collection .
+    }
   } GROUP BY 
   ?description 
+  ?assignment_comment
+  ?assignment_collection
   ?dateOfBirth
   ?dateOfDeath
   ?placeOfBirth
@@ -329,6 +338,27 @@
       {{/if}}
       {{#if description.value}}
         <p>{{description.value}}</p>
+      {{/if}}
+      {{#if assignment_comment.value}}
+        <p>{{assignment_comment.value}}
+            {{#if assignment_collection.value}}
+              <p>
+                <small>
+                  In Bezug auf 
+                    <mp-event-trigger 
+                      id='node-click-{{assignment_collection.value}}'
+                      type="JILA.PanelNodeClicked"
+                      data='{"node": "{{assignment_collection.value}}"}'
+                    >
+                      <a href="#">
+                        <mp-label iri="{{assignment_collection.value}}"></mp-label>
+                      </a>
+                    </mp-event-trigger>
+                  </small>
+              </p>
+            {{/if}}
+        </p>
+
       {{/if}}
     {{/each}}
   </template>
