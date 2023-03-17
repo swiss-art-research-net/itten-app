@@ -83,7 +83,7 @@ p {
   padding: 0;
 }
 .jila-component.entity-view-container .panel-view-container::after {
-  content: '.';
+  content: ' ';
   display: block;
   height: 20rem;
   background-image: linear-gradient(to bottom, #f1f5fa, transparent);
