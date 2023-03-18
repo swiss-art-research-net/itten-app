@@ -191,6 +191,10 @@ ol.page-breadcrumb {
 .navbar .navbar-nav li a:active {
   color: #5574bb;
 }
+.navbar .navbar-nav li.dropdown > a.dropdown-toggle {
+  position: relative;
+  top: -9px;
+}
 .rs-header-logo {
   color: #90746d;
 }

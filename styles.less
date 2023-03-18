@@ -245,6 +245,12 @@ ol.page-breadcrumb {
       a:hover, a:active {
         color: @col-nav-link-hover;
       }
+      &.dropdown {
+        > a.dropdown-toggle {
+          position: relative;
+          top: -9px;
+        }
+      }
     }
   }
 }
