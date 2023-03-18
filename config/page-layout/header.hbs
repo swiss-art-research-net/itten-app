@@ -15,12 +15,13 @@
                 </mp-anonymous-hidden>
             </ul>
             <bs-nav-dropdown title="{{deploymentTitle}}" id="basic-nav-dropdown"  class="rs-only-xs">
-                <semantic-link class="dropdown-item" iri="page:persons">Personen</semantic-link>
-                <semantic-link class="dropdown-item" iri="page:ittenArchive">Itten-Archiv</semantic-link>
-                <semantic-link class="dropdown-item" iri="page:about">Über uns</semantic-link>
-                <a class="dropdown-item" href="/sparql">SPARQL</a>
-                <mp-anonymous-hidden alt='<a href="/login">Login</a>'>
-                    <semantic-link class="dropdown-item" iri="rsp:admin">Admin</semantic-link>
+                <li class="vl"></li>
+                <li><semantic-link iri="page:persons">Personen</semantic-link></li>
+                <li><semantic-link iri="page:ittenArchive">Itten-Archiv</semantic-link></li>
+                <li><semantic-link iri="page:about">Über uns</semantic-link></li>
+                <li><a href="/sparql">SPARQL</a></li>
+                <mp-anonymous-hidden alt='<li><a href="/login" title="login">Login</a></li>'>
+                    <li><semantic-link iri="rsp:admin">Admin</semantic-link></li>
                 </mp-anonymous-hidden>
             </bs-nav-dropdown>
         </div>
