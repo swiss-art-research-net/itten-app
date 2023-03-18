@@ -117,6 +117,7 @@ p {
 }
 .jila-component.panel-entity-details .image img {
   max-width: 100%;
+  max-height: 300px;
 }
 .jila-component.plus-button {
   display: inline-block;
