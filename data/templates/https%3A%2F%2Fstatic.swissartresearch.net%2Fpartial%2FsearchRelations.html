@@ -46,6 +46,21 @@
             ?subject crmdig:L54_is_same-as/gndo:gender ?__value__ .
         }"
     }],
+    "<https://platform.swissartresearch.net/search/Person_has_number_of_appearances>": [{
+        "kind": "numeric-range",
+        "queryPattern": "{
+            {
+                SELECT ?subject (COUNT(?predicate) AS ?value) WHERE {
+                    GRAPH <https://resource.swissartresearch.net/graph/network> {
+                        ?subject ?predicate ?object .
+                    }
+                } GROUP BY ?subject
+            }
+            BIND(IF(?value > 100, 100, ?value) AS ?value_bracketed)
+            FILTER(?value_bracketed >= ?__numericRangeBeginValue__) .
+            FILTER(?value_bracketed <= ?__numericRangeEndValue__) .
+        }"
+    }],
     "<https://platform.swissartresearch.net/search/Person_has_occupation>": [{
         "kind": "resource",
         "queryPattern": "{

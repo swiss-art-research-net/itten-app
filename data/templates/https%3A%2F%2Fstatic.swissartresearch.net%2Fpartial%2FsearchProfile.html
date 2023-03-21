@@ -5,7 +5,8 @@
         { "iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>", "label": "Place", "thumbnail": "../images/fcs/places.svg" },
         { "iri": "<https://platform.swissartresearch.net/search/Person>", "label": "Person", "thumbnail": "../images/fcs/actors.svg"},
         { "iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>", "label": "Time", "thumbnail": "../images/fcs/dates.svg" },
-        { "iri": "<http://www.cidoc-crm.org/cidoc-crm/E55_Type>", "label": "Type", "thumbnail": "../images/fcs/concepts.svg" }
+        { "iri": "<http://www.cidoc-crm.org/cidoc-crm/E55_Type>", "label": "Type", "thumbnail": "../images/fcs/concepts.svg" },
+        { "iri": "<http://www.w3.org/2001/XMLSchema#Decimal>", "label": "Number", "thumbnail": "../images/fcs/things.svg" }
     ],
     "relations": [
         {
@@ -54,7 +55,13 @@
             "iri": "<https://platform.swissartresearch.net/search/Person_has_occupation>",
             "hasDomain": "<https://platform.swissartresearch.net/search/Person>",
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E55_Type>",
-        "label": "[[> label_person_has_occupation]]"
+            "label": "[[> label_person_has_occupation]]"
+        },
+        {
+            "iri": "<https://platform.swissartresearch.net/search/Person_has_number_of_appearances>",
+            "hasDomain": "<https://platform.swissartresearch.net/search/Person>",
+            "hasRange": "<http://www.w3.org/2001/XMLSchema#Decimal>",
+            "label": "[[> label_person_num_appearances]]"
         }
     ]
 }
