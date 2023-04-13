@@ -40,6 +40,20 @@
             FILTER(STRDT(STR(?date), xsd:date) >= ?__dateBeginValue__) .
         }"
     }],
+    "<https://platform.swissartresearch.net/search/Person_has_count>": [{
+        "kind": "numeric-range",
+        "queryPattern": "{
+            BIND(aat:300404433 as ?type_count)
+            ?subject crm:P1_is_identified_by ?identifier .
+            ?identifier crm:P2_has_type ?type_count  ;
+                crm:P190_has_symbolic_content ?value .
+            BIND(xsd:integer(REPLACE(?value,\"\\\\D\",\"\")) AS ?value_int)
+            BIND(IF(CONTAINS(?value, \">\"), ?value_int + 1, ?value_int) as ?value_for_search)
+            BIND(IF(?value_for_search > 100, 100, ?value_for_search) AS ?value_bracketed)
+            FILTER(?value_bracketed >= ?__numericRangeBeginValue__) .
+            FILTER(?value_bracketed <= ?__numericRangeEndValue__) .
+        }"
+    }],
     "<https://platform.swissartresearch.net/search/Person_has_gender>": [{
         "kind": "resource",
         "queryPattern": "{
