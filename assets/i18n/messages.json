@@ -3,5 +3,8 @@
     "label_details": "Details",
     "label_field": "Field",
     "label_relations": "Relations",
-    "label_value": "Value"
+    "label_value": "Value",
+    "nav_about": "About us",
+    "nav_itten-archive": "Itten Archive",
+    "nav_persons": "Persons"
 }
