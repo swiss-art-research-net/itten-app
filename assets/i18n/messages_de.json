@@ -1,4 +1,7 @@
 {
+    "button_show_source_data": "Quelldaten anzeigen",
     "label_details": "Details",
-    "label_relations": "Beziehungen"
+    "label_field": "Feld",
+    "label_relations": "Beziehungen",
+    "label_value": "Wert"
 }

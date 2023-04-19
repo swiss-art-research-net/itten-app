@@ -1,4 +1,7 @@
 {
+    "button_show_source_data": "Show source data",
     "label_details": "Details",
-    "label_relations": "Relations"
+    "label_field": "Field",
+    "label_relations": "Relations",
+    "label_value": "Value"
 }
