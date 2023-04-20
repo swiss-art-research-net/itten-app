@@ -1,0 +1,17 @@
+{
+    "button_show_source_data": "Show source data",
+    "label_details": "Details",
+    "label_field": "Field",
+    "label_person_active": "Active",
+    "label_person_role": "Role",
+    "label_person_born": "Born",
+    "label_person_died": "Died",
+    "label_person_has_gender": "Gender",
+    "label_person_has_occupation": "Occupation",
+    "label_person_num_appearances": "Number of appearances",
+    "label_relations": "Relations",
+    "label_value": "Value",
+    "nav_about": "About us",
+    "nav_itten-archive": "Itten Archive",
+    "nav_persons": "Persons"
+}
