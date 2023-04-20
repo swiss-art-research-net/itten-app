@@ -3,7 +3,7 @@
         <div class="navbar-header">
             <a class="rs-header-logo" href="/">{{deploymentTitle}}</a>
             <ul class="nav navbar-nav rs-only-xs">
-                <bs-nav-dropdown title="Menü" id="basic-nav-dropdown">
+                <bs-nav-dropdown title="Menü" id="basic-nav-dropdown" class="main-menu">
                     <li><semantic-link iri="page:persons"><i18n>nav_persons</i18n></semantic-link></li>
                     <li><semantic-link iri="page:ittenArchive"><i18n>nav_itten-archive</i18n></semantic-link></li>
                     <li><semantic-link iri="page:about"><i18n>nav_about</i18n></semantic-link></li>
@@ -22,7 +22,7 @@
                 <mp-anonymous-hidden alt='<li><a href="/login" title="login">Login</a></li>'>
                     <li><semantic-link iri="rsp:admin">Admin</semantic-link></li>
                 </mp-anonymous-hidden>
-                <li><mp-user-language-switch languages='["de", "en"]'></mp-user-language-switch></li>
+                <mp-user-language-switch languages='["de", "en"]'></mp-user-language-switch>
             </ul>
         </div>
     </div>
