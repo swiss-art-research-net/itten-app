@@ -34,18 +34,37 @@
         }
       </style>
   </semantic-if>
-  <bs-tabs id="entity-details-tabs">
-    <bs-tab event-key="relations" title="Beziehungen">
-      [[> component-relations-table]]
-    </bs-tab>
-    <bs-tab event-key="fields" title="Details">
-      [[> component-fields-visualisation]]
-      [[> component-source-link]]
-    </bs-tab>
-    <bs-tab event-key="images" title="Bilder">
-      [[> component-images]]
-    </bs-tab>
-  </bs-tabs>
+  
+  <bs-tab-container id="entity-details-tabs" default-active-key="relations">
+    <div>
+      <bs-nav bs-style="tabs">
+        <bs-nav-item event-key="relations">
+          <i18n>label_relations</i18n>
+        </bs-nav-item>
+        <bs-nav-item event-key="fields">
+          <i18n>label_details</i18n>
+        </bs-nav-item>
+        <bs-nav-item event-key="images">
+          <i18n>label_images</i18n>
+        </bs-nav-item>
+      </bs-nav>
+      <bs-tab-content>
+        <div>
+          <bs-tab-pane event-key="relations" title="Beziehungen">
+            [[> component-relations-table]]
+          </bs-tab-pane>
+          <bs-tab-pane event-key="fields" title="Details">
+            [[> component-fields-visualisation]]
+            [[> component-source-link]]
+          </bs-tab-pane>
+          <bs-tab-pane event-key="images" title="Bilder">
+            [[> component-images]]
+          </bs-tab-pane>
+        </div>
+      </bs-tab-content>
+    </div>
+  </bs-tab-container>
+
 </div>
 
 [[#*inline "component-fields-visualisation"]]
@@ -62,8 +81,8 @@
                   <table class="table table-hover">
                       <thead>
                           <tr>
-                              <th scope="col" style="width: 30%">Field</th>
-                              <th scope="col">Value</th>
+                              <th scope="col" style="width: 30%"><i18n>label_field</i18n></th>
+                              <th scope="col"><i18n>label_value</i18n></th>
                           </tr>
                       </thead>
                       <tbody>
@@ -263,7 +282,7 @@
 <div class="container-fluid">
   <bs-row>
     <bs-col sm="12">
-      <semantic-link target="_blank" iri="{{entityiri}}">Quelldaten anzeigen <i class="fa fa-external-link"></i></semantic-link>
+      <semantic-link target="_blank" iri="{{entityiri}}"><i18n>button_show_source_data</i18n> <i class="fa fa-external-link"></i></semantic-link>
     </bs-col>
   </bs-row>
 </div>

@@ -191,7 +191,7 @@ ol.page-breadcrumb {
 .navbar .navbar-nav li a:active {
   color: #5574bb;
 }
-.navbar .navbar-nav li.dropdown > a.dropdown-toggle {
+.navbar .navbar-nav li.main-menu > a.dropdown-toggle {
   position: relative;
   top: -9px;
 }
