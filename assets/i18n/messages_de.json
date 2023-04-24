@@ -6,6 +6,7 @@
     "label_person_role": "Rolle",
     "label_person_born": "Geboren",
     "label_person_died": "Gestorben",
+    "label_person_count": "Anzahl",
     "label_person_has_gender": "Geschlecht",
     "label_person_has_occupation": "Beruf",
     "label_person_num_appearances": "Anzahl Beziehungen",

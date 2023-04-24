@@ -41,17 +41,32 @@
         }"
     }],
     "<https://platform.swissartresearch.net/search/Person_has_count>": [{
-        "kind": "numeric-range",
+        "kind": "literal",
         "queryPattern": "{
+            ?subject rdf:type ?type.
+            VALUES (?type) {
+              (search:Group)
+              (search:Person)
+            }
             BIND(aat:300404433 as ?type_count)
-            ?subject crm:P1_is_identified_by ?identifier .
-            ?identifier crm:P2_has_type ?type_count  ;
-                crm:P190_has_symbolic_content ?value .
-            BIND(xsd:integer(REPLACE(?value,\"\\\\D\",\"\")) AS ?value_int)
-            BIND(IF(CONTAINS(?value, \">\"), ?value_int + 1, ?value_int) as ?value_for_search)
-            BIND(IF(?value_for_search > 100, 100, ?value_for_search) AS ?value_bracketed)
-            FILTER(?value_bracketed >= ?__numericRangeBeginValue__) .
-            FILTER(?value_bracketed <= ?__numericRangeEndValue__) .
+            OPTIONAL {
+                ?subject crm:P1_is_identified_by ?identifier .
+                ?identifier crm:P2_has_type ?type_count  ;
+                    crm:P190_has_symbolic_content ?value_raw .
+            }
+            BIND(xsd:integer(REPLACE(IF(CONTAINS(?value_raw,\"-\"), STRBEFORE(?value_raw, \"-\"), ?value_raw), \"\\\\D\", \"\")) as ?value_integer)
+            BIND(xsd:string(IF(!BOUND(?value_raw),\"1\",
+                IF(?value_raw = \">1\", ?value_raw, 
+                    IF(?value_integer = 1 , \"1\", 
+                        IF(?value_integer <= 10 , \"2-10\", 
+                            IF(?value_integer <= 100 , \"11-100\", 
+                                IF(?value_integer <= 1000 , \"101-1000\", \">1000\")
+                            )
+                        )
+                    )
+                )
+            )) AS ?literal)
+            FILTER(?literal = ?__literal__)
         }"
     }],
     "<https://platform.swissartresearch.net/search/Person_has_gender>": [{
