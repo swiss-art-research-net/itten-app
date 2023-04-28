@@ -14,6 +14,7 @@
             <semantic-search limit="10">
                 <semantic-search-query-keyword
                     tokenize-lucene-query="false"
+                    placeholder="<i18n>home_search_placeholder</i18n>"
                     domain="<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
                     query='SELECT ?subject ?typeLabel ?score (COUNT(?relation) as ?num_relation) WHERE {
                         ?subject a ?type ;
@@ -37,6 +38,7 @@
                         <div class="jila-component simple-search-results card-container">
                             <semantic-table 
                                 id='grid-result'
+                                no-result-template='<bs-panel class="info"><i18n>search_no_results</i18n></bs-panel>'
                                 query='SELECT DISTINCT ?subject ?score (COUNT(?relation) as ?num_relation) WHERE {
                                         ?subject rdfs:label ?label .
                                     } 

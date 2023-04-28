@@ -22,5 +22,6 @@
   "label_person_died_place": "Gestorben in",
   "label_person_has_relation_with_person": "Beziehung zu Person",
   "label_person_has_relation_with_place": "Beziehung zu Ort",
-  "home_tagline": "Entdecken Sie das Itten-Archiv über Personen und ihre Netzwerke"
+  "home_tagline": "Entdecken Sie das Itten-Archiv über Personen und ihre Netzwerke",
+  "search_no_results": "Leider nichts gefunden"
 }

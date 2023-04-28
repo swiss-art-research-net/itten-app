@@ -22,5 +22,6 @@
   "label_person_died_place": "Died in",
   "label_person_has_relation_with_person": "Relation to Person",
   "label_person_has_relation_with_place": "Relation to Place",
-  "home_tagline": "Discover the Itten archive through people and their networks"
+  "home_tagline": "Discover the Itten archive through people and their networks",
+  "search_no_results": "No results found"
 }
