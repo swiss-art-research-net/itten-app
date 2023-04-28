@@ -10,49 +10,7 @@
             <p class="tagline"><i18n>home_tagline</i18n></p>
         </div>
         <div class="jila-component home-search">
-            <semantic-search limit="10">
-                <semantic-search-query-keyword
-                    tokenize-lucene-query="true"
-                    placeholder="<i18n>home_search_placeholder</i18n>"
-                    min-search-term-length="1"
-                    domain="<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
-                    query='SELECT ?subject ?typeLabel ?score (COUNT(?relation) as ?num_relation) WHERE {
-                        ?subject a ?type ;
-                            rdfs:label ?label .
-                        VALUES (?type ?typelabel) {
-                            (search:Group "group")
-                            (search:Person "person")
-                        }
-                        ?label bds:search ?__token__ ;
-                            bds:relevance ?score ;
-                            bds:matchAllTerms "true" .
-
-                        GRAPH <https://resource.swissartresearch.net/graph/network> {
-                            ?subject ?relation ?object .
-                        }
-                    } GROUP BY ?subject ?typeLabel ?score
-                    ORDER BY DESC(?num_relation) DESC(?score)'
-                ></semantic-search-query-keyword>
-                <semantic-search-result-holder>
-                    <semantic-search-result>
-                        <div class="jila-component simple-search-results card-container">
-                            <semantic-table 
-                                id='grid-result'
-                                no-result-template='<bs-panel class="info"><i18n>search_no_results</i18n></bs-panel>'
-                                query='SELECT DISTINCT ?subject ?score (COUNT(?relation) as ?num_relation) WHERE {
-                                        ?subject rdfs:label ?label .
-                                    } 
-                                    GROUP BY ?subject ?typeLabel ?score
-                                    ORDER BY DESC(?num_relation) DESC(?score)'
-                                number-of-displayed-rows="4"
-                                options='{"showFilter": false}'
-                                tuple-template='{{> partial:entityCard subject=subject.value}}'
-                            >    
-                            </semantic-table>
-                        </div>
-                    </semantic-search-result>
-                </semantic-search-result-holder>
-            </semantic-search>
+            [[> component-search]]
         </div>
     </bs-col>
 </bs-row>
@@ -65,3 +23,49 @@
     </bs-row>
 [[> partial:contentFooter]]
 [[> partial:pageFooter ]]
+
+[[#*inline "component-search"]]
+    <semantic-search limit="10">
+        <semantic-search-query-keyword
+            tokenize-lucene-query="true"
+            placeholder="<i18n>home_search_placeholder</i18n>"
+            min-search-term-length="1"
+            domain="<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
+            query='SELECT ?subject ?typeLabel ?score (COUNT(?relation) as ?num_relation) WHERE {
+                ?subject a ?type ;
+                    rdfs:label ?label .
+                VALUES (?type ?typelabel) {
+                    (search:Group "group")
+                    (search:Person "person")
+                }
+                ?label bds:search ?__token__ ;
+                    bds:relevance ?score ;
+                    bds:matchAllTerms "true" .
+
+                GRAPH <https://resource.swissartresearch.net/graph/network> {
+                    ?subject ?relation ?object .
+                }
+            } GROUP BY ?subject ?typeLabel ?score
+            ORDER BY DESC(?num_relation) DESC(?score)'
+        ></semantic-search-query-keyword>
+        <semantic-search-result-holder>
+            <semantic-search-result>
+                <div class="jila-component simple-search-results card-container">
+                    <semantic-table 
+                        id='grid-result'
+                        no-result-template='<bs-panel class="info"><i18n>search_no_results</i18n></bs-panel>'
+                        query='SELECT DISTINCT ?subject ?score (COUNT(?relation) as ?num_relation) WHERE {
+                                ?subject rdfs:label ?label .
+                            } 
+                            GROUP BY ?subject ?typeLabel ?score
+                            ORDER BY DESC(?num_relation) DESC(?score)'
+                        number-of-displayed-rows="4"
+                        options='{"showFilter": false}'
+                        tuple-template='{{> partial:entityCard subject=subject.value}}'
+                    >    
+                    </semantic-table>
+                </div>
+            </semantic-search-result>
+        </semantic-search-result-holder>
+    </semantic-search>
+[[/inline]]
