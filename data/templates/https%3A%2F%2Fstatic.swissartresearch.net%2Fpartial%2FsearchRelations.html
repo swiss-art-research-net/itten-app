@@ -95,5 +95,25 @@
         "queryPattern": "{
             ?subject crmdig:L54_is_same-as/gndo:professionOrOccupation ?__value__ .
         }"
+    }],
+    "<https://platform.swissartresearch.net/search/Person_has_relation_with_Person>": [{
+        "kind": "resource",
+        "queryPattern": "{
+            BIND(<https://resource.swissartresearch.net/actor/AF0BA76E-E7EA-367A-AF8A-B3537D730E31> as ?itten)
+            GRAPH <https://resource.swissartresearch.net/graph/network> {
+                ?subject ?predicate ?__value__ .
+            }
+            ?__value__ a/rdfs:subClassOf* crm:E39_Actor .
+            FILTER(?__value__ != ?itten)
+        }"
+    }],
+    "<https://platform.swissartresearch.net/search/Person_has_relation_with_Place>": [{
+        "kind": "resource",
+        "queryPattern": "{
+            GRAPH <https://resource.swissartresearch.net/graph/network> {
+                ?subject ?predicate ?__value__ .
+            }
+            ?__value__ a/rdfs:subClassOf* crm:E53_Place .
+        }"
     }]
 }
