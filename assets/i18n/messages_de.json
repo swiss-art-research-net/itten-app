@@ -20,6 +20,6 @@
   "label_person_born_place": "Geboren in",
   "label_person_died_date": "Gestorben am",
   "label_person_died_place": "Gestorben in",
-  "label_person_has_relation_with_person": "Beziehung zur Person",
-  "label_person_has_relation_with_place": "Beziehung zum Ort"
+  "label_person_has_relation_with_person": "Beziehung zu Person",
+  "label_person_has_relation_with_place": "Beziehung zu Ort"
 }
