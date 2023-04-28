@@ -1,5 +1,4 @@
 [[> partial:pageHeader ]]
-[[> partial:contentHeader padding=true]]
 
 <bs-row>
     <bs-col sm="2">
@@ -13,8 +12,9 @@
         <div class="jila-component home-search">
             <semantic-search limit="10">
                 <semantic-search-query-keyword
-                    tokenize-lucene-query="false"
+                    tokenize-lucene-query="true"
                     placeholder="<i18n>home_search_placeholder</i18n>"
+                    min-search-term-length="1"
                     domain="<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
                     query='SELECT ?subject ?typeLabel ?score (COUNT(?relation) as ?num_relation) WHERE {
                         ?subject a ?type ;
@@ -57,5 +57,11 @@
     </bs-col>
 </bs-row>
 
+[[> partial:contentHeader padding=true]]
+    <bs-row>
+        <bs-col sm="12">
+            
+        </bs-col>
+    </bs-row>
 [[> partial:contentFooter]]
 [[> partial:pageFooter ]]
