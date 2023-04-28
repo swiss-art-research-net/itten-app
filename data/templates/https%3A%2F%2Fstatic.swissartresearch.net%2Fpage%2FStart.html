@@ -18,7 +18,7 @@
 [[> partial:contentHeader padding=true]]
     <bs-row>
         <bs-col sm="12">
-            
+            [[> component-selected-items]]
         </bs-col>
     </bs-row>
 [[> partial:contentFooter]]
@@ -68,4 +68,28 @@
             </semantic-search-result>
         </semantic-search-result-holder>
     </semantic-search>
+[[/inline]]
+
+[[#*inline "component-selected-items"]]
+    <h2>Selected stuff</h2>
+    <div class="jila-component simple-search-results card-container">
+        <semantic-table 
+            id='grid-selected'
+            query='SELECT ?subject  WHERE {
+                    VALUES(?subject ?label) {
+                        (<https://resource.swissartresearch.net/actor/9D9C5FE9-5A09-35BC-A278-96A0DB7C57F1> "Walter Gropius")
+                        (<https://resource.swissartresearch.net/collection/jila-3bcad6e1a3f0417abe3f0fd2cdf9842a> "Aufzeichnungen Formenlehre")
+                        (<https://resource.swissartresearch.net/actor/6087C534-014F-3F05-BA83-778861FF59F2> "Lucia Moholy")
+                        (<https://resource.swissartresearch.net/collection/jila-43908e6998744707b9f97af7af418d61> "Tagebuch Italienreise")
+                        (<https://resource.swissartresearch.net/actor/E32268AC-B898-3225-98D4-D6BC388F0321> "Anna Höllering")
+                        (<https://resource.swissartresearch.net/collection/jila-4a0b9a495b714d2eba527851f20c81be> "Farbanalyse Meisterwerke")
+                        (<https://resource.swissartresearch.net/actor/C333E88B-3AAB-3076-8978-86CB42805A36> "Thomas Edison")
+                    }
+                }'
+            number-of-displayed-rows="10"
+            options='{"showFilter": false}'
+            tuple-template='{{> partial:entityCard subject=subject.value}}'
+        >    
+        </semantic-table>
+    </div>
 [[/inline]]
