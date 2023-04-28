@@ -1,5 +1,6 @@
 {
   "button_show_source_data": "Show source data",
+  "home_tagline": "Discover the Itten archive through people and their networks",
   "label_details": "Details",
   "label_field": "Field",
   "label_images": "Images",
@@ -21,5 +22,6 @@
   "label_value": "Value",
   "nav_about": "About us",
   "nav_itten-archive": "Itten Archive",
-  "nav_persons": "Persons"
+  "nav_persons": "Persons",
+  "search_no_results": "No results found"
 }
