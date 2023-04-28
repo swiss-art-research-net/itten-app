@@ -103,8 +103,17 @@
             GRAPH <https://resource.swissartresearch.net/graph/network> {
                 ?subject ?predicate ?__value__ .
             }
-            ?__value__ a/rdfs:subClassOf crm:E39_Actor .
+            ?__value__ a/rdfs:subClassOf* crm:E39_Actor .
             FILTER(?__value__ != ?itten)
+        }"
+    }],
+    "<https://platform.swissartresearch.net/search/Person_has_relation_with_Place>": [{
+        "kind": "resource",
+        "queryPattern": "{
+            GRAPH <https://resource.swissartresearch.net/graph/network> {
+                ?subject ?predicate ?__value__ .
+            }
+            ?__value__ a/rdfs:subClassOf* crm:E53_Place .
         }"
     }]
 }
