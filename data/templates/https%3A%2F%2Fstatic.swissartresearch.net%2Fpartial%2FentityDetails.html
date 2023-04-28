@@ -289,6 +289,7 @@
 [[#*inline "module-entity-description"]]
   <semantic-query
   query="SELECT 
+      ?content
       ?description 
       ?assignment_comment
       ?assignment_collection
@@ -299,6 +300,11 @@
       (GROUP_CONCAT(?profession; SEPARATOR=',') as ?professions) 
     WHERE {
     BIND(<{{entityiri}}> as ?subject)
+    OPTIONAL {
+      ?subject crm:P129i_is_subject_of ?contentDescription .
+      ?contentDescription crm:P2_has_type aat:300435416 ;
+        crm:P190_has_symbolic_content ?content .
+    }
     OPTIONAL {
       ?subject crmdig:L54_is_same-as/gndo:professionOrOccupation ?profession .
     }
@@ -323,6 +329,7 @@
         crm:P140_assigned_attribute_to/^crm:P128_carries ?assignment_collection .
     }
   } GROUP BY 
+  ?content
   ?description 
   ?assignment_comment
   ?assignment_collection
@@ -352,6 +359,9 @@
             <mp-label iri="{{this}}"></mp-label>{{#unless @last}}, {{/unless}}
           {{/each}}
         </p>
+      {{/if}}
+      {{#if content.value}}
+        <p>{{content.value}}</p>
       {{/if}}
       {{#if description.value}}
         <p>{{description.value}}</p>
