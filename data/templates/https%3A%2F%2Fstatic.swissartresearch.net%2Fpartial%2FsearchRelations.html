@@ -40,6 +40,20 @@
             FILTER(STRDT(STR(?date), xsd:date) >= ?__dateBeginValue__) .
         }"
     }],
+    "<https://platform.swissartresearch.net/search/Person_has_associated_digitised_object>": [{
+        "kind": "literal",
+        "queryPattern": "{
+            ?subject a/rdfs:subClassOf* crm:E39_Actor .
+            GRAPH <https://resource.swissartresearch.net/graph/network> {
+                ?object ?predicate ?subject .
+            }
+            OPTIONAL {
+                ?object crm:P46_is_composed_of/crm:P138i_has_representation ?image .
+            }
+            BIND(BOUND(?image) AS ?literal)
+            FILTER(?literal = ?__literal__)
+        }"
+    }],
     "<https://platform.swissartresearch.net/search/Person_has_count>": [{
         "kind": "literal",
         "queryPattern": "{
