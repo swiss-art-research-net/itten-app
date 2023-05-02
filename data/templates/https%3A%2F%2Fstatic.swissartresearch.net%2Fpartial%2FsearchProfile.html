@@ -7,7 +7,7 @@
         { "iri": "<http://www.cidoc-crm.org/cidoc-crm/E55_Type>", "label": "Type", "thumbnail": "../images/fcs/concepts.svg" },
         { "iri": "<http://www.w3.org/2001/XMLSchema#decimal>", "label": "Number", "thumbnail": "../images/fcs/things.svg" },
         { "iri": "<http://www.w3.org/2001/XMLSchema#string>", "label": "String", "thumbnail": "../images/fcs/concepts.svg" },
-        { "iri": "<http://www.w3.org/2001/XMLSchema#boolean>", "label": "String", "thumbnail": "../images/fcs/concepts.svg" }
+        { "iri": "<http://www.w3.org/2001/XMLSchema#boolean>", "label": "Boolean", "thumbnail": "../images/fcs/concepts.svg" }
     ],
     "relations": [
         {
@@ -45,6 +45,12 @@
             "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>",
             "label": "<i18n>label_person_died</i18n>"
+        },
+        {
+            "iri": "<https://platform.swissartresearch.net/search/Person_has_associated_digitised_object>",
+            "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",
+            "hasRange": "<http://www.w3.org/2001/XMLSchema#boolean>",
+            "label": "<i18n>label_person_digitised_object</i18n>"
         },
         {
             "iri": "<https://platform.swissartresearch.net/search/Person_has_count>",
