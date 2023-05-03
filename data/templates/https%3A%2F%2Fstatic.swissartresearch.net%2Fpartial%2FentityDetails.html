@@ -54,7 +54,9 @@
           </bs-tab-pane>
           <bs-tab-pane event-key="fields" title="Details">
             [[> component-fields-visualisation]]
-            [[> component-entity-external-data]]
+            [[#if (hasPermission "api:ldp:*")]]
+              [[> component-entity-external-data]]
+            [[/if]]
             [[> component-source-link]]
           </bs-tab-pane>
           <bs-tab-pane event-key="images" title="Bilder">
