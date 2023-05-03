@@ -1,7 +1,10 @@
 {
+  "button_explore": "Explore",
+  "button_open": "Open",
   "button_show_source_data": "Show source data",
   "home_tagline": "Discover the Itten archive through people and their networks",
   "label_details": "Details",
+  "label_external_data": "External data",
   "label_field": "Field",
   "label_images": "Images",
   "label_person_active": "Active",

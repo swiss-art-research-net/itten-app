@@ -54,6 +54,7 @@
           </bs-tab-pane>
           <bs-tab-pane event-key="fields" title="Details">
             [[> component-fields-visualisation]]
+            [[> component-entity-external-data]]
             [[> component-source-link]]
           </bs-tab-pane>
           <bs-tab-pane event-key="images" title="Bilder">
@@ -390,6 +391,56 @@
     {{/each}}
   </template>
   </semantic-query>
+[[/inline]]
+
+[[#*inline "component-entity-external-data"]]
+
+<div class="table-responsive rs-table">
+  <semantic-query
+    query='SELECT ?externalEntity WHERE {
+      BIND(<{{entityiri}}> AS ?entity)
+      ?entity crmdig:L54_is_same-as ?gndEntity .
+      ?gndEntity a gndo:AuthorityResource .
+      SERVICE secondary:sparql {
+        ?externalEntity owl:sameAs ?gndEntity
+      }
+    }'
+    template='{{> template-external-data}}'
+    >
+    <template id="template-external-data">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th colspan="3">
+                <i18n>label_external_data</i18n>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each bindings}}
+              <tr>
+                <th>
+                  <semantic-context repository="secondary">
+                    <mp-label iri="{{externalEntity.value}}"></mp-label>
+                  </semantic-context>
+                </th>
+                <td>
+                  <semantic-link iri="page:exploreExternal" urlqueryparam-entityiri="{{externalEntity.value}}" target="_blank">
+                    <i18n>button_explore</i18n>
+                  </semantic-link>
+                </td>
+                <td>
+                  <a href="{{externalEntity.value}}" target="_blank">
+                    <i18n>button_open</i18n>
+                  </a>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+      </table>
+  </semantic-query>
+</div>
+
 [[/inline]]
 
 [[#*inline "template-entity-tag"]]

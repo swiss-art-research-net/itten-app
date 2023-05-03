@@ -24,5 +24,8 @@
   "label_person_has_relation_with_place": "Relation to Place",
   "home_tagline": "Discover the Itten archive through people and their networks",
   "search_no_results": "No results found",
-  "label_person_digitised_object": "Digitised copy available"
+  "label_person_digitised_object": "Digitised copy available",
+  "button_explore": "Explore",
+  "button_open": "Open",
+  "label_external_data": "External data"
 }

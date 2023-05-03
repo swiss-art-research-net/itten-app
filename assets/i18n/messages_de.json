@@ -24,5 +24,8 @@
   "label_person_has_relation_with_place": "Beziehung zu Ort",
   "home_tagline": "Entdecken Sie das Itten-Archiv über Personen und ihre Netzwerke",
   "search_no_results": "Leider nichts gefunden",
-  "label_person_digitised_object": "Digitalisat vorhanden"
+  "label_person_digitised_object": "Digitalisat vorhanden",
+  "button_explore": "Erkunden",
+  "button_open": "Öffnen",
+  "label_external_data": "Externe Daten"
 }
