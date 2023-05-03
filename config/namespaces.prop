@@ -9,3 +9,4 @@ type=https://resource.swissartresearch.net/type/
 wd=http://www.wikidata.org/entity/
 wdt=http://www.wikidata.org/prop/direct/
 jila=https://jila.swissartresearch.net/ontology/
+secondary=http://blazegraph-secondary:8080/blazegraph/
