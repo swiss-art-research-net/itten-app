@@ -1,6 +1,6 @@
 [[> partial:pageHeader ]]
 
-<div class="container-fluid">
+<div class="jila-component container-fluid color-background-light home-header-container">
     <bs-row>
         <bs-col sm="2">
             Logo
@@ -23,8 +23,35 @@
             [[> component-selected-items]]
         </bs-col>
     </bs-row>
+    <bs-row>
+        <bs-col sm="12">
+            [[> component-buttons]]
+        </bs-col>
+    </bs-row>
 [[> partial:contentFooter]]
 [[> partial:pageFooter ]]
+
+[[#*inline "component-buttons"]]
+    <div class="jila-component home-buttons">
+        <bs-row>
+            <bs-col md="4">
+                <a class="jila-component home-button" href="https://www.zb.uzh.ch/de/zuerich/johannes-itten" target="_blank">
+                    <i18n>button_information_about_itten</i18n>
+                </a>
+            </bs-col>
+            <bs-col md="4">
+                <semantic-link class="jila-component home-button" iri="page:persons"> 
+                    <i18n>button_browse_archive</i18n>
+                </semantic-link>
+            </bs-col>
+            <bs-col md="4">
+                <a class="jila-component home-button" href="https://zbcollections.ch/home/#/content/43a2ab3eb18841db9ec1af3669b74f39" target="_blank">
+                    <i18n>button_zbcollections</i18n>
+                </a>
+            </bs-col>
+        </bs-row>
+    </div>
+[[/inline]]
 
 [[#*inline "component-search"]]
     <semantic-search limit="10">

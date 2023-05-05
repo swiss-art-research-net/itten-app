@@ -172,6 +172,17 @@ p {
       }
     }
   }
+  &.home-buttons {
+    margin-top: 5rem;
+    padding-bottom: 4rem;
+    .home-button {
+      display: block;
+      border: 1px solid @col-bg-med;
+      padding: 4rem;
+      text-align: center;
+      min-height: 13rem;
+    }
+  }
   &.home-header {
     padding-top: 3rem;
     h1 {
@@ -179,13 +190,19 @@ p {
       margin-bottom: 4rem;
     }
   }
+  &.home-header-container {
+    padding-bottom: 3rem;
+  }
   &.home-search {
     .simple-search-results {
       padding-top: 1rem;
     }
   }
   &.home-selected-items {
-    padding-top: 3rem;
+    padding-top: 5rem;
+    .card-container {
+      padding:0 0.2rem;
+    }
   }
   &.page-title {
     margin-top: 5rem;
