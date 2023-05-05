@@ -48,6 +48,29 @@ p {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    &.horizontal-fill {
+      flex-flow: unset;
+        .card-image img {
+          max-width: 300% !important;
+          width:auto;
+          height: 100%;
+        }
+        
+    }
+    &.horizontal-scroll {
+        overflow-x: scroll;
+        flex-flow: unset;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        
+        /* Hide scrollbar for IE, Edge and Firefox */
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        .card {
+          min-width: 20rem;
+        }
+    }
     .card {
       border: 0;
       border-radius: 4px;
@@ -160,6 +183,9 @@ p {
     .simple-search-results {
       padding-top: 1rem;
     }
+  }
+  &.home-selected-items {
+    padding-top: 3rem;
   }
   &.page-title {
     margin-top: 5rem;

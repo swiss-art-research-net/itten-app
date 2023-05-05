@@ -19,6 +19,29 @@ p {
   flex-wrap: wrap;
   justify-content: flex-start;
 }
+.jila-component.card-container.horizontal-fill {
+  flex-flow: unset;
+}
+.jila-component.card-container.horizontal-fill .card-image img {
+  max-width: 300% !important;
+  width: auto;
+  height: 100%;
+}
+.jila-component.card-container.horizontal-scroll {
+  overflow-x: scroll;
+  flex-flow: unset;
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.jila-component.card-container.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+.jila-component.card-container.horizontal-scroll .card {
+  min-width: 20rem;
+}
 .jila-component.card-container .card {
   border: 0;
   border-radius: 4px;
@@ -120,6 +143,9 @@ p {
 }
 .jila-component.home-search .simple-search-results {
   padding-top: 1rem;
+}
+.jila-component.home-selected-items {
+  padding-top: 3rem;
 }
 .jila-component.page-title {
   margin-top: 5rem;

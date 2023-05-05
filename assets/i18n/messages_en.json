@@ -27,5 +27,6 @@
   "label_person_digitised_object": "Digitised copy available",
   "button_explore": "Explore",
   "button_open": "Open",
-  "label_external_data": "External data"
+  "label_external_data": "External data",
+  "label_selected_items": "Selected content"
 }

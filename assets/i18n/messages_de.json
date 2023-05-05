@@ -27,5 +27,6 @@
   "label_person_digitised_object": "Digitalisat vorhanden",
   "button_explore": "Erkunden",
   "button_open": "Öffnen",
-  "label_external_data": "Externe Daten"
+  "label_external_data": "Externe Daten",
+  "label_selected_items": "Ausgewählte Inhalte"
 }
