@@ -48,6 +48,29 @@ p {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    &.horizontal-fill {
+      flex-flow: unset;
+        .card-image img {
+          max-width: 300% !important;
+          width:auto;
+          height: 100%;
+        }
+        
+    }
+    &.horizontal-scroll {
+        overflow-x: scroll;
+        flex-flow: unset;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        
+        /* Hide scrollbar for IE, Edge and Firefox */
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        .card {
+          min-width: 20rem;
+        }
+    }
     .card {
       border: 0;
       border-radius: 4px;
@@ -149,6 +172,17 @@ p {
       }
     }
   }
+  &.home-buttons {
+    margin-top: 5rem;
+    padding-bottom: 4rem;
+    .home-button {
+      display: block;
+      border: 1px solid @col-bg-med;
+      padding: 4rem;
+      text-align: center;
+      min-height: 13rem;
+    }
+  }
   &.home-header {
     padding-top: 3rem;
     h1 {
@@ -156,9 +190,18 @@ p {
       margin-bottom: 4rem;
     }
   }
+  &.home-header-container {
+    padding-bottom: 3rem;
+  }
   &.home-search {
     .simple-search-results {
       padding-top: 1rem;
+    }
+  }
+  &.home-selected-items {
+    padding-top: 5rem;
+    .card-container {
+      padding:0 0.2rem;
     }
   }
   &.page-title {

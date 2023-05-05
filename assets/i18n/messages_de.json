@@ -1,4 +1,7 @@
 {
+  "button_information_about_itten": "Informationen zu Johannes Itten",
+  "button_browse_archive": "Stöbern im Johannes Itten Linked Archive",
+  "button_zbcollections": "Suche in ZBcollections",
   "button_show_source_data": "Quelldaten anzeigen",
   "label_details": "Details",
   "label_field": "Feld",
@@ -27,5 +30,6 @@
   "label_person_digitised_object": "Digitalisat vorhanden",
   "button_explore": "Erkunden",
   "button_open": "Öffnen",
-  "label_external_data": "Externe Daten"
+  "label_external_data": "Externe Daten",
+  "label_selected_items": "Ausgewählte Inhalte"
 }

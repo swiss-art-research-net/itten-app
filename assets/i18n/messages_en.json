@@ -27,5 +27,9 @@
   "label_person_digitised_object": "Digitised copy available",
   "button_explore": "Explore",
   "button_open": "Open",
-  "label_external_data": "External data"
+  "label_external_data": "External data",
+  "label_selected_items": "Selected content",
+  "button_browse_archive": "Browse the Johannes Itten Linked Archive",
+  "button_information_about_itten": "Information about Johannes Itten",
+  "button_zbcollections": "Search the ZBcollections"
 }
