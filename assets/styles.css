@@ -144,6 +144,11 @@ p {
   padding: 4rem;
   text-align: center;
   min-height: 13rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+.jila-component.home-buttons .home-button:hover {
+  background-color: #f1f5fa;
 }
 .jila-component.home-header {
   padding-top: 3rem;
