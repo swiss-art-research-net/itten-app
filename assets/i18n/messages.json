@@ -27,11 +27,11 @@
   "label_person_has_occupation": "Occupation",
   "label_person_num_appearances": "Number of appearances",
   "label_selected_items": "Selected content",
+  "label_source": "Source",
   "label_relations": "Relations",
   "label_value": "Value",
   "nav_about": "About us",
   "nav_itten-archive": "Itten Archive",
   "nav_persons": "Persons",
-  "search_no_results": "No results found",
-  "source": "Source"
+  "search_no_results": "No results found"
 }

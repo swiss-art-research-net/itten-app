@@ -25,12 +25,12 @@
   "label_person_died_place": "Gestorben in",
   "label_person_has_relation_with_person": "Beziehung zu Person",
   "label_person_has_relation_with_place": "Beziehung zu Ort",
+  "label_source": "Quelle",
   "home_tagline": "Entdecken Sie das Itten-Archiv über Personen und ihre Netzwerke",
   "search_no_results": "Leider nichts gefunden",
   "label_person_digitised_object": "Digitalisat vorhanden",
   "button_explore": "Erkunden",
   "button_open": "Öffnen",
   "label_external_data": "Externe Daten",
-  "label_selected_items": "Ausgewählte Inhalte",
-  "source": "Quelle"
+  "label_selected_items": "Ausgewählte Inhalte"
 }
