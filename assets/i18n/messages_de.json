@@ -31,5 +31,6 @@
   "button_explore": "Erkunden",
   "button_open": "Öffnen",
   "label_external_data": "Externe Daten",
-  "label_selected_items": "Ausgewählte Inhalte"
+  "label_selected_items": "Ausgewählte Inhalte",
+  "source": "Quelle"
 }

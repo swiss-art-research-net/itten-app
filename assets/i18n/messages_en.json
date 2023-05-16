@@ -31,5 +31,6 @@
   "label_selected_items": "Selected content",
   "button_browse_archive": "Browse the Johannes Itten Linked Archive",
   "button_information_about_itten": "Information about Johannes Itten",
-  "button_zbcollections": "Search the ZBcollections"
+  "button_zbcollections": "Search the ZBcollections",
+  "source": "Source"
 }

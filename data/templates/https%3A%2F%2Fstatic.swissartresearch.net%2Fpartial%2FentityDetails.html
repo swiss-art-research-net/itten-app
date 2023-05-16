@@ -314,6 +314,7 @@
   query="SELECT 
       ?content
       ?description 
+      ?gndEntity
       ?assignment_comment
       ?assignment_collection
       ?dateOfBirth
@@ -323,6 +324,10 @@
       (GROUP_CONCAT(?profession; SEPARATOR=',') as ?professions) 
     WHERE {
     BIND(<{{entityiri}}> as ?subject)
+    OPTIONAL {
+      ?subject crmdig:L54_is_same-as ?gndEntity .
+      ?gndEntity a gndo:AuthorityResource .
+    }
     OPTIONAL {
       ?subject crm:P129i_is_subject_of ?contentDescription .
       ?contentDescription crm:P2_has_type aat:300435416 ;
@@ -354,6 +359,7 @@
   } GROUP BY 
   ?content
   ?description 
+  ?gndEntity
   ?assignment_comment
   ?assignment_collection
   ?dateOfBirth
@@ -383,11 +389,14 @@
           {{/each}}
         </p>
       {{/if}}
-      {{#if content.value}}
-        <p>{{content.value}}</p>
-      {{/if}}
       {{#if description.value}}
         <p>{{description.value}}</p>
+      {{/if}}
+      {{#if gndEntity.value}}
+      <p><small><i18n>label_source</i18n>: <a href="{{gndEntity.value}}" target="_blank">GND</a></small></p>
+      {{/if}}
+      {{#if content.value}}
+        <p>{{content.value}}</p>
       {{/if}}
       {{#if assignment_comment.value}}
         <p>{{assignment_comment.value}}
