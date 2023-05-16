@@ -2,6 +2,7 @@ import deepl
 import json
 import re
 import sys
+from collections import OrderedDict
 from os import listdir
 from os.path import join
 from tqdm import tqdm
@@ -22,7 +23,6 @@ def synchroniseAndTranslate(*, inputDir, authKey):
                     allTerms.append(key)
     allTerms = sorted(list(allTerms))
 
-    print(defaultFile) 
     # Set missing language keys to False
     for file in fields.keys():
         for term in allTerms:
@@ -50,7 +50,7 @@ def synchroniseAndTranslate(*, inputDir, authKey):
                             translation = False
                         fields[file][term] = str(translation)
             with open(join(inputDir, file), 'w', encoding='utf8') as f:
-                json.dump(fields[file], f, indent=2, ensure_ascii=False)
+                json.dump(fields[file], f, indent=2, ensure_ascii=False, sort_keys=True)
 
 
 if __name__ == "__main__":
