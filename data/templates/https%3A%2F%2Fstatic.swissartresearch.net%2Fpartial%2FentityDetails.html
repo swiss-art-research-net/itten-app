@@ -88,7 +88,6 @@
                       </thead>
                       <tbody>
                       {{#each fields as |field|}}
-                          {{log field}}
                           {{#if field.values}}
                             {{#ifCond field.display "===" "hidden"}}
                             {{else}}
