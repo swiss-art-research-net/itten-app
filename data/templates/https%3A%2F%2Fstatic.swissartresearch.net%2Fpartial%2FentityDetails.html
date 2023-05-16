@@ -1,3 +1,4 @@
+[[> partial:fieldDefinitionsInline]]
 
 <div class="jila-component panel-entity-details">
   <div class="container-fluid">
@@ -76,7 +77,16 @@
     <template id="template">
       <mp-field-visualization
       subject="{{entityiri}}"
-      fields='[[> partial:fieldDefinitions]]'
+      fields='[
+        [[> display_signature]],
+        [[> display_form_and_content]],
+        [[> display_production_date]],
+        [[> display_part_count]],
+        [[> display_archival_level]],
+        [[> display_archival_type]],
+        [[> display_language]],
+        [[> display_path]]
+      ]'
       template='{{> field-table-template }}'
     >
         <template id="field-table-template">
