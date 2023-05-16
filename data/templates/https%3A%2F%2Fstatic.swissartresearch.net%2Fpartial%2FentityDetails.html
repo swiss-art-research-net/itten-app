@@ -69,78 +69,85 @@
 </div>
 
 [[#*inline "component-fields-visualisation"]]
-  <mp-field-visualization
-    subject="{{entityiri}}"
-    fields='[[> partial:fieldDefinitions]]'
-    template='{{> field-table-template }}'
+  <semantic-if
+    query="ASK { <{{entityiri}}> a crm:E78_Curated_Holding . }"
+    then="{{> template}}"
   >
-      <template id="field-table-template">
-          {{#if noData}}
-              <div class="bs-alert">No data</div>
-          {{else}}
-              <div class="table-responsive rs-table">
-                  <table class="table table-hover">
-                      <thead>
-                          <tr>
-                              <th scope="col" style="width: 30%"><i18n>label_field</i18n></th>
-                              <th scope="col"><i18n>label_value</i18n></th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                      {{#each fields as |field|}}
-                          {{#if field.values}}
-                            {{#ifCond field.display "===" "hidden"}}
-                            {{else}}
-                                <tr>
-                                    <td>{{field.label.0.value}}</td>
-                                    <td>
-                                        {{#ifCond (objectLength field.values) '>' 1}}
-                                            <ol>
-                                                {{#each field.values as |value|}}
-                                                    <li>
-                                                        {{> field-value-template field=field value=value}}
-                                                    </li>
-                                                {{/each}}
-                                            </ol>
-                                        {{/ifCond}}
+    <template id="template">
+      <mp-field-visualization
+      subject="{{entityiri}}"
+      fields='[[> partial:fieldDefinitions]]'
+      template='{{> field-table-template }}'
+    >
+        <template id="field-table-template">
+            {{#if noData}}
+                <div class="bs-alert">No data</div>
+            {{else}}
+                <div class="table-responsive rs-table">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 30%"><i18n>label_field</i18n></th>
+                                <th scope="col"><i18n>label_value</i18n></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {{#each fields as |field|}}
+                            {{#if field.values}}
+                              {{#ifCond field.display "===" "hidden"}}
+                              {{else}}
+                                  <tr>
+                                      <td>{{field.label.0.value}}</td>
+                                      <td>
+                                          {{#ifCond (objectLength field.values) '>' 1}}
+                                              <ol>
+                                                  {{#each field.values as |value|}}
+                                                      <li>
+                                                          {{> field-value-template field=field value=value}}
+                                                      </li>
+                                                  {{/each}}
+                                              </ol>
+                                          {{/ifCond}}
 
-                                        {{#ifCond (objectLength field.values) '===' 1}}
-                                            {{#each field.values as |value|}}
-                                                {{> field-value-template field=field value=value}}
-                                            {{/each}}
-                                        {{/ifCond}}
-                                    </td>
-                                </tr>
-                              {{/ifCond}}
-                          {{/if}}                  
-                      {{/each}}
-                      </tbody>
-                  </table>
-              </div>
-          {{/if}}
-      </template>
-      <template id="field-value-template">
-          <div>
-              {{#ifCond field.xsdDatatype.value "=="  "http://www.w3.org/2001/XMLSchema#string"}}
-              {{value.value.value}}
-              {{/ifCond}}
-              {{#ifCond field.xsdDatatype.value "=="  "http://www.w3.org/2001/XMLSchema#langString"}}
-              {{value.value.value}}{{#if value.value.language}} - {{value.value.language}}{{/if}}
-              {{/ifCond}}
-              {{#ifCond field.xsdDatatype.value "==" "http://www.w3.org/2001/XMLSchema#dateTime"}}
-              {{value.value.value}}
-              {{/ifCond}}
-              {{#ifCond field.xsdDatatype.value "=="  "http://www.w3.org/2001/XMLSchema#anyURI"}}
-              {{#if value.value.datatype}}
-                  [[!-- in the messy data it can happen that field is anyURI but actual data is literal --]]
-                  {{value.value.value}}
-              {{else}}
-                  <semantic-link class="external-link" iri="{{value.value.value}}"><mp-label iri="{{value.value.value}}"></mp-label></semantic-link>
-              {{/if}}
-              {{/ifCond}}
-          </div>          
-      </template>
-  </mp-field-visualization>
+                                          {{#ifCond (objectLength field.values) '===' 1}}
+                                              {{#each field.values as |value|}}
+                                                  {{> field-value-template field=field value=value}}
+                                              {{/each}}
+                                          {{/ifCond}}
+                                      </td>
+                                  </tr>
+                                {{/ifCond}}
+                            {{/if}}                  
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            {{/if}}
+        </template>
+        <template id="field-value-template">
+            <div>
+                {{#ifCond field.xsdDatatype.value "=="  "http://www.w3.org/2001/XMLSchema#string"}}
+                {{value.value.value}}
+                {{/ifCond}}
+                {{#ifCond field.xsdDatatype.value "=="  "http://www.w3.org/2001/XMLSchema#langString"}}
+                {{value.value.value}}{{#if value.value.language}} - {{value.value.language}}{{/if}}
+                {{/ifCond}}
+                {{#ifCond field.xsdDatatype.value "==" "http://www.w3.org/2001/XMLSchema#dateTime"}}
+                {{value.value.value}}
+                {{/ifCond}}
+                {{#ifCond field.xsdDatatype.value "=="  "http://www.w3.org/2001/XMLSchema#anyURI"}}
+                {{#if value.value.datatype}}
+                    [[!-- in the messy data it can happen that field is anyURI but actual data is literal --]]
+                    {{value.value.value}}
+                {{else}}
+                    <semantic-link class="external-link" iri="{{value.value.value}}"><mp-label iri="{{value.value.value}}"></mp-label></semantic-link>
+                {{/if}}
+                {{/ifCond}}
+            </div>          
+        </template>
+    </mp-field-visualization>
+    </template>
+  </semantic-if>
 [[/inline]]
 
 [[#*inline "component-images"]]
