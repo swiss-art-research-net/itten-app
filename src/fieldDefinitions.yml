@@ -144,6 +144,7 @@ fields:
 
     - id: label
       label: Label
+      display: hidden
       description: A human-readable label for the entity
       datatype: xsd:langString
       queries:

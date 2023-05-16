@@ -88,27 +88,31 @@
                       </thead>
                       <tbody>
                       {{#each fields as |field|}}
+                          {{log field}}
                           {{#if field.values}}
-                              <tr>
-                                  <td>{{field.label.0.value}}</td>
-                                  <td>
-                                      {{#ifCond (objectLength field.values) '>' 1}}
-                                          <ol>
-                                              {{#each field.values as |value|}}
-                                                  <li>
-                                                      {{> field-value-template field=field value=value}}
-                                                  </li>
-                                              {{/each}}
-                                          </ol>
-                                      {{/ifCond}}
+                            {{#ifCond field.display "===" "hidden"}}
+                            {{else}}
+                                <tr>
+                                    <td>{{field.label.0.value}}</td>
+                                    <td>
+                                        {{#ifCond (objectLength field.values) '>' 1}}
+                                            <ol>
+                                                {{#each field.values as |value|}}
+                                                    <li>
+                                                        {{> field-value-template field=field value=value}}
+                                                    </li>
+                                                {{/each}}
+                                            </ol>
+                                        {{/ifCond}}
 
-                                      {{#ifCond (objectLength field.values) '===' 1}}
-                                          {{#each field.values as |value|}}
-                                              {{> field-value-template field=field value=value}}
-                                          {{/each}}
-                                      {{/ifCond}}
-                                  </td>
-                              </tr>
+                                        {{#ifCond (objectLength field.values) '===' 1}}
+                                            {{#each field.values as |value|}}
+                                                {{> field-value-template field=field value=value}}
+                                            {{/each}}
+                                        {{/ifCond}}
+                                    </td>
+                                </tr>
+                              {{/ifCond}}
                           {{/if}}                  
                       {{/each}}
                       </tbody>
