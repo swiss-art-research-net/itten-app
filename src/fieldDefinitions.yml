@@ -132,6 +132,18 @@ fields:
               crm:P190_has_symbolic_content ?value .
           }'
 
+    - id: display_signature
+      label: Signatur
+      datatype: xsd:string
+      queries:
+        - select: 'SELECT DISTINCT ?value WHERE {
+            $subject crm:P1_is_identified_by ?identifier .
+            ?identifier a crm:E42_Identifier ;
+              crm:P190_has_symbolic_content ?identifierValue ;
+              crm:P2_has_type <https://resource.swissartresearch.net/type/signatur> .
+            BIND(IF(BOUND(?identifierType), CONCAT(MIN(?identifierType), ": ", ?identifierValue), ?identifierValue) AS ?value)
+          }'
+
     - id: display_title
       label: Titel
       datatype: xsd:string
