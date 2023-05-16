@@ -20,6 +20,11 @@
         <mp-resource-thumbnail iri="{{entityiri}}"></mp-resource-thumbnail>
       </bs-col>
     </bs-row>
+    <bs-row>
+      <bs-col sm="12">
+        [[> module-entity-links]]
+      </bs-col>
+    </bs-row>
   </div>
 </div>
 <div class="entity-view-tabs">
@@ -421,6 +426,31 @@
       {{/if}}
     {{/each}}
   </template>
+  </semantic-query>
+[[/inline]]
+
+[[#*inline "module-entity-links"]]
+  <semantic-query
+    query='SELECT ?sameAs ?source WHERE {
+      <{{entityiri}}> crmdig:L54_is_same-as ?sameAs .
+      FILTER(CONTAINS(STR(?sameAs),?namespace))
+      VALUES (?source ?namespace) {
+        ("GND" "https://d-nb.info/gnd/")
+        ("Sikart" "https://www.sikart.ch/")
+        ("Wikidata" "http://www.wikidata.org/entity/")
+      }
+    }'
+    template="{{> template-links}}"
+  >
+    <template id="template-links">
+      <ul class="jila-component external-link-list">
+        {{#each bindings}}
+          <li>
+            <a class="jila-component tag external-link" href="{{{sameAs.value}}}" target="_blank"><span>{{source.value}}</span></a>
+          </li>
+        {{/each}}
+      </ul>
+    </template>
   </semantic-query>
 [[/inline]]
 

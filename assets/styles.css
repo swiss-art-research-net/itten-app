@@ -134,6 +134,25 @@ p {
 .jila-component.entity-view-container .panel-view-container .panel-view .table-hover > tbody > tr:hover {
   background-color: #f5f8fb;
 }
+.jila-component.external-link-list {
+  list-style: none;
+  margin: 0;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+.jila-component.external-link-list::before {
+  content: "Links: ";
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+.jila-component.external-link-list li {
+  display: inline-block;
+  margin-right: 5px;
+}
+.jila-component.external-link-list li span {
+  padding-left: 4px;
+  padding-right: 4px;
+}
 .jila-component.home-buttons {
   margin-top: 5rem;
   padding-bottom: 4rem;
@@ -202,7 +221,6 @@ p {
 }
 .jila-component .tag > span {
   display: inline-block;
-  max-width: 90%;
 }
 .jila-component .tag > a > span,
 .jila-component .tag span {
@@ -214,6 +232,9 @@ p {
 }
 .jila-component .tag.collection > span {
   background-color: #FFD966;
+}
+.jila-component .tag.external-link > span {
+  background-color: #ced8e3;
 }
 .jila-component .tag.event > span {
   background-color: #0099FF;

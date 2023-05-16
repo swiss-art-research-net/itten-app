@@ -26,6 +26,8 @@
 @col-person: #FF66B3;
 @col-place: #00CC66;
 
+@col-external-link: #ced8e3;
+
 html, body {
   font-family: 'Open Sans', sans-serif;
   height: 100%;
@@ -172,6 +174,25 @@ p {
       }
     }
   }
+  &.external-link-list {
+    list-style: none;
+    margin: 0;
+    margin-bottom: 1rem;
+    padding: 0;
+    &::before {
+      content: "Links: ";
+      font-size: 1rem;
+      margin-right: .5rem;
+    }
+    li {
+      display: inline-block;
+      margin-right: 5px;
+      span {
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+    }
+  }
   &.home-buttons {
     margin-top: 5rem;
     padding-bottom: 4rem;
@@ -248,7 +269,6 @@ p {
     }
     > span {
       display: inline-block;
-      max-width: 90%;
     }
     > a > span, span {
       padding: 4px;
@@ -259,6 +279,9 @@ p {
     }
     &.collection > span {
       background-color: @col-collection;
+    }
+    &.external-link > span {
+      background-color: @col-external-link;
     }
     &.event > span {
       background-color: @col-event;
