@@ -142,7 +142,7 @@ p {
 }
 .jila-component.external-link-list::before {
   content: "Links: ";
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-right: 0.5rem;
 }
 .jila-component.external-link-list li {
