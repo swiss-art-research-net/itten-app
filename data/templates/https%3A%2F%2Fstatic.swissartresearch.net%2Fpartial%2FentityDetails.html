@@ -326,6 +326,7 @@
       ?dateOfDeath
       ?placeOfBirth
       ?placeOfDeath
+      ?hasGndInformation
       (GROUP_CONCAT(?profession; SEPARATOR=',') as ?professions) 
     WHERE {
     BIND(<{{entityiri}}> as ?subject)
@@ -361,6 +362,7 @@
         crm:P129i_is_subject_of/crm:P3_has_note ?assignment_comment ;
         crm:P140_assigned_attribute_to/^crm:P128_carries ?assignment_collection .
     }
+    BIND(COALESCE(?profession, ?description, ?dateOfBirth, ?dateOfDeath, ?placeOfBirth, ?placeOfDeath) as ?hasGndInformation)
   } GROUP BY 
   ?content
   ?description 
@@ -371,6 +373,7 @@
   ?dateOfDeath
   ?placeOfBirth
   ?placeOfDeath
+  ?hasGndInformation
   LIMIT 1"
   template="{{> template-description}}"
   >
@@ -397,7 +400,7 @@
       {{#if description.value}}
         <p>{{description.value}}</p>
       {{/if}}
-      {{#if gndEntity.value}}
+      {{#if hasGndInformation.value}}
       <p><small><i18n>label_source</i18n>: <a href="{{gndEntity.value}}" target="_blank">GND</a></small></p>
       {{/if}}
       {{#if content.value}}
