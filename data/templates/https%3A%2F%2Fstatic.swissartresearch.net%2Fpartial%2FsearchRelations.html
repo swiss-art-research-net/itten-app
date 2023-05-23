@@ -112,6 +112,38 @@
             FILTER(?value_bracketed <= ?__numericRangeEndValue__) .
         }"
     }],
+    "<https://platform.swissartresearch.net/search/Person_has_relation_to_number_of_Collections>": [{
+        "kind": "numeric-range",
+        "queryPattern": "{
+            {
+                SELECT ?subject (COUNT(DISTINCT ?object) AS ?value) WHERE {
+                    GRAPH <https://resource.swissartresearch.net/graph/network> {
+                        ?subject ?predicate ?object .
+                    }
+                    ?object a crm:E78_Curated_Holding .
+                } GROUP BY ?subject
+            }
+            BIND(IF(?value > 100, 100, ?value) AS ?value_bracketed)
+            FILTER(?value_bracketed >= ?__numericRangeBeginValue__) .
+            FILTER(?value_bracketed <= ?__numericRangeEndValue__) .
+        }"
+    }],
+    "<https://platform.swissartresearch.net/search/Person_has_relation_to_number_of_Persons>": [{
+        "kind": "numeric-range",
+        "queryPattern": "{
+            {
+                SELECT ?subject (COUNT(DISTINCT ?object) AS ?value) WHERE {
+                    GRAPH <https://resource.swissartresearch.net/graph/network> {
+                        ?subject ?predicate ?object .
+                    }
+                    ?object a/rdfs:subClassOf* crm:E39_Actor .
+                } GROUP BY ?subject
+            }
+            BIND(IF(?value > 100, 100, ?value) AS ?value_bracketed)
+            FILTER(?value_bracketed >= ?__numericRangeBeginValue__) .
+            FILTER(?value_bracketed <= ?__numericRangeEndValue__) .
+        }"
+    }],
     "<https://platform.swissartresearch.net/search/Person_has_occupation>": [{
         "kind": "resource",
         "queryPattern": "{

@@ -25,6 +25,8 @@
   "label_person_has_relation_with_person": "Beziehung zu Person",
   "label_person_has_relation_with_place": "Beziehung zu Ort",
   "label_person_num_appearances": "Anzahl Beziehungen",
+  "label_person_relations_num_collections": "Anzahl Beziehungen zu Dokumenten",
+  "label_person_relations_num_persons": "Anzahl Beziehungen zu Personen",
   "label_person_role": "Rolle",
   "label_relations": "Beziehungen",
   "label_selected_items": "Ausgewählte Inhalte",
