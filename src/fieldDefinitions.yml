@@ -1,4 +1,4 @@
-prefix: https://platform.swissartresearch.net/instances/fields/
+prefix: https://platform.jila.zb.uzh.ch/instances/fields/
 container: http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer
 namespaces:
   aat: http://vocab.getty.edu/aat/
@@ -9,7 +9,7 @@ namespaces:
   la: http://www.linkedart.org/schema/
   rdfs: http://www.w3.org/2000/01/rdf-schema#
   prov: http://www.w3.org/ns/prov#
-  search: https://platform.swissartresearch.net/search/
+  search: https://platform.jila.zb.uzh.ch/search/
 
 fields:
 

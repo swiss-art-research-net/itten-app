@@ -5,7 +5,7 @@
             "label": "Verzeichnungsstufe",
             "xsdDatatype" : "xsd:anyURI",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P2_has_type ?value . ?value crm:P127_has_broader_term aat:300241507 . }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_archival_level"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_archival_level"
     },
 
     {
@@ -14,7 +14,7 @@
             "label": "Archivalienart",
             "xsdDatatype" : "xsd:anyURI",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P2_has_type ?value . ?value crm:P127_has_broader_term aat:300026031 . }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_archival_type"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_archival_type"
     },
 
     {
@@ -23,7 +23,7 @@
             "label": "Form und Inhalt",
             "xsdDatatype" : "xsd:string",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P129i_is_subject_of ?remark . ?remark crm:P2_has_type aat:300435416 ; crm:P190_has_symbolic_content ?value . }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_form_and_content"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_form_and_content"
     },
 
     {
@@ -32,7 +32,7 @@
             "label": "Identifikator",
             "xsdDatatype" : "xsd:string",
                 "selectPattern" : "SELECT DISTINCT ?value WHERE { $subject crm:P1_is_identified_by ?identifier . ?identifier a crm:E42_Identifier ; crm:P190_has_symbolic_content ?identifierValue . OPTIONAL { ?identifier crm:P2_has_type/rdfs:label ?identifierType . } BIND(IF(BOUND(?identifierType), CONCAT(MIN(?identifierType), \": \", ?identifierValue), ?identifierValue) AS ?value) }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_identifier"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_identifier"
     },
 
     {
@@ -41,7 +41,7 @@
             "label": "Sprache",
             "xsdDatatype" : "xsd:anyURI",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P128_carries/crm:P72_has_language ?value . }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_language"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_language"
     },
 
     {
@@ -50,7 +50,7 @@
             "label": "Bemerkungen zum Umfang",
             "xsdDatatype" : "xsd:string",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P57_has_number_of_parts ?value . }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_part_count"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_part_count"
     },
 
     {
@@ -59,7 +59,7 @@
             "label": "Pfad Bestand",
             "xsdDatatype" : "xsd:string",
                 "selectPattern" : "SELECT (GROUP_CONCAT(?sub; SEPARATOR=\" / \") as ?value) ?dummy WHERE { { SELECT ?sub (count(?mid) as ?distance) { $subject crm:P46i_forms_part_of* ?mid . ?mid crm:P46i_forms_part_of+/rdfs:label ?sub . } GROUP BY ?sub ORDER BY DESC(?distance) } } GROUP BY ?dummy",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_path"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_path"
     },
 
     {
@@ -68,7 +68,7 @@
             "label": "Entstehungszeitraum",
             "xsdDatatype" : "xsd:string",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P108i_was_produced_by/crm:P4_has_time-span ?production_date . ?production_date rdfs:label ?date_label . OPTIONAL { ?production_date crm:P82a_begin_of_the_begin ?begin . } OPTIONAL { ?production_date crm:P82b_end_of_the_end ?end . } BIND(IF(BOUND(?begin) || BOUND(?end), CONCAT(?date_label, \" (\", STR(?begin), \" - \", STR(?end), \")\"), ?date_label) AS ?value) }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_production_date"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_production_date"
     },
 
     {
@@ -77,7 +77,7 @@
             "label": "Bemerkungen zur Datierung",
             "xsdDatatype" : "xsd:string",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P108i_was_produced_by ?production . ?production crm:P4_has_time-span ?production_date . ?attribute_assignment crm:P141_assigned ?production_date ; crm:P140_assigned_attribute_to ?production ; crm:P3_has_note ?value . }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_production_date_remarks"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_production_date_remarks"
     },
 
     {
@@ -86,7 +86,7 @@
             "label": "Entstehungsort",
             "xsdDatatype" : "xsd:anyURI",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P108i_was_produced_by/crm:P7_took_place_at ?value . }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_production_place"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_production_place"
     },
 
     {
@@ -95,7 +95,7 @@
             "label": "Allgemeine Anmerkungen",
             "xsdDatatype" : "xsd:string",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P129i_is_subject_of ?remark . ?remark crm:P2_has_type aat:300435415 ; crm:P190_has_symbolic_content ?value . }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_remarks_general"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_remarks_general"
     },
 
     {
@@ -104,7 +104,7 @@
             "label": "Signatur",
             "xsdDatatype" : "xsd:string",
                 "selectPattern" : "SELECT DISTINCT ?value WHERE { $subject crm:P1_is_identified_by ?identifier . ?identifier a crm:E42_Identifier ; crm:P190_has_symbolic_content ?identifierValue ; crm:P2_has_type <https://resource.jila.zb.uzh.ch/type/signatur> . BIND(IF(BOUND(?identifierType), CONCAT(MIN(?identifierType), \": \", ?identifierValue), ?identifierValue) AS ?value) }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_signature"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_signature"
     },
 
     {
@@ -113,7 +113,7 @@
             "label": "Titel",
             "xsdDatatype" : "xsd:string",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P1_is_identified_by ?title . ?title crm:P2_has_type aat:300404670 ; crm:P190_has_symbolic_content ?value . }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/display_title"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_title"
     },
 
     {
@@ -125,7 +125,7 @@
             "xsdDatatype" : "xsd:langString",
                 "insertPattern" : "INSERT { $subject rdfs:label $value . } WHERE {}",
                 "selectPattern" : "SELECT ?value WHERE { $subject rdfs:label ?value . }",
-        "iri" : "https://platform.swissartresearch.net/instances/fields/label"
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/label"
     }
 
 ]
