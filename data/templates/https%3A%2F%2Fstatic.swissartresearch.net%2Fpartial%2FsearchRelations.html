@@ -44,7 +44,7 @@
         "kind": "literal",
         "queryPattern": "{
             ?subject a/rdfs:subClassOf* crm:E39_Actor .
-            GRAPH <https://resource.swissartresearch.net/graph/network> {
+            GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                 ?object ?predicate ?subject .
             }
             OPTIONAL {
@@ -102,7 +102,7 @@
         "queryPattern": "{
             {
                 SELECT ?subject (COUNT(?predicate) AS ?value) WHERE {
-                    GRAPH <https://resource.swissartresearch.net/graph/network> {
+                    GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                         ?subject ?predicate ?object .
                     }
                 } GROUP BY ?subject
@@ -117,7 +117,7 @@
         "queryPattern": "{
             {
                 SELECT ?subject (COUNT(DISTINCT ?object) AS ?value) WHERE {
-                    GRAPH <https://resource.swissartresearch.net/graph/network> {
+                    GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                         ?subject ?predicate ?object .
                     }
                     ?object a crm:E78_Curated_Holding .
@@ -133,7 +133,7 @@
         "queryPattern": "{
             {
                 SELECT ?subject (COUNT(DISTINCT ?object) AS ?value) WHERE {
-                    GRAPH <https://resource.swissartresearch.net/graph/network> {
+                    GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                         ?subject ?predicate ?object .
                     }
                     ?object a/rdfs:subClassOf* crm:E39_Actor .
@@ -153,8 +153,8 @@
     "<https://platform.swissartresearch.net/search/Person_has_relation_with_Person>": [{
         "kind": "resource",
         "queryPattern": "{
-            BIND(<https://resource.swissartresearch.net/actor/AF0BA76E-E7EA-367A-AF8A-B3537D730E31> as ?itten)
-            GRAPH <https://resource.swissartresearch.net/graph/network> {
+            BIND(<https://resource.jila.zb.uzh.ch/actor/AF0BA76E-E7EA-367A-AF8A-B3537D730E31> as ?itten)
+            GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                 ?subject ?predicate ?__value__ .
             }
             ?__value__ a/rdfs:subClassOf* crm:E39_Actor .
@@ -165,7 +165,7 @@
         "kind": "resource",
         "queryPattern": "{
             {
-                GRAPH <https://resource.swissartresearch.net/graph/network> {
+                GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                     ?subject ?predicate ?__value__ .
                 }
                 ?__value__ a/rdfs:subClassOf* crm:E53_Place .

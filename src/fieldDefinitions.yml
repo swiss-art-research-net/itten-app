@@ -140,7 +140,7 @@ fields:
             $subject crm:P1_is_identified_by ?identifier .
             ?identifier a crm:E42_Identifier ;
               crm:P190_has_symbolic_content ?identifierValue ;
-              crm:P2_has_type <https://resource.swissartresearch.net/type/signatur> .
+              crm:P2_has_type <https://resource.jila.zb.uzh.ch/type/signatur> .
             BIND(IF(BOUND(?identifierType), CONCAT(MIN(?identifierType), ": ", ?identifierValue), ?identifierValue) AS ?value)
           }'
 
