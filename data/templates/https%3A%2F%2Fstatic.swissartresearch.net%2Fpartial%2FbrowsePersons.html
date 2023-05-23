@@ -21,6 +21,11 @@
             <semantic-search-facet
                 open-by-default="true"
                 facet-values-threshold="1000"
+                default-value-queries='{
+                    "literal": "SELECT ?literal ?order (COUNT(DISTINCT $subject) AS ?count) 
+                        WHERE { FILTER(?__facetRelationPattern__) } 
+                    GROUP BY ?literal ?order ORDER BY ?order ?literal"
+                }'
             >
             </semantic-search-facet>
         </bs-col>
