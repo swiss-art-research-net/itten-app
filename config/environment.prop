@@ -1,3 +1,3 @@
 shiroAuthenticationFilter=authcBasic,anon,authc
 pathsToRewrite=/actor/,/collection/,/place/,/type/
-platformBaseIri=http://jila.local
+platformBaseIri=https://resource.jila.zb.uzh.ch
