@@ -37,6 +37,12 @@
     ></mp-event-proxy>
 
     <mp-event-proxy
+        on-event-type='JILA.ScatterGroupNode'
+        proxy-event-type='Sigma.ScatterGroupNode'
+        proxy-targets='["entity-view-graph"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy
         on-event-type='JILA.PanelNodeClicked'
         proxy-event-type='Component.TemplateUpdate'
         proxy-targets='["entity-view-panel"]'
@@ -158,7 +164,16 @@
                             <div class="container-fluid">
                                 <bs-row>
                                     <bs-col sm="12">
-                                    <h2>Auswahl</h2>
+                                    <h2><i18n>label_selection</i18n></h2>
+                                    <p>
+                                        <mp-event-trigger 
+                                            id='node-grouped-{{id}}'
+                                            type="JILA.ScatterGroupNode"
+                                            data='{"id": "{{id}}"}'
+                                        >
+                                            <button><i18n>button_expand_group_node</i18n></button>
+                                        </mp-event-trigger>
+                                    </p>
                                     <div class="jila-component card-container">
                                         <semantic-table 
                                             id='grid-result'

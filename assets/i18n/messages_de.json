@@ -1,5 +1,6 @@
 {
   "button_browse_archive": "Stöbern im Johannes Itten Linked Archive",
+  "button_expand_group_node": "Gruppierung lösen",
   "button_explore": "Erkunden",
   "button_information_about_itten": "Informationen zu Johannes Itten",
   "button_open": "Öffnen",
@@ -30,6 +31,7 @@
   "label_person_role": "Rolle",
   "label_relations": "Beziehungen",
   "label_selected_items": "Ausgewählte Inhalte",
+  "label_selection": "Auswahl",
   "label_source": "Quelle",
   "label_value": "Wert",
   "nav_about": "Über uns",
