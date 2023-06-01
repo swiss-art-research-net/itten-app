@@ -1,24 +1,24 @@
 {
-    "<https://platform.swissartresearch.net/search/Person_active_at_Place>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_active_at_Place>": [{
         "kind": "resource",
         "queryPattern": "{
             ?subject crmdig:L54_is_same-as/gndo:placeOfActivity ?__value__ .
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_appears_as_Type>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_appears_as_Type>": [{
         "kind": "resource",
         "queryPattern": "{
             ?event crm:P14_carried_out_by|crm:P11_had_participant ?subject ;
                 crm:P2_has_type ?__value__ .
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_born_at_Place>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_born_at_Place>": [{
         "kind": "resource",
         "queryPattern": "{
             ?subject crmdig:L54_is_same-as/gndo:placeOfBirth ?__value__ .
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_born_at_Time>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_born_at_Time>": [{
         "kind": "date-range",
         "queryPattern": "{
             ?subject crm:P98i_was_born/crm:P4_has_time-span/crm:P82a_begin_of_the_begin ?date .
@@ -26,13 +26,13 @@
             FILTER(STRDT(STR(?date), xsd:date) >= ?__dateBeginValue__) .
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_died_at_Place>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_died_at_Place>": [{
         "kind": "resource",
         "queryPattern": "{
             ?subject crmdig:L54_is_same-as/gndo:placeOfDeath ?__value__ .
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_died_at_Time>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_died_at_Time>": [{
         "kind": "date-range",
         "queryPattern": "{
             ?subject crm:P100i_died_in/crm:P4_has_time-span/crm:P82b_end_of_the_end ?date .
@@ -40,11 +40,11 @@
             FILTER(STRDT(STR(?date), xsd:date) >= ?__dateBeginValue__) .
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_has_associated_digitised_object>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_has_associated_digitised_object>": [{
         "kind": "literal",
         "queryPattern": "{
             ?subject a/rdfs:subClassOf* crm:E39_Actor .
-            GRAPH <https://resource.swissartresearch.net/graph/network> {
+            GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                 ?object ?predicate ?subject .
             }
             OPTIONAL {
@@ -54,7 +54,7 @@
             FILTER(?literal = ?__literal__)
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_has_count>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_has_count>": [{
         "kind": "literal",
         "queryPattern": "{
             ?subject rdf:type ?type.
@@ -91,18 +91,18 @@
             FILTER(?literal = ?__literal__)
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_has_gender>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_has_gender>": [{
         "kind": "resource",
         "queryPattern": "{
             ?subject crmdig:L54_is_same-as/gndo:gender ?__value__ .
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_has_number_of_appearances>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_has_number_of_appearances>": [{
         "kind": "numeric-range",
         "queryPattern": "{
             {
                 SELECT ?subject (COUNT(?predicate) AS ?value) WHERE {
-                    GRAPH <https://resource.swissartresearch.net/graph/network> {
+                    GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                         ?subject ?predicate ?object .
                     }
                 } GROUP BY ?subject
@@ -112,12 +112,12 @@
             FILTER(?value_bracketed <= ?__numericRangeEndValue__) .
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_has_relation_to_number_of_Collections>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_has_relation_to_number_of_Collections>": [{
         "kind": "numeric-range",
         "queryPattern": "{
             {
                 SELECT ?subject (COUNT(DISTINCT ?object) AS ?value) WHERE {
-                    GRAPH <https://resource.swissartresearch.net/graph/network> {
+                    GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                         ?subject ?predicate ?object .
                     }
                     ?object a crm:E78_Curated_Holding .
@@ -128,12 +128,12 @@
             FILTER(?value_bracketed <= ?__numericRangeEndValue__) .
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_has_relation_to_number_of_Persons>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_has_relation_to_number_of_Persons>": [{
         "kind": "numeric-range",
         "queryPattern": "{
             {
                 SELECT ?subject (COUNT(DISTINCT ?object) AS ?value) WHERE {
-                    GRAPH <https://resource.swissartresearch.net/graph/network> {
+                    GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                         ?subject ?predicate ?object .
                     }
                     ?object a/rdfs:subClassOf* crm:E39_Actor .
@@ -144,28 +144,28 @@
             FILTER(?value_bracketed <= ?__numericRangeEndValue__) .
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_has_occupation>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_has_occupation>": [{
         "kind": "resource",
         "queryPattern": "{
             ?subject crmdig:L54_is_same-as/gndo:professionOrOccupation ?__value__ .
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_has_relation_with_Person>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_has_relation_with_Person>": [{
         "kind": "resource",
         "queryPattern": "{
-            BIND(<https://resource.swissartresearch.net/actor/AF0BA76E-E7EA-367A-AF8A-B3537D730E31> as ?itten)
-            GRAPH <https://resource.swissartresearch.net/graph/network> {
+            BIND(<https://resource.jila.zb.uzh.ch/actor/AF0BA76E-E7EA-367A-AF8A-B3537D730E31> as ?itten)
+            GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                 ?subject ?predicate ?__value__ .
             }
             ?__value__ a/rdfs:subClassOf* crm:E39_Actor .
             FILTER(?__value__ != ?itten)
         }"
     }],
-    "<https://platform.swissartresearch.net/search/Person_has_relation_with_Place>": [{
+    "<https://platform.jila.zb.uzh.ch/search/Person_has_relation_with_Place>": [{
         "kind": "resource",
         "queryPattern": "{
             {
-                GRAPH <https://resource.swissartresearch.net/graph/network> {
+                GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                     ?subject ?predicate ?__value__ .
                 }
                 ?__value__ a/rdfs:subClassOf* crm:E53_Place .
