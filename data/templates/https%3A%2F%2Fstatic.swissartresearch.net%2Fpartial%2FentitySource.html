@@ -1,0 +1,125 @@
+
+
+<ol class="page-breadcrumb">
+    <li>
+      <mp-link title="Home" url="/">Home</mp-link>
+    </li>
+    <li class="active">
+      <mp-label iri='[[entityiri]]'></mp-label>
+    </li>
+  </ol>
+  
+  <style>
+    #tabs .tab-ontodia {
+      margin: 0px;
+      padding: 2px 0px 0px;
+      width: 100%;
+      height: calc(100vh - 300px);
+    }
+  </style>
+  
+  <div class="page">
+    <div class='page__header-navtabs'>
+      <div class='page__header-thumbnail'>
+        <mp-resource-thumbnail no-image-uri='/images/default-thumbnail.png' iri='[[entityiri]]'></mp-resource-thumbnail>
+      </div>
+      <div class='page__header-body'>
+        <h1>
+          <mp-label iri='[[entityiri]]'></mp-label>
+        </h1>
+      
+        <!--Image -->
+        <p>
+          <b>URI</b>: <a href='[[entityiri]]' style="font-size: 12px;" target='_blank'><i>[[entityiri]]</i>&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
+        </p>
+      
+        <!--Types -->    
+        <p>
+          <b>Type</b>: <semantic-query query="SELECT DISTINCT ?type WHERE { <[[entityiri]]> [[#if type]][[type]][[else]]a[[/if]] ?type }" style="display:inline;"></semantic-query>
+        </p>
+      
+        <!--Description -->
+        <p>
+          <semantic-query query='SELECT ?description WHERE { <[[entityiri]]> [[#if description]][[description]][[else]]rdfs:comment[[/if]] ?description } LIMIT 1' 
+                          template='{{#each bindings}}<span><b>Description</b>: {{description.value}}</span>{{/each}}'>
+          </semantic-query>
+        </p>
+      </div>
+    </div>
+    <bs-tabs id="tabs" class='page__body-navtabs' unmount-on-exit=true>
+    <bs-tab event-key="0" class="tab-ontodia" title="Knowledge Graph">
+        <ontodia id='ontodia' hide-toolbar=true hide-panels=true hide-scroll-bars=true hide-navigation-confirmation=true auto-zoom=true settings=nostats iri='[[entityiri]]'></ontodia>
+    </bs-tab>
+    <bs-tab event-key="1" title="Fields">
+        [[> partial:entityFields entityiri=entityiri]]
+    </bs-tab>
+    <bs-tab event-key="2" title="Relations">
+        [[> partial:entityNetwork entityiri=entityiri]]
+    </bs-tab>
+    <bs-tab event-key="9" title="Source">
+        [[> source-statements]]
+    </bs-tab>
+    </bs-tabs>
+  </div>
+
+  [[#*inline "source-statements"]]
+    <h2>Outgoing Statements</h2>
+    [[> statements-table entityiri=entityiri po=true projection='object' label='Object' showLink=true]]
+    <hr>
+    <h2>Incoming Statements</h2>
+    [[> statements-table entityiri=entityiri projection='subject' label='Subject' showLink=true]]
+    
+    <br>
+    <br>
+    <i>Please note that the tables above are limited to 1000 statements. </i>
+  [[/inline]]
+  
+  [[#*inline "statements-table"]]
+    [[#*inline "pattern"]]
+    [[#if po]]
+      <[[entityiri]]> ?property ?object .
+    [[else]]
+      ?subject ?property <[[entityiri]]> .
+    [[/if]]
+  [[/inline]]
+
+  <semantic-table 
+      query='
+        SELECT ?property ?[[projection]] ?graph WHERE { 
+          { 
+            GRAPH ?graph { [[> pattern]] }
+          } UNION {
+            [[> pattern]]
+            OPTIONAL { GRAPH ?g { [[> pattern]] } }
+            FILTER(!BOUND(?g))
+          } 
+        } LIMIT 1000'
+      column-configuration='[
+        {"variableName":"property", "displayName":"Property"},
+        {"variableName":"[[projection]]", "displayName":"[[label]]"},
+        {"variableName":"graph", "displayName":"Named Graph", "cellTemplate":"{{> template}}"}                                
+      ]'
+      no-result-template='Resource [[this]] is not used in a subject in any RDF statement.'
+      options='{
+        "resultsPerPage":10
+      }'
+      show-literal-datatype=true
+      link-params='[[#if (urlParam "showStatements")]]{"showStatements": [[urlParam "showStatements"]]}[[else]]{}[[/if]]'
+  >
+      <template id='template'>
+        {{#if graph.value}}
+          <semantic-link uri="[[resolvePrefix "Admin:NamedGraphs"]]" urlqueryparam-graph='{{graph.value}}'>{{graph.value}}</semantic-link>
+        {{else}}
+          <semantic-link uri="[[resolvePrefix "Admin:NamedGraphs"]]">Default Graph</semantic-link>
+        {{/if}}
+      </template>
+  </semantic-table>
+
+  [[#if showLink]]
+    <mp-link url="/sparql" 
+            urlqueryparam-query='SELECT * WHERE { [[> pattern]] } LIMIT 100'
+            class-name='btn btn-success'>
+            Execute as SPARQL query
+    </mp-link>
+  [[/if]]
+[[/inline]]

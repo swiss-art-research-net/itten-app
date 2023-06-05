@@ -1,0 +1,5 @@
+[[#if entityiri]]
+    [[> partial:entitySource entityiri=entityiri]]
+[[else]]
+    [[> partial:entitySource entityiri=(urlParam "entityiri")]]
+[[/if]]

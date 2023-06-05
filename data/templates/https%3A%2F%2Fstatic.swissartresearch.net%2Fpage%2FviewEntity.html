@@ -1,1 +1,5 @@
-[[> partial:entityView entityiri=(urlParam "entityiri")]]
+[[#if entityiri]]
+    [[> partial:entityView entityiri=entityiri]]
+[[else]]
+    [[> partial:entityView entityiri=(urlParam "entityiri")]]
+[[/if]]
