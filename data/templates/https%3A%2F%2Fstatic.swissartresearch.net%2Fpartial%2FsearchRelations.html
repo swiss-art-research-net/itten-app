@@ -54,6 +54,19 @@
             FILTER(?literal = ?__literal__)
         }"
     }],
+    "<https://platform.jila.zb.uzh.ch/search/Person_has_entry_in_Heidelberg>": [{
+        "kind": "literal",
+        "queryPattern": "{
+            ?subject crmdig:L54_is_same-as ?gndEntity .
+            ?gndEntity a gndo:AuthorityResource .
+            SERVICE secondary:sparql {
+                ?externalEntity owl:sameAs ?gndEntity .
+                FILTER(STRSTARTS(STR(?externalEntity), \"http://lod.ub.uni-heidelberg.de\"))
+            }
+            BIND(BOUND(?externalEntity) AS ?literal)
+            FILTER(?literal = ?__literal__)
+        }"
+    }],
     "<https://platform.jila.zb.uzh.ch/search/Person_has_count>": [{
         "kind": "literal",
         "queryPattern": "{
