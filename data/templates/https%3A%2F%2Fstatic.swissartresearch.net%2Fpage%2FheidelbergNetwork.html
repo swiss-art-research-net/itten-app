@@ -1,0 +1,74 @@
+[[> partial:pageHeader ]]
+[[> partial:contentHeader]]
+<div style="height:800px">
+    <semantic-sigma-graph
+    id="entity-view-graph"
+    height="100%"
+    width="100%"
+    grouping='{
+        "behaviour": "none",
+        "enabled": true,
+        "threshold": 5
+    }'
+    persist-graph="false"
+    edge-filter="true"
+    search-box="true"
+    sizes='{"nodes": 5, "edges": 2}'
+    colours='{
+            "[[resolvePrefix "search:Person"]]": "#FF66B3",
+            "[[resolvePrefix "crm:E21_Person"]]": "#FF66B3",
+            "[[resolvePrefix "search:Actor"]]": "#fb644d",
+            "[[resolvePrefix "crm:E39_Actor"]]": "#fb644d",
+            "[[resolvePrefix "search:Object"]]": "#B0927A",
+            "[[resolvePrefix "search:Place"]]": "#00CC66",
+            "[[resolvePrefix "crm:E53_Place"]]": "#00CC66",
+            "[[resolvePrefix "search:Collection"]]": "#FFD966",
+            "[[resolvePrefix "search:Event"]]": "#0099FF"
+        }'
+    query='
+        CONSTRUCT {
+        ?subject ?predicate ?object .
+        ?subject a ?typeSubject .
+        ?object a ?typeObject .
+        } WHERE {
+            { 
+                ?relation crm:P11_had_participant ?gndSubject ;
+                          crm:P12_occurred_in_the_presence_of ?gndObject ;
+                          crm:P2_has_type ?predicate .
+                ?attributeAssignment crm:P141_assigned ?relation ;
+                  crm:P14_carried_out_by <http://lod.ub.uni-heidelberg.de> .
+                ?subject crmdig:L54_is_same-as ?gndSubject .
+                OPTIONAL {
+                  ?jilaObject crmdig:L54_is_same-as ?gndObject .
+               }
+                BIND(COALESCE(?jilaObject, ?gndObject) as ?object)
+              }
+              ?subject a ?typeSubject .
+              ?object a ?typeObject .
+              VALUES (?typeSubject) {
+                  [[> query-partial-entity-types]]
+              }
+              VALUES (?typeObject) {
+                  [[> query-partial-entity-types]]
+              }
+        }'
+    ></semantic-sigma-graph>
+</div>
+[[> partial:contentFooter]]
+[[> partial:pageFooter ]]
+
+
+
+[[#*inline "query-partial-entity-types"]]
+    (crm:E21_Person)
+    (crm:E39_Actor)
+    (crm:E74_Group)
+    (crm:E53_Place)
+    (search:Actor)
+    (search:Collection)
+    (search:Event)
+    (search:Group)
+    (search:Object)
+    (search:Person)
+    (search:Place)
+[[/inline]]
