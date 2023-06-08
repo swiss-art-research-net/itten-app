@@ -430,13 +430,22 @@
 [[#*inline "module-entity-links"]]
   <semantic-query
     query='SELECT ?sameAs ?source WHERE {
-      <{{entityiri}}> crmdig:L54_is_same-as ?sameAs .
-      FILTER(CONTAINS(STR(?sameAs),?namespace))
       VALUES (?source ?namespace) {
         ("GND" "https://d-nb.info/gnd/")
         ("Sikart" "https://www.sikart.ch/")
         ("Wikidata" "http://www.wikidata.org/entity/")
+        ("Werkverzeichnis" "https://sempub.ub.uni-heidelberg.de/")
       }
+      {
+        <{{entityiri}}> crmdig:L54_is_same-as ?sameAs .
+      } UNION {
+        <{{entityiri}}> crmdig:L54_is_same-as ?gndEntity .
+        ?gndEntity a gndo:AuthorityResource .
+        SERVICE secondary:sparql {
+          ?sameAs owl:sameAs ?gndEntity.
+        }
+      }
+      FILTER(CONTAINS(STR(?sameAs),?namespace))
     }'
     template="{{> template-links}}"
   >
