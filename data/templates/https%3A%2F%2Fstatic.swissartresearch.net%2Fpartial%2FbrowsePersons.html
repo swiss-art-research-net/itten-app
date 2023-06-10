@@ -28,6 +28,37 @@
         </bs-col>
 
         <bs-col md="8" sm="12">
+
+            <semantic-search-query-keyword 
+                min-search-term-length='3' 
+                debounce='600'
+                default-query='SELECT ?subject WHERE {
+                ?subject a/rdfs:subClassOf* crm:E39_Actor .
+                FILTER EXISTS {
+                    GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
+                        ?subject ?predicate ?object .
+                    } 
+                }
+                }'
+
+                query='SELECT ?subject WHERE {
+                        ?subject a/rdfs:subClassOf* crm:E39_Actor;
+                        rdfs:label|crm:P1_is_identified_by|crm:P1_is_identified_by/rdfs:label ?searchTerm .   
+                        FILTER EXISTS {
+                            GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
+                                ?subject ?predicate ?object .
+                            } 
+                        }
+                        SERVICE <http://www.bigdata.com/rdf/search#search> {
+                            ?searchTerm
+                                    bds:search        ?__token__ ;
+                                    bds:relevance     ?score ;
+                                    bds:matchAllTerms "true";
+                                    bds:rank          ?rank .
+                        }
+                    } ORDER BY DESC(?score)
+                '>
+            </semantic-search-query-keyword>
             <semantic-search-result-holder>
                 <div data-flex-self="md-full">
                     <semantic-search-facet-breadcrumbs></semantic-search-facet-breadcrumbs>
@@ -52,6 +83,9 @@
                                 } ORDER BY ?label'
                                 number-of-displayed-rows="50"
                                 tuple-template='{{> partial:entityCard subject=subject.value}}'
+                                options='{
+                                    "showFilter": false
+                                }'
                             >    
                             </semantic-table>
                         </div>
