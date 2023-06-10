@@ -46,7 +46,7 @@
         </p>
       </div>
     </div>
-    <bs-tabs id="tabs" class='page__body-navtabs' unmount-on-exit=true>
+    <bs-tabs id="tabs" class='page__body-navtabs' unmount-on-exit=true [[#if (urlParam "tab")]]default-active-key=[[urlParam "tab"]][[/if]]>
     <bs-tab event-key="0" class="tab-ontodia" title="Knowledge Graph">
         <ontodia id='ontodia' hide-toolbar=true hide-panels=true hide-scroll-bars=true hide-navigation-confirmation=true auto-zoom=true settings=nostats iri='[[entityiri]]'></ontodia>
     </bs-tab>
@@ -95,8 +95,8 @@
           } 
         } LIMIT 1000'
       column-configuration='[
-        {"variableName":"property", "displayName":"Property"},
-        {"variableName":"[[projection]]", "displayName":"[[label]]"},
+        {"variableName":"property", "displayName":"Property", "cellTemplate": "{{> templateValue entry=property}}"},
+        {"variableName":"[[projection]]", "displayName":"[[label]]", "cellTemplate": "{{> templateValue entry=[[projection]]}}"},
         {"variableName":"graph", "displayName":"Named Graph", "cellTemplate":"{{> template}}"}                                
       ]'
       no-result-template='Resource [[this]] is not used in a subject in any RDF statement.'
@@ -106,6 +106,13 @@
       show-literal-datatype=true
       link-params='[[#if (urlParam "showStatements")]]{"showStatements": [[urlParam "showStatements"]]}[[else]]{}[[/if]]'
   >
+      <template id='templateValue'>
+        {{#ifCond entry.termType "==" "Literal"}}
+          {{entry.value}}
+        {{else}}
+          <semantic-link uri="page:viewSource" urlqueryparam-entityiri="{{entry.value}}" urlqueryparam-tab="9"><mp-label iri="{{entry.value}}"></mp-label></semantic-link>
+        {{/ifCond}}
+      </template>
       <template id='template'>
         {{#if graph.value}}
           <semantic-link uri="[[resolvePrefix "Admin:NamedGraphs"]]" urlqueryparam-graph='{{graph.value}}'>{{graph.value}}</semantic-link>
