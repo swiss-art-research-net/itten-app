@@ -22,7 +22,7 @@
 
             "label": "DOI",
             "xsdDatatype" : "xsd:anyURI",
-                "selectPattern" : "SELECT DISTINCT ?value WHERE { $subject crm:P1_is_identified_by ?identifier . ?value a crm:E42_Identifier ; crm:P2_has_type <https://doi.org> . }",
+                "selectPattern" : "SELECT DISTINCT ?value WHERE { $subject crm:P1_is_identified_by ?value . ?value a crm:E42_Identifier ; crm:P2_has_type <https://doi.org> . }",
         "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_doi"
     },
 

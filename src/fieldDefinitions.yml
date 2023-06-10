@@ -36,7 +36,7 @@ fields:
       datatype: xsd:anyURI
       queries:
         - select: 'SELECT DISTINCT ?value WHERE {
-            $subject crm:P1_is_identified_by ?identifier .
+            $subject crm:P1_is_identified_by ?value .
             ?value a crm:E42_Identifier ;
               crm:P2_has_type <https://doi.org> .
           }'
