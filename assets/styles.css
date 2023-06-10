@@ -195,6 +195,9 @@ p {
 .jila-component.jila-logo.header {
   height: 4rem;
 }
+.jila-component.jila-logo.home {
+  height: 8rem;
+}
 .jila-component.jila-logo.login {
   height: 8rem;
 }
