@@ -176,6 +176,10 @@ p {
   text-transform: uppercase;
   margin-bottom: 4rem;
 }
+.jila-component.home-header .tagline {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
 .jila-component.home-header-container {
   padding-bottom: 3rem;
 }
