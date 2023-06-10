@@ -9,12 +9,10 @@
         "kind": "resource",
         "queryPattern": "{
             {
-                ?event crm:P14_carried_out_by|crm:P11_had_participant ?subject ;
-                    crm:P2_has_type ?v .
-                ?__value__ owl:inverseOf ?v.
-            } UNION {
-                ?subject ?__value__ ?document .
-                FILTER(?__value__ = crm:P62i_is_depicted_by || ?__value__ = crm:P67i_is_referred_to_by)
+                GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
+                    ?subject ?__value__ ?document .
+                }
+                ?document a crm:E78_Curated_Holding .
             }
         }"
     }],
