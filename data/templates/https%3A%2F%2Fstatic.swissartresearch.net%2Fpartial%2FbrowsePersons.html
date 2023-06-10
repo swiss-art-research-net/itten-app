@@ -7,11 +7,8 @@
     <semantic-search-query-constant 
         domain='<[[resolvePrefix "crm:E39_Actor"]]>'
         query='SELECT ?subject WHERE { 
-            ?subject a ?type .
-            VALUES (?type) {
-                (search:Group)
-                (search:Person)
-            }
+            ?subject a/rdfs:subClassOf* crm:E39_Actor ;
+                rdfs:label ?label .
         }'
     ></semantic-search-query-constant>
     

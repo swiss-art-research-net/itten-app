@@ -8,8 +8,13 @@
     "<https://platform.jila.zb.uzh.ch/search/Person_appears_as_Type>": [{
         "kind": "resource",
         "queryPattern": "{
-            ?event crm:P14_carried_out_by|crm:P11_had_participant ?subject ;
-                crm:P2_has_type ?__value__ .
+            {
+                ?event crm:P14_carried_out_by|crm:P11_had_participant ?subject ;
+                    crm:P2_has_type ?__value__ .
+            } UNION {
+                ?subject ?__value__ ?document .
+                FILTER(?__value__ = crm:P62i_is_depicted_by || ?__value__ = crm:P67i_is_referred_to_by)
+            }
         }"
     }],
     "<https://platform.jila.zb.uzh.ch/search/Person_born_at_Place>": [{
