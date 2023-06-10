@@ -153,6 +153,10 @@ p {
   padding-left: 4px;
   padding-right: 4px;
 }
+.jila-component.footer {
+  background-color: #fefefe;
+  color: #0c0c0c;
+}
 .jila-component.home-buttons {
   margin-top: 5rem;
   padding-bottom: 4rem;
