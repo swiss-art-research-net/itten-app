@@ -59,6 +59,18 @@
             FILTER(?literal = ?__literal__)
         }"
     }],
+    "<https://platform.jila.zb.uzh.ch/search/Person_has_been_identified>": [{
+        "kind": "literal",
+        "queryPattern": "{
+            ?subject rdfs:label ?label .
+            FILTER(STRSTARTS(STR(?subject), \"https://resource.jila.zb.uzh.ch/\"))
+            OPTIONAL {
+                ?subject crmdig:L54_is_same-as ?sameas .
+            }
+            BIND(BOUND(?sameas) AS ?literal)
+            FILTER(?literal = ?__literal__)
+        }"
+    }],
     "<https://platform.jila.zb.uzh.ch/search/Person_has_entry_in_Heidelberg>": [{
         "kind": "literal",
         "queryPattern": "{
