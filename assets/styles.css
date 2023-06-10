@@ -260,6 +260,9 @@ p {
 *:hover > .jila-component.show-on-hover {
   visibility: visible;
 }
+.form-control {
+  width: 95%;
+}
 ol.page-breadcrumb {
   position: static;
 }
