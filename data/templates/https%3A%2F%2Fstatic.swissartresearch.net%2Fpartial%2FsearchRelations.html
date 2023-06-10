@@ -10,7 +10,8 @@
         "queryPattern": "{
             {
                 ?event crm:P14_carried_out_by|crm:P11_had_participant ?subject ;
-                    crm:P2_has_type ?__value__ .
+                    crm:P2_has_type ?v .
+                ?__value__ owl:inverseOf ?v.
             } UNION {
                 ?subject ?__value__ ?document .
                 FILTER(?__value__ = crm:P62i_is_depicted_by || ?__value__ = crm:P67i_is_referred_to_by)
