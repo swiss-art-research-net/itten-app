@@ -157,6 +157,10 @@ p {
   background-color: #fefefe;
   color: #0c0c0c;
 }
+.jila-component.footer .logos img {
+  height: 8rem;
+  padding: 1rem;
+}
 .jila-component.home-buttons {
   margin-top: 5rem;
   padding-bottom: 4rem;
