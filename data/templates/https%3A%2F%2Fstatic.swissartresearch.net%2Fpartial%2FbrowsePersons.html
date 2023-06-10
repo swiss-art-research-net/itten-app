@@ -43,7 +43,7 @@
 
                 query='SELECT ?subject WHERE {
                         ?subject a/rdfs:subClassOf* crm:E39_Actor;
-                        rdfs:label|crm:P1_is_identified_by|crm:P1_is_identified_by/rdfs:label ?searchTerm .   
+                        rdfs:label|crm:P1_is_identified_by|crm:P1_is_identified_by/rdfs:label|crmdig:L54_is_same-as/gndo:variantName ?searchTerm .   
                         FILTER EXISTS {
                             GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                                 ?subject ?predicate ?object .
