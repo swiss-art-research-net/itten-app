@@ -1,6 +1,7 @@
 // out: assets/styles.css
 
 @col-white: #fefefe;
+@col-black: #0c0c0c;
 @col-brand-1: #6d9cc6;
 @col-brand-2: #90746d;
 @col-brand-3: #6a5e5e;
@@ -193,6 +194,16 @@ p {
       }
     }
   }
+  &.footer {
+    background-color: @col-white;
+    color: @col-black;
+    .logos {
+      img {
+        height: 8rem;
+        padding: 1rem;
+      }
+    }
+  }
   &.home-buttons {
     margin-top: 5rem;
     padding-bottom: 4rem;
@@ -215,6 +226,10 @@ p {
       text-transform: uppercase;
       margin-bottom: 4rem;
     }
+    .tagline {
+      margin-top:4rem;
+      margin-bottom: 4rem;
+    }
   }
   &.home-header-container {
     padding-bottom: 3rem;
@@ -233,6 +248,9 @@ p {
   &.jila-logo {
     &.header {
       height: 4rem;
+    }
+    &.home {
+      height: 8rem; 
     }
     &.login {
       height: 8rem;

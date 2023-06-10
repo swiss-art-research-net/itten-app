@@ -19,6 +19,16 @@
         "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_archival_type"
     }
 [[/inline]]
+ [[#*inline "display_doi"]]
+    {
+        "id" : "display_doi",
+
+            "label": "DOI",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT DISTINCT ?value WHERE { $subject crm:P1_is_identified_by ?identifier . ?value a crm:E42_Identifier ; crm:P2_has_type <https://doi.org> . }",
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_doi"
+    }
+[[/inline]]
  [[#*inline "display_form_and_content"]]
     {
         "id" : "display_form_and_content",
@@ -135,7 +145,6 @@
 
             "label": "Label",
             "description" : "A human-readable label for the entity",
-            "display" : "hidden",
             "xsdDatatype" : "xsd:langString",
                 "insertPattern" : "INSERT { $subject rdfs:label $value . } WHERE {}",
                 "selectPattern" : "SELECT ?value WHERE { $subject rdfs:label ?value . }",

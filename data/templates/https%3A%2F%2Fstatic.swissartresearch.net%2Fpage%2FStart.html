@@ -1,11 +1,19 @@
 [[> partial:pageHeader ]]
 
+<style>
+
+    .rs-header-logo {
+        opacity: 0
+    }
+    
+</style>
+
 <div class="jila-component container-fluid color-background-light home-header-container">
     <bs-row>
         <bs-col sm="12" md="10" md-offset="1">
             <div class="jila-component home-header">
-                <h1>Johannes Itten Linked Archive (JILA)</h1>
-                <p class="tagline"><i18n>home_tagline</i18n></p>
+                <img class="jila-component jila-logo home" src="/assets/no_auth/Logo_JILA.svg" alt="{{deploymentTitle}}">
+                <h2 class="tagline"><i18n>home_tagline</i18n></h2>
             </div>
             <div class="jila-component home-search">
                 [[> component-search]]
@@ -25,7 +33,8 @@
             [[> component-buttons]]
         </bs-col>
     </bs-row>
-[[> partial:contentFooter]]
+    [[> partial:contentFooter]]
+[[>component-footer]]
 [[> partial:pageFooter ]]
 
 [[#*inline "component-buttons"]]
@@ -45,6 +54,20 @@
                 <a class="jila-component home-button" href="https://zbcollections.ch/home/#/content/43a2ab3eb18841db9ec1af3669b74f39" target="_blank">
                     <i18n>button_zbcollections</i18n>
                 </a>
+            </bs-col>
+        </bs-row>
+    </div>
+[[/inline]]
+
+[[#*inline "component-footer"]]
+
+    <div class="jila-component container-fluid footer">
+        <bs-row class="logos">
+            <bs-col sm="6" md="5" md-offset="1">
+                <a href="https://www.zb.uzh.ch/"><img src="/assets/no_auth/zb-logo.svg" class="zbz-logo" title="Zentralbibliothek Zürich"></a>
+            </bs-col>
+            <bs-col sm="6" md="5" class="text-right">
+                <a href="https://sari.uzh.ch/"><img src="/assets/no_auth/sari-logo.png" class="sari-logo" title="Swiss Art Research Infrastructure"></a>
             </bs-col>
         </bs-row>
     </div>
@@ -98,19 +121,21 @@
 
 [[#*inline "component-selected-items"]]
     <div class="jila-component home-selected-items">
-        <h2><i18n>label_selected_items</i18n></h2>
+        <h3><i18n>label_selected_items</i18n></h3>
         <div class="jila-component simple-search-results card-container horizontal-scroll">
             <semantic-query 
                 id='grid-selected'
                 query='SELECT ?subject  WHERE {
                         VALUES(?subject ?label) {
+                            (<https://resource.jila.zb.uzh.ch/actor/AF0BA76E-E7EA-367A-AF8A-B3537D730E31> "Johannes Itten")
                             (<https://resource.jila.zb.uzh.ch/actor/4B331B80-9530-386C-9319-6DCA7B5B168B> "Albrecht Dürer")
                             (<https://resource.jila.zb.uzh.ch/actor/E32268AC-B898-3225-98D4-D6BC388F0321> "Anna Höllering")
                             (<https://resource.jila.zb.uzh.ch/actor/9D9C5FE9-5A09-35BC-A278-96A0DB7C57F1> "Walter Gropius")
-                            (<https://resource.jila.zb.uzh.ch/actor/813C3FC6-ABC7-3D0E-BEE6-845723F29B5C> "Goethe")
                             (<https://resource.jila.zb.uzh.ch/actor/6087C534-014F-3F05-BA83-778861FF59F2> "Lucia Moholy")
+                            (<https://resource.jila.zb.uzh.ch/actor/813C3FC6-ABC7-3D0E-BEE6-845723F29B5C> "Goethe")
                             (<https://resource.jila.zb.uzh.ch/actor/F1DF7640-0DDA-30C8-8E1B-4215E1DAA3CE> "Kennedy")
                             (<https://resource.jila.zb.uzh.ch/actor/83A646E1-0EE3-325F-8684-C259DB2CD226> "Holbein")
+                            (<https://resource.jila.zb.uzh.ch/actor/06B281E1-D405-3017-9AF0-9D5B2F0993A1> "Schöne Bürgerin")
                         }
                     }'
                 number-of-displayed-rows="10"

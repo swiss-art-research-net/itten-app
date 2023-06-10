@@ -153,6 +153,14 @@ p {
   padding-left: 4px;
   padding-right: 4px;
 }
+.jila-component.footer {
+  background-color: #fefefe;
+  color: #0c0c0c;
+}
+.jila-component.footer .logos img {
+  height: 8rem;
+  padding: 1rem;
+}
 .jila-component.home-buttons {
   margin-top: 5rem;
   padding-bottom: 4rem;
@@ -176,6 +184,10 @@ p {
   text-transform: uppercase;
   margin-bottom: 4rem;
 }
+.jila-component.home-header .tagline {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
 .jila-component.home-header-container {
   padding-bottom: 3rem;
 }
@@ -190,6 +202,9 @@ p {
 }
 .jila-component.jila-logo.header {
   height: 4rem;
+}
+.jila-component.jila-logo.home {
+  height: 8rem;
 }
 .jila-component.jila-logo.login {
   height: 8rem;
