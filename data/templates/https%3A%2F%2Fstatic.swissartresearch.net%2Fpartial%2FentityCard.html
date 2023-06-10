@@ -39,6 +39,6 @@
     </mp-resource-thumbnail>
 </div>
 <div class="jila-component card-body">
-    <mp-label iri="{{subject}}"></mp-label>
+    <mp-label iri="{{subject}}"></mp-label> {{#if altLabel}}{{#ifCond displayAltLabel "==" "true"}}({{altLabel}}){{/ifCond}}{{/if}}
 </div>
 [[/inline]]

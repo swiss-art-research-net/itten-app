@@ -43,11 +43,15 @@
 
                 query='SELECT ?subject WHERE {
                         ?subject a/rdfs:subClassOf* crm:E39_Actor;
-                        rdfs:label|crm:P1_is_identified_by|crm:P1_is_identified_by/rdfs:label ?searchTerm .   
+                        rdfs:label|crm:P1_is_identified_by|crm:P1_is_identified_by/rdfs:label|crmdig:L54_is_same-as/gndo:variantName ?searchTerm .   
                         FILTER EXISTS {
                             GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                                 ?subject ?predicate ?object .
                             } 
+                        }
+                        OPTIONAL {
+                            ?subject rdfs:label ?label .
+                            FILTER(REGEX(?label, ?__token__, "i"))
                         }
                         SERVICE <http://www.bigdata.com/rdf/search#search> {
                             ?searchTerm
@@ -78,11 +82,14 @@
                         <div class="jila-component card-container">
                             <semantic-table 
                                 id='grid-result'
-                                query='SELECT DISTINCT ?subject WHERE {
-                                    ?subject rdfs:label ?label .
-                                } ORDER BY ?label'
+                                query='SELECT DISTINCT ?subject ?sortLabel (GROUP_CONCAT(DISTINCT ?searchTerm; SEPARATOR="/") as ?altNames) ?displayAltLabel WHERE {
+                                    BIND(!BOUND(?label) as ?displayAltLabel)
+                                    ?subject rdfs:label ?sortLabel .
+                                }
+                                GROUP BY ?subject ?sortLabel ?displayAltLabel 
+                                ORDER BY ?sortLabel'
                                 number-of-displayed-rows="50"
-                                tuple-template='{{> partial:entityCard subject=subject.value}}'
+                                tuple-template='{{> partial:entityCard subject=subject.value altLabel=altNames.value displayAltLabel=displayAltLabel.value}}'
                                 options='{
                                     "showFilter": false
                                 }'
