@@ -262,7 +262,6 @@
             <semantic-table 
                 id='grid-result'
                 query='SELECT?subject ?label WHERE {
-                    ?subject rdfs:label ?label
                     VALUES (?subject) {
                         {{#each (split entities.value ";")}}
                             (<{{this}}>)
