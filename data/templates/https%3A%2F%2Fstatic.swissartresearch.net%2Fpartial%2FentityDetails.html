@@ -161,7 +161,7 @@
         <template id="field-value-template">
             <div>
                 {{#ifCond field.xsdDatatype.value "=="  "http://www.w3.org/2001/XMLSchema#string"}}
-                {{value.value.value}}
+                {{{value.value.value}}}
                 {{/ifCond}}
                 {{#ifCond field.xsdDatatype.value "=="  "http://www.w3.org/2001/XMLSchema#langString"}}
                 {{value.value.value}}{{#if value.value.language}} - {{value.value.language}}{{/if}}
@@ -172,7 +172,7 @@
                 {{#ifCond field.xsdDatatype.value "=="  "http://www.w3.org/2001/XMLSchema#anyURI"}}
                 {{#if value.value.datatype}}
                     [[!-- in the messy data it can happen that field is anyURI but actual data is literal --]]
-                    {{value.value.value}}
+                    {{{value.value.value}}}
                 {{else}}
                     <semantic-link class="external-link" iri="{{value.value.value}}"><mp-label iri="{{value.value.value}}"></mp-label></semantic-link>
                 {{/if}}
