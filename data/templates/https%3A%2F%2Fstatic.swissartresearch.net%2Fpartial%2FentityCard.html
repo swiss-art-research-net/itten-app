@@ -10,8 +10,8 @@
 
 [[#*inline "component-card-body"]]
 <div class="jila-component card-image">
-    <mp-resource-thumbnail iri={{subject}}>
-        <mp-resource-thumbnail-fallback>
+    <mp-resource-thumbnail iri={{subject}} no-result-template="{{> no-image-template}}">
+        <template id="no-image-template">
             <semantic-query
                 query="SELECT ?type ?image WHERE {
                     <{{subject}}> a ?type .
@@ -35,7 +35,7 @@
                     </div>
                 </template>
             </semantic-query>
-        </mp-resource-thumbnail-fallback>
+        </template>
     </mp-resource-thumbnail>
 </div>
 <div class="jila-component card-body">
