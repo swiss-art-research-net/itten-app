@@ -200,6 +200,9 @@ p {
 .jila-component.home-selected-items .card-container {
   padding: 0 0.2rem;
 }
+.jila-component.image-license {
+  font-size: 1rem;
+}
 .jila-component.jila-logo.header {
   height: 4rem;
 }

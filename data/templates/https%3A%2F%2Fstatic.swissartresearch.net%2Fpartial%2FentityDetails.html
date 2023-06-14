@@ -17,7 +17,31 @@
         [[> module-entity-description]]
       </bs-col>
       <bs-col md="4" class-name="image">
-        <mp-resource-thumbnail iri="{{entityiri}}"></mp-resource-thumbnail>
+      
+        <mp-resource-thumbnail iri="{{entityiri}}" template="{{> template}}">
+          <template id="template">
+              <img src="{{thumbnail}}" />
+              <semantic-query
+                  query="SELECT * WHERE {
+                      BIND(<{{thumbnail}}> as ?thumbnail)
+                      ?thumbnail crmdig:L54_is_same-as?/crm:P104_is_subject_to ?right .
+                      ?right crm:P2_has_type ?license .
+                      OPTIONAL {
+                          ?right crm:P105_right_held_by ?rightsHolder .
+                      }
+                  } LIMIT 1"
+                  template="{{> licenseTemplate}}">
+                  <template id="licenseTemplate">
+                      <div class="jila-component image-license">
+                          <i18n>label_image_license</i18n>: <mp-label iri="{{ bindings.0.license.value }}"></mp-label>.
+                          {{#if bindings.0.rightsHolder.value}}
+                              <mp-label iri="{{ bindings.0.rightsHolder.value}}"></mp-label>
+                          {{/if}}
+                      </div>
+                  </template>
+              </semantic-query>
+          </template>
+        </mp-resource-thumbnail>
       </bs-col>
     </bs-row>
     <bs-row>
