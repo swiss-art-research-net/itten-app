@@ -134,13 +134,13 @@
                                       <td>{{field.label.0.value}}</td>
                                       <td>
                                           {{#ifCond (objectLength field.values) '>' 1}}
-                                              <ol>
+                                              <ul>
                                                   {{#each field.values as |value|}}
                                                       <li>
                                                           {{> field-value-template field=field value=value}}
                                                       </li>
                                                   {{/each}}
-                                              </ol>
+                                              </ul>
                                           {{/ifCond}}
 
                                           {{#ifCond (objectLength field.values) '===' 1}}
