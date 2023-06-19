@@ -73,6 +73,14 @@ fields:
             $subject crm:P128_carries/crm:P72_has_language ?value .
           }'
     
+    - id: display_license
+      label: Lizenz
+      datatype: xsd:anyURI
+      queries:
+        - select: 'SELECT ?value WHERE {
+            $subject crm:P104_is_subject_to/crm:P2_has_type ?value
+          }'
+
     - id: display_part_count
       label: Bemerkungen zum Umfang
       datatype: xsd:string

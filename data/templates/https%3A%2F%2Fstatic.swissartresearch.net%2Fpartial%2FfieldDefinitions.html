@@ -54,6 +54,15 @@
     },
 
     {
+        "id" : "display_license",
+
+            "label": "Lizenz",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P104_is_subject_to/crm:P2_has_type ?value }",
+        "iri" : "https://platform.jila.zb.uzh.ch/instances/fields/display_license"
+    },
+
+    {
         "id" : "display_part_count",
 
             "label": "Bemerkungen zum Umfang",
