@@ -40,5 +40,59 @@
 </div>
 <div class="jila-component card-body">
     <mp-label iri="{{subject}}"></mp-label> {{#if altLabel}}{{#ifCond displayAltLabel "==" "true"}}({{altLabel}}){{/ifCond}}{{/if}}
+    <semantic-if
+        query="ASK { <{{subject}}> crmdig:L54_is_same-as/(gndo:biographicalOrHistoricalInformation|gndo:professionOrOccupation) ?information . }"
+        then="{{> template-info-popup}}"
+    >
+        <template id="template-info-popup">
+            
+            <mp-popover title="Info">
+                <mp-popover-trigger placement="bottom"  trigger='["hover"]'> 
+                    <span>&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i>
+                </mp-popover-trigger>
+                <mp-popover-content style="background:white;">
+                    <div>
+                        <semantic-query
+                            query="SELECT 
+                                    ?subject 
+                                    (GROUP_CONCAT(DISTINCT ?description; SEPARATOR='/') as ?descriptions)
+                                    (GROUP_CONCAT(DISTINCT ?profession; SEPARATOR='/') as ?professions)
+                                    (GROUP_CONCAT(DISTINCT ?nameVariant; SEPARATOR='/') as ?nameVariants)
+                                WHERE {
+                                BIND(<{{subject}}> AS ?subject)
+                                OPTIONAL {
+                                    ?subject crmdig:L54_is_same-as/gndo:biographicalOrHistoricalInformation ?description .
+                                }
+                                OPTIONAL {
+                                    ?subject crmdig:L54_is_same-as/gndo:professionOrOccupation/rdfs:label ?profession .
+                                }
+                                OPTIONAL {
+                                    ?subject crmdig:L54_is_same-as/gndo:variantName ?nameVariant .
+                                }
+                            } 
+                            GROUP BY ?subject
+                            LIMIT 1"
+                            template="{{> template-info}}"
+                        >
+                            <template id="template-info">
+                                <div>
+                                    
+                                    {{#each bindings}}
+                                        {{#if descriptions.value}}
+                                            <p>{{descriptions.value}}</p>
+                                        {{else}}
+                                            {{#if professions.value}}
+                                                <p>{{professions.value}}</p>
+                                            {{/if}}
+                                        {{/if}}
+                                    {{/each}}    
+                                </div>
+                            </template>
+                        </semantic-query>
+                    </div>
+                </mp-popover-content>
+            </mp-popover>
+        </template>
+    </semantic-if>
 </div>
 [[/inline]]
