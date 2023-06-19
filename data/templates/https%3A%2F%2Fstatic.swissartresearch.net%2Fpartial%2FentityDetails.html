@@ -87,6 +87,7 @@
             [[#if (hasPermission "api:ldp:*")]]
               [[> component-entity-external-data]]
             [[/if]]
+            [[> component-citation]]
             [[> component-source-link]]
           </bs-tab-pane>
           <bs-tab-pane event-key="images" title="Bilder">
@@ -97,6 +98,16 @@
   </bs-tab-container>
 
 </div>
+
+[[#*inline "component-citation"]]
+  <div class="container-fluid">
+    <bs-row>
+      <bs-col sm="12">
+        [[> partial:citationWidget iri=entityiri]]
+      </bs-col>
+    </bs-row>
+  </div>
+[[/inline]]
 
 [[#*inline "component-fields-visualisation"]]
   <semantic-if
@@ -115,6 +126,7 @@
         [[> display_archival_level]],
         [[> display_archival_type]],
         [[> display_language]],
+        [[> display_license]],
         [[> display_path]]
       ]'
       template='{{> field-table-template }}'
