@@ -284,6 +284,9 @@ p {
 ol.page-breadcrumb {
   position: static;
 }
+#mp-popover .arrow {
+  left: 30px !important;
+}
 .navbar {
   height: 6rem;
   min-height: 6rem;
