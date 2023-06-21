@@ -465,7 +465,7 @@
 
 [[#*inline "module-entity-links"]]
   <semantic-query
-    query='SELECT ?sameAs ?source ?link WHERE {
+    query='SELECT DISTINCT ?sameAs ?source ?link WHERE {
       VALUES (?source ?namespace) {
         ("GND" "https://d-nb.info/gnd/")
         ("Sikart" "https://recherche.sik-isea.ch/")
