@@ -465,10 +465,10 @@
 
 [[#*inline "module-entity-links"]]
   <semantic-query
-    query='SELECT ?sameAs ?source WHERE {
+    query='SELECT ?sameAs ?source ?link WHERE {
       VALUES (?source ?namespace) {
         ("GND" "https://d-nb.info/gnd/")
-        ("Sikart" "https://www.sikart.ch/")
+        ("Sikart" "https://recherche.sik-isea.ch/")
         ("Wikidata" "http://www.wikidata.org/entity/")
         ("Werkverzeichnis" "https://sempub.ub.uni-heidelberg.de/")
       }
@@ -481,6 +481,12 @@
           ?sameAs owl:sameAs ?gndEntity.
         }
       }
+      BIND(
+        IF(
+          ?namespace = "https://recherche.sik-isea.ch/", 
+          URI(CONCAT("https://recherche.sik-isea.ch/en/sik:", STRAFTER(STR(?sameAs), ?namespace))), 
+          ?sameAs
+        ) as ?link)
       FILTER(CONTAINS(STR(?sameAs),?namespace))
     }'
     template="{{> template-links}}"
@@ -489,7 +495,7 @@
       <ul class="jila-component external-link-list">
         {{#each bindings}}
           <li>
-            <a class="jila-component tag external-link" href="{{{sameAs.value}}}" target="_blank"><span>{{source.value}}</span></a>
+            <a class="jila-component tag external-link" href="{{{link.value}}}" target="_blank"><span>{{source.value}}</span></a>
           </li>
         {{/each}}
       </ul>
