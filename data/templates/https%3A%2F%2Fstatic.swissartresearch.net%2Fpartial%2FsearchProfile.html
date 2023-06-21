@@ -14,7 +14,7 @@
             "iri": "<https://platform.jila.zb.uzh.ch/search/Person_born_at_Place>",
             "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",
-            "label": "<i18n>label_person_born_place</i18n>"
+            "label": "[[> template-facet-label id="person_born_place"]]"
         },
         {
             "iri": "<https://platform.jila.zb.uzh.ch/search/Person_born_at_Time>",
@@ -102,3 +102,16 @@
         }
     ]
 }
+
+[[#*inline "template-facet-label"]]
+<div class=\"jila-component facet-explanation\">
+    <mp-popover>
+        <mp-popover-trigger placement=\"bottom\" trigger=\"hover\"> 
+            <span><i18n>label_[[id]]</i18n></span>
+        </mp-popover-trigger>
+        <mp-popover-content>
+            <div><i18n>explanation_facet_[[id]]</i18n></div>
+        </mp-popover-content>
+    </mp-popover>
+    </div>
+[[/inline]]

@@ -278,6 +278,9 @@ p {
 *:hover > .jila-component.show-on-hover {
   visibility: visible;
 }
+.facet__relation__content__category-image {
+  display: none;
+}
 .form-control {
   width: 95%;
 }

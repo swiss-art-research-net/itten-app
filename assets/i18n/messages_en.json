@@ -6,6 +6,7 @@
   "button_open": "Open",
   "button_show_source_data": "Show source data",
   "button_zbcollections": "Search the ZBcollections",
+  "explanation_facet_person_born_place": "Filter by the birth place of a person",
   "home_tagline": "Discover the Itten archive through people and their networks",
   "label_details": "Details",
   "label_external_data": "External data",
