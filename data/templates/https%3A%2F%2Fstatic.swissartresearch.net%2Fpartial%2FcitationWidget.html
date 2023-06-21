@@ -5,7 +5,14 @@
     <div class="bso-component citation">
 
         <semantic-query
-            query="SELECT * WHERE {
+            query="SELECT
+                    ?year
+                    ?ownerLabel
+                    ?placeLabel
+                    ?link
+                    ?subjectLabel
+                    (GROUP_CONCAT(DISTINCT ?authorLabel; separator=' & ') as ?authorLabel)            
+                WHERE {
                 BIND(<{{entityiri}}> as ?subject)
                 OPTIONAL {
                     ?subject rdfs:label ?entityLabel .
@@ -18,7 +25,9 @@
                 BIND('Zürich' as ?placeLabel)
                 OPTIONAL {
                     ?subject a crm:E78_Curated_Holding .
-                    BIND('Johannes Itten' as ?author_label)
+                    OPTIONAL {
+                        ?subject crm:P108i_was_produced_by/crm:P9_consists_of/crm:P14_carried_out_by/rdfs:label ?author_label .
+                    }
                 }
                 OPTIONAL {
                     ?subject crm:P108i_was_produced_by/crm:P4_has_time-span/crm:P82a_begin_of_the_begin ?document_date .
@@ -26,7 +35,14 @@
                 }
                 BIND(COALESCE(?author_label, 'JILA') as ?authorLabel)
                 BIND(COALESCE(?document_year, '[[currentDateTime format='YYYY']]') as ?year)
-            } LIMIT 1"
+            } 
+            GROUP BY 
+                ?year
+                ?ownerLabel
+                ?placeLabel
+                ?link
+                ?subjectLabel
+            LIMIT 1"
             template="{{> citationTemplate}}">
 
             <template id="citationTemplate">
