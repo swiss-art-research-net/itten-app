@@ -48,7 +48,7 @@
             <template id="citationTemplate">
                 {{> citationHTML author=bindings.0.authorLabel.value year=bindings.0.year.value owner=bindings.0.ownerLabel.value place=bindings.0.placeLabel.value link=bindings.0.link.value}}
                 <mp-copy-to-clipboard 
-                    text="{{> citationText author=bindings.0.authorLabel.value year=bindings.0.year.value label=bindings.0.subjectLabel.value owner=bindings.0.ownerLabel.value place=bindings.0.placeLabel.value link=bindings.0.link.value}}"
+                    text="{{bindings.0.authorLabel.value}}, {{bindings.0.year.value}}. {{bindings.0.subjectLabel.value}}. In Johannes Itten Linked Archive. {{#if bindings.0.ownerLabel.value}}{{#if bindings.0.placeLabel.value}}{{bindings.0.placeLabel.value}}: {{/if}}{{bindings.0.ownerLabel.value}}. {{/if}}Available at: {{bindings.0.link.value}}. Accessed [[currentDateTime format='dd.MM.YYYY']]"
                     message="Citation copied to clipboard"
                 >
                     <button class="btn btn-secondary"><i class="fa fa-copy"></i></button>
@@ -64,8 +64,6 @@
                 {{owner}}.{{/if}}
                 Available at: <a href="{{link}}">{{link}}</a>. Accessed [[currentDateTime format='dd.MM.YYYY']]
             </template>
-
-            <template id="citationText">{{author}}, {{year}}. {{label}}. In Bilder der Schweiz Online. {{#if owner}}{{#if place}}{{place}}: {{/if}}{{owner}}. {{/if}}Available at: {{link}}. Accessed [[currentDateTime format='dd.MM.YYYY']]</template>
 
         </semantic-query>
     </div>
