@@ -50,8 +50,8 @@
                             } 
                         }
                         OPTIONAL {
-                            ?subject rdfs:label ?label .
-                            FILTER(REGEX(?label, ?__token__, "i"))
+                            ?subject rdfs:label ?label.
+                            FILTER(?label != ?searchTerm)
                         }
                         SERVICE <http://www.bigdata.com/rdf/search#search> {
                             ?searchTerm
@@ -83,7 +83,7 @@
                             <semantic-table 
                                 id='grid-result'
                                 query='SELECT DISTINCT ?subject ?sortLabel (GROUP_CONCAT(DISTINCT ?searchTerm; SEPARATOR="/") as ?altNames) ?displayAltLabel WHERE {
-                                    BIND(!BOUND(?label) as ?displayAltLabel)
+                                    BIND(BOUND(?label) as ?displayAltLabel)
                                     ?subject rdfs:label ?sortLabel .
                                 }
                                 GROUP BY ?subject ?sortLabel ?displayAltLabel 
