@@ -351,13 +351,13 @@
       ?content
       ?description 
       ?gndEntity
-      ?assignment_comment
-      ?assignment_collection
       ?dateOfBirth
       ?dateOfDeath
       ?placeOfBirth
       ?placeOfDeath
       ?hasGndInformation
+      (GROUP_CONCAT(DISTINCT ?assignment_comment; SEPARATOR='||') as ?assignment_comments)
+      (GROUP_CONCAT(DISTINCT ?assignment_collection; SEPARATOR=',') as ?assignment_collections)
       (GROUP_CONCAT(?profession; SEPARATOR=',') as ?professions) 
     WHERE {
     BIND(<{{entityiri}}> as ?subject)
@@ -402,8 +402,6 @@
   ?content
   ?description 
   ?gndEntity
-  ?assignment_comment
-  ?assignment_collection
   ?dateOfBirth
   ?dateOfDeath
   ?placeOfBirth
@@ -441,26 +439,30 @@
       {{#if content.value}}
         <p>{{content.value}}</p>
       {{/if}}
-      {{#if assignment_comment.value}}
-        <p>{{assignment_comment.value}}
-            {{#if assignment_collection.value}}
-              <p>
-                <small>
-                  In Bezug auf 
-                    <mp-event-trigger 
-                      id='node-click-{{assignment_collection.value}}'
-                      type="JILA.PanelNodeClicked"
-                      data='{"node": "{{assignment_collection.value}}"}'
-                    >
-                      <a href="#">
-                        <mp-label iri="{{assignment_collection.value}}"></mp-label>
-                      </a>
-                    </mp-event-trigger>
-                  </small>
-              </p>
-            {{/if}}
-        </p>
-
+      {{#if assignment_comments.value}}
+        {{#each (split assignment_comments.value '||')}}
+          <p>{{this}}</p>
+          {{#if ../assignment_collections.value}}
+            {{#each (split ../assignment_collections.value ',')}}
+              {{#ifCond @index "==" @../index}}
+                <p>
+                  <small>
+                    <i18n>label_in_relation_to</i18n>
+                      <mp-event-trigger 
+                        id='node-click-{{this}}'
+                        type="JILA.PanelNodeClicked"
+                        data='{"node": "{{this}}"}'
+                      >
+                        <a href="#">
+                          <mp-label iri="{{this}}"></mp-label>
+                        </a>
+                      </mp-event-trigger>
+                    </small>
+                </p>
+              {{/ifCond}}
+            {{/each}}
+          {{/if}}
+        {{/each}}
       {{/if}}
     {{/each}}
   </template>
