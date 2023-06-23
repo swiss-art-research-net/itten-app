@@ -391,7 +391,7 @@
     OPTIONAL {
       ?assignment crm:P141_assigned ?subject ;
         crm:P129i_is_subject_of/crm:P3_has_note ?assignment_comment ;
-        crm:P140_assigned_attribute_to/^crm:P128_carries ?assignment_collection .
+        crm:P140_assigned_attribute_to/^crm:P128_carries? ?assignment_collection .
     }
     BIND(COALESCE(?profession, ?description, ?dateOfBirth, ?dateOfDeath, ?placeOfBirth, ?placeOfDeath) as ?hasGndInformation)
   } GROUP BY 
