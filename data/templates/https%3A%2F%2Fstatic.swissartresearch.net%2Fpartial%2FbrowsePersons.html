@@ -82,7 +82,7 @@
                         <div class="jila-component card-container">
                             <semantic-table 
                                 id='grid-result'
-                                query='SELECT DISTINCT ?subject ?sortLabel (GROUP_CONCAT(DISTINCT ?searchTerm; SEPARATOR="/") as ?altNames) ?displayAltLabel WHERE {
+                                query='SELECT DISTINCT ?subject (xsd:string(?sortLabel) as ?sortLabel) (GROUP_CONCAT(DISTINCT ?searchTerm; SEPARATOR="/") as ?altNames) ?displayAltLabel WHERE {
                                     BIND(BOUND(?label) as ?displayAltLabel)
                                     ?subject rdfs:label ?sortLabel .
                                 }
