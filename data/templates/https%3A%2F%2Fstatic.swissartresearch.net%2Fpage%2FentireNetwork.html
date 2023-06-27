@@ -15,14 +15,15 @@
     search-box="true"
     sizes='{"nodes": 2, "edges": 0.5}'
     colours='{
-            "[[resolvePrefix "search:Person"]]": "#FF66B3",
-            "[[resolvePrefix "crm:E21_Person"]]": "#FF66B3",
-            "[[resolvePrefix "search:Actor"]]": "#fb644d",
-            "[[resolvePrefix "crm:E39_Actor"]]": "#fb644d",
-            "[[resolvePrefix "search:Object"]]": "#B0927A",
-            "[[resolvePrefix "search:Place"]]": "#00CC66",
-            "[[resolvePrefix "crm:E53_Place"]]": "#00CC66",
-            "[[resolvePrefix "search:Collection"]]": "#FFD966",
+        "[[resolvePrefix "search:Person"]]": "#FF66B3",
+        "[[resolvePrefix "crm:E21_Person"]]": "#FF66B3",
+        "[[resolvePrefix "search:Actor"]]": "#fb644d",
+        "[[resolvePrefix "crm:E39_Actor"]]": "#fb644d",
+        "[[resolvePrefix "search:Object"]]": "#B0927A",
+        "[[resolvePrefix "search:Place"]]": "#00CC66",
+        "[[resolvePrefix "crm:E53_Place"]]": "#00CC66",
+        "[[resolvePrefix "search:Collection"]]": "#FFD966",
+        "[[resolvePrefix "crm:E5_Event"]]": "#0099FF",
             "[[resolvePrefix "search:Event"]]": "#0099FF"
         }'
     node-query='CONSTRUCT {
@@ -36,10 +37,10 @@
         ?subject a ?typeSubject .
         ?object a ?typeObject .
         VALUES (?typeSubject) {
-            [[> query-partial-entity-types]]
+            [[> partial:queryPartialEntityTypes ]]
         }
         VALUES (?typeObject) {
-            [[> query-partial-entity-types]]
+            [[> partial:queryPartialEntityTypes ]]
         }
     }'
     query='
@@ -54,29 +55,13 @@
             ?subject a ?typeSubject .
             ?object a ?typeObject .
             VALUES (?typeSubject) {
-                [[> query-partial-entity-types]]
+                [[> partial:queryPartialEntityTypes ]]
             }
             VALUES (?typeObject) {
-                [[> query-partial-entity-types]]
+                [[> partial:queryPartialEntityTypes ]]
             }
         }'
     ></semantic-sigma-graph>
 </div>
 [[> partial:contentFooter]]
 [[> partial:pageFooter ]]
-
-
-
-[[#*inline "query-partial-entity-types"]]
-    (crm:E21_Person)
-    (crm:E39_Actor)
-    (crm:E74_Group)
-    (crm:E53_Place)
-    (search:Actor)
-    (search:Collection)
-    (search:Event)
-    (search:Group)
-    (search:Object)
-    (search:Person)
-    (search:Place)
-[[/inline]]

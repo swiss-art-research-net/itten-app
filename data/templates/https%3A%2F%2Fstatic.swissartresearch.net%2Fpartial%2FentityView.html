@@ -109,6 +109,7 @@
                 "[[resolvePrefix "search:Place"]]": "#00CC66",
                 "[[resolvePrefix "crm:E53_Place"]]": "#00CC66",
                 "[[resolvePrefix "search:Collection"]]": "#FFD966",
+                "[[resolvePrefix "crm:E5_Event"]]": "#0099FF",
                 "[[resolvePrefix "search:Event"]]": "#0099FF",
                 "[[resolvePrefix "crm:E22_Human-Made_Object"]]": "#B0927A"
             }'
@@ -123,10 +124,10 @@
             ?subject a ?typeSubject .
             ?object a ?typeObject .
             VALUES (?typeSubject) {
-                [[> query-partial-entity-types]]
+                [[> partial:queryPartialEntityTypes ]]
             }
             VALUES (?typeObject) {
-                [[> query-partial-entity-types]]
+                [[> partial:queryPartialEntityTypes ]]
             }
         }'
         query='
@@ -142,10 +143,10 @@
                 ?subject a ?typeSubject .
                 ?object a ?typeObject .
                 VALUES (?typeSubject) {
-                    [[> query-partial-entity-types]]
+                    [[> partial:queryPartialEntityTypes ]]
                 }
                 VALUES (?typeObject) {
-                    [[> query-partial-entity-types]]
+                    [[> partial:queryPartialEntityTypes ]]
                 }
             }'
     ></semantic-sigma-graph>
@@ -219,19 +220,4 @@
             </div>
         </template>
     </mp-event-target-template-render>
-[[/inline]]
-
-[[#*inline "query-partial-entity-types"]]
-    (crm:E21_Person)
-    (crm:E39_Actor)
-    (crm:E74_Group)
-    (crm:E53_Place)
-    (crm:E22_Human-Made_Object)
-    (search:Actor)
-    (search:Collection)
-    (search:Event)
-    (search:Group)
-    (search:Object)
-    (search:Person)
-    (search:Place)
 [[/inline]]

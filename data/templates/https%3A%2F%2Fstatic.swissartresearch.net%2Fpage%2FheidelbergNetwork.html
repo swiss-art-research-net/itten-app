@@ -46,29 +46,13 @@
               ?subject a ?typeSubject .
               ?object a ?typeObject .
               VALUES (?typeSubject) {
-                  [[> query-partial-entity-types]]
+                  [[> partial:queryPartialEntityTypes ]]
               }
               VALUES (?typeObject) {
-                  [[> query-partial-entity-types]]
+                  [[> partial:queryPartialEntityTypes ]]
               }
         }'
     ></semantic-sigma-graph>
 </div>
 [[> partial:contentFooter]]
 [[> partial:pageFooter ]]
-
-
-
-[[#*inline "query-partial-entity-types"]]
-    (crm:E21_Person)
-    (crm:E39_Actor)
-    (crm:E74_Group)
-    (crm:E53_Place)
-    (search:Actor)
-    (search:Collection)
-    (search:Event)
-    (search:Group)
-    (search:Object)
-    (search:Person)
-    (search:Place)
-[[/inline]]
