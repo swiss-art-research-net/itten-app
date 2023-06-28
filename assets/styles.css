@@ -277,6 +277,9 @@ p {
 .jila-component .tag.event > span {
   background-color: #0099FF;
 }
+.jila-component .tag.group > span {
+  background-color: #fb644d;
+}
 .jila-component .tag.object > span {
   background-color: #B0927A;
 }
