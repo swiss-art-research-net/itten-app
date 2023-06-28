@@ -80,7 +80,7 @@
             placeholder=""
             min-search-term-length="1"
             domain="<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
-            query='SELECT ?subject ?typeLabel ?score (COUNT(?relation) as ?num_relation) WHERE {
+            query='SELECT DISTINCT ?subject  {
                 ?subject (rdf:type/(rdfs:subClassOf*)) crm:E39_Actor;
                     rdfs:label|crm:P1_is_identified_by|crm:P1_is_identified_by/rdfs:label|crmdig:L54_is_same-as/gndo:variantName ?searchTerm .
                 OPTIONAL {
@@ -90,11 +90,11 @@
                 ?searchTerm bds:search ?__token__ ;
                     bds:relevance ?score ;
                     bds:matchAllTerms "true" .
-
+                BIND(BOUND(?label) AS ?displayAltLabel)
                 GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                     ?subject ?relation ?object .
                 }
-            } GROUP BY ?subject ?typeLabel ?score
+            } GROUP BY ?subject ?displayAltLabel 
             ORDER BY DESC(?num_relation) DESC(?score)'
         ></semantic-search-query-keyword>
         <semantic-search-result-holder>
@@ -103,14 +103,14 @@
                     <semantic-table 
                         id='grid-result'
                         no-result-template='<bs-panel class="info"><i18n>search_no_results</i18n></bs-panel>'
-                        query='SELECT DISTINCT ?subject (GROUP_CONCAT(DISTINCT ?searchTerm; SEPARATOR="/") as ?altNames) (COUNT(?relation) AS ?num_relation) ?displayAltLabel WHERE {
-                                BIND(BOUND(?label) as ?displayAltLabel)
+                        query='SELECT DISTINCT ?subject (MIN(?displayAltLabel) as ?displayAltLabel) (COUNT(DISTINCT ?relation) as ?num_relation)   WHERE {
+                                
                             } 
-                            GROUP BY ?subject ?label ?displayAltLabel
+                            GROUP BY ?subject
                             ORDER BY DESC(?num_relation) DESC(?score)'
                         number-of-displayed-rows="4"
                         options='{"showFilter": false}'
-                        tuple-template='{{> partial:entityCard subject=subject.value altLabel=altNames.value displayAltLabel=displayAltLabel.value}}'
+                        tuple-template='{{> partial:entityCard subject=subject.value displayAltLabel=displayAltLabel.value}}'
                     >    
                     </semantic-table>
                 </div>

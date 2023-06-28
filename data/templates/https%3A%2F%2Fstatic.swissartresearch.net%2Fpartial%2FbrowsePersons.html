@@ -7,8 +7,7 @@
     <semantic-search-query-constant 
         domain='<[[resolvePrefix "crm:E39_Actor"]]>'
         query='SELECT ?subject WHERE { 
-            ?subject a/rdfs:subClassOf* crm:E39_Actor ;
-                rdfs:label ?label .
+            ?subject a/rdfs:subClassOf* crm:E39_Actor  .
         }'
     ></semantic-search-query-constant>
     
@@ -33,12 +32,12 @@
                 min-search-term-length='3' 
                 debounce='600'
                 default-query='SELECT ?subject WHERE {
-                ?subject a/rdfs:subClassOf* crm:E39_Actor .
-                FILTER EXISTS {
-                    GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
-                        ?subject ?predicate ?object .
-                    } 
-                }
+                    ?subject a/rdfs:subClassOf* crm:E39_Actor .
+                    FILTER EXISTS {
+                        GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
+                            ?subject ?predicate ?object .
+                        } 
+                    }
                 }'
 
                 query='SELECT ?subject WHERE {
@@ -53,6 +52,7 @@
                             ?subject rdfs:label ?label.
                             FILTER(?label != ?searchTerm)
                         }
+                        BIND(BOUND(?label) AS ?displayAltLabel)
                         SERVICE <http://www.bigdata.com/rdf/search#search> {
                             ?searchTerm
                                     bds:search        ?__token__ ;
@@ -82,14 +82,14 @@
                         <div class="jila-component card-container">
                             <semantic-table 
                                 id='grid-result'
-                                query='SELECT DISTINCT ?subject (xsd:string(?sortLabel) as ?sortLabel) (GROUP_CONCAT(DISTINCT ?searchTerm; SEPARATOR="/") as ?altNames) ?displayAltLabel WHERE {
-                                    BIND(BOUND(?label) as ?displayAltLabel)
-                                    ?subject rdfs:label ?sortLabel .
+                                query='SELECT ?subject ?sortLabel (MIN(?displayAltLabel) as ?displayAltLabel) WHERE {
+                                    ?subject rdfs:label ?sortLabelRaw .
+                                    BIND(xsd:string(?sortLabelRaw) AS ?sortLabel)
                                 }
-                                GROUP BY ?subject ?sortLabel ?displayAltLabel 
+                                GROUP BY ?subject ?sortLabel
                                 ORDER BY ?sortLabel'
                                 number-of-displayed-rows="50"
-                                tuple-template='{{> partial:entityCard subject=subject.value altLabel=altNames.value displayAltLabel=displayAltLabel.value}}'
+                                tuple-template='{{> partial:entityCard subject=subject.value displayAltLabel=displayAltLabel.value}}'
                                 options='{
                                     "showFilter": false
                                 }'

@@ -39,7 +39,21 @@
     </mp-resource-thumbnail>
 </div>
 <div class="jila-component card-body">
-    <mp-label iri="{{subject}}"></mp-label> {{#if altLabel}}{{#ifCond displayAltLabel "==" "true"}}({{altLabel}}){{/ifCond}}{{/if}}
+    <mp-label iri="{{subject}}"></mp-label> 
+        {{#ifCond displayAltLabel "==" "true"}}
+            <semantic-query
+                query="SELECT ?altLabel WHERE {
+                    <{{subject}}> crmdig:L54_is_same-as/gndo:variantName ?altLabel
+                }"
+                template="{{> template-altlabel}}"
+            >
+                <template id="template-altlabel">
+                    <span>
+                        ({{#each bindings}}{{altLabel.value}}{{#if @last}}{{else}}/{{/if}}{{/each}})
+                    </span>
+                </template>
+            </semantic-query>
+        {{/ifCond}}
     <semantic-if
         query="ASK { <{{subject}}> crmdig:L54_is_same-as/(gndo:biographicalOrHistoricalInformation|gndo:professionOrOccupation) ?information . }"
         then="{{> template-info-popup}}"
