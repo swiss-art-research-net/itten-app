@@ -30,11 +30,10 @@
                     }
                 }
                 OPTIONAL {
-                    ?subject crm:P108i_was_produced_by/crm:P4_has_time-span/crm:P82a_begin_of_the_begin ?document_date .
-                    BIND(YEAR(?document_date) as ?document_year)
+                    ?subject crm:P108i_was_produced_by/crm:P4_has_time-span/rdfs:label ?document_date .
                 }
                 BIND(COALESCE(?author_label, 'JILA') as ?authorLabel)
-                BIND(COALESCE(?document_year, '[[currentDateTime format='YYYY']]') as ?year)
+                BIND(COALESCE(?document_date, '[[currentDateTime format='YYYY']]') as ?year)
             } 
             GROUP BY 
                 ?year
