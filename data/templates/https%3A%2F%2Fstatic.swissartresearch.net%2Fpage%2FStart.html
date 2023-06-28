@@ -91,6 +91,7 @@
                     bds:relevance ?score ;
                     bds:matchAllTerms "true" .
                 BIND(BOUND(?label) AS ?displayAltLabel)
+                BIND(?__token__ as ?searchToken)
                 GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                     ?subject ?relation ?object .
                 }
@@ -103,14 +104,14 @@
                     <semantic-table 
                         id='grid-result'
                         no-result-template='<bs-panel class="info"><i18n>search_no_results</i18n></bs-panel>'
-                        query='SELECT DISTINCT ?subject (MIN(?displayAltLabel) as ?displayAltLabel) (COUNT(DISTINCT ?relation) as ?num_relation)   WHERE {
+                        query='SELECT DISTINCT ?subject ?searchToken (MIN(?displayAltLabel) as ?displayAltLabel) (COUNT(DISTINCT ?relation) as ?num_relation)  WHERE {
                                 
                             } 
-                            GROUP BY ?subject
+                            GROUP BY ?subject ?searchToken
                             ORDER BY DESC(?num_relation) DESC(?score)'
                         number-of-displayed-rows="4"
                         options='{"showFilter": false}'
-                        tuple-template='{{> partial:entityCard subject=subject.value displayAltLabel=displayAltLabel.value}}'
+                        tuple-template='{{> partial:entityCard subject=subject.value displayAltLabel=displayAltLabel.value searchTerm=searchToken.value}}'
                     >    
                     </semantic-table>
                 </div>

@@ -42,9 +42,14 @@
     <mp-label iri="{{subject}}"></mp-label> 
         {{#ifCond displayAltLabel "==" "true"}}
             <semantic-query
-                query="SELECT ?altLabel WHERE {
-                    <{{subject}}> crmdig:L54_is_same-as/gndo:variantName ?altLabel
-                }"
+                query='SELECT ?altLabel WHERE {
+                    <{{subject}}> crmdig:L54_is_same-as/gndo:variantName ?altLabel .
+                    {{#if searchTerm}}
+                        ?altLabel bds:search "{{searchTerm}}"^^xsd:string ;
+                        bds:relevance ?score ;
+                        bds:matchAllTerms "true" .
+                    {{/if}}
+                }'
                 template="{{> template-altlabel}}"
             >
                 <template id="template-altlabel">

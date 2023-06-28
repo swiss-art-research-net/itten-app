@@ -60,6 +60,7 @@
                                     bds:matchAllTerms "true";
                                     bds:rank          ?rank .
                         }
+                        BIND(?__token__ as ?searchToken)
                     } ORDER BY DESC(?score)
                 '>
             </semantic-search-query-keyword>
@@ -82,14 +83,14 @@
                         <div class="jila-component card-container">
                             <semantic-table 
                                 id='grid-result'
-                                query='SELECT ?subject ?sortLabel (MIN(?displayAltLabel) as ?displayAltLabel) WHERE {
+                                query='SELECT DISTINCT ?subject ?sortLabel ?searchToken (MIN(?displayAltLabel) as ?displayAltLabel) WHERE {
                                     ?subject rdfs:label ?sortLabelRaw .
                                     BIND(xsd:string(?sortLabelRaw) AS ?sortLabel)
                                 }
-                                GROUP BY ?subject ?sortLabel
+                                GROUP BY ?subject ?sortLabel ?searchToken
                                 ORDER BY ?sortLabel'
                                 number-of-displayed-rows="50"
-                                tuple-template='{{> partial:entityCard subject=subject.value displayAltLabel=displayAltLabel.value}}'
+                                tuple-template='{{> partial:entityCard subject=subject.value displayAltLabel=displayAltLabel.value searchTerm=searchToken.value}}'
                                 options='{
                                     "showFilter": false
                                 }'
