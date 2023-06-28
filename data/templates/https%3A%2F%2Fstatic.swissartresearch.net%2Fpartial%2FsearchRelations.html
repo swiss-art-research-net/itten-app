@@ -64,9 +64,9 @@
             ?subject rdfs:label ?label .
             FILTER(STRSTARTS(STR(?subject), \"https://resource.jila.zb.uzh.ch/\"))
             OPTIONAL {
-                ?subject crmdig:L54_is_same-as ?sameas .
+                ?subject crm:P1_is_identified_by ?identifier .
             }
-            BIND(BOUND(?sameas) AS ?literal)
+            BIND(BOUND(?identifier) AS ?literal)
             FILTER(?literal = ?__literal__)
         }"
     }],
