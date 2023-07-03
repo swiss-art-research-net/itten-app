@@ -33,10 +33,18 @@
                 debounce='600'
                 default-query='SELECT ?subject WHERE {
                     ?subject a/rdfs:subClassOf* crm:E39_Actor .
-                    FILTER EXISTS {
-                        GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
-                            ?subject ?predicate ?object .
-                        } 
+                    {
+                        FILTER EXISTS {
+                            {
+                                GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
+                                    ?subject ?predicate ?object .
+                                }
+                            } UNION {
+                                GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
+                                    ?object ?predicate ?subject .
+                                }
+                            } 
+                        }
                     }
                 }'
 
