@@ -201,6 +201,7 @@ p {
 .jila-component.home-header .tagline {
   margin-top: 4rem;
   margin-bottom: 4rem;
+  font-size: 24px;
 }
 .jila-component.home-header-container {
   padding-bottom: 3rem;
