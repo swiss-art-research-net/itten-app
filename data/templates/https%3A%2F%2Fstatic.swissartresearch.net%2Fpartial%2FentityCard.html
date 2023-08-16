@@ -60,7 +60,7 @@
             </semantic-query>
         {{/ifCond}}
     <semantic-if
-        query="ASK { <{{subject}}> crmdig:L54_is_same-as/(gndo:biographicalOrHistoricalInformation|gndo:professionOrOccupation) ?information . }"
+        query="ASK { { <{{subject}}> crmdig:L54_is_same-as/(gndo:biographicalOrHistoricalInformation|gndo:professionOrOccupation) ?information . } UNION { ?assignment crm:P141_assigned <{{subject}}> ; crm:P129i_is_subject_of/crm:P3_has_note ?comment .  } }"
         then="{{> template-info-popup}}"
     >
         <template id="template-info-popup">
@@ -76,7 +76,7 @@
                                     ?subject 
                                     (GROUP_CONCAT(DISTINCT ?description; SEPARATOR='/') as ?descriptions)
                                     (GROUP_CONCAT(DISTINCT ?profession; SEPARATOR='/') as ?professions)
-                                    (GROUP_CONCAT(DISTINCT ?nameVariant; SEPARATOR='/') as ?nameVariants)
+                                    (GROUP_CONCAT(DISTINCT ?assignment_comment; SEPARATOR='/') as ?assignment_comments)
                                 WHERE {
                                 BIND(<{{subject}}> AS ?subject)
                                 OPTIONAL {
@@ -86,7 +86,8 @@
                                     ?subject crmdig:L54_is_same-as/gndo:professionOrOccupation/rdfs:label ?profession .
                                 }
                                 OPTIONAL {
-                                    ?subject crmdig:L54_is_same-as/gndo:variantName ?nameVariant .
+                                    ?assignment crm:P141_assigned ?subject ;
+                                    crm:P129i_is_subject_of/crm:P3_has_note ?assignment_comment ;
                                 }
                             } 
                             GROUP BY ?subject
@@ -102,6 +103,9 @@
                                         {{else}}
                                             {{#if professions.value}}
                                                 <p>{{professions.value}}</p>
+                                            {{/if}}
+                                            {{#if assignment_comments.value}}
+                                                <p>{{assignment_comments.value}}</p>
                                             {{/if}}
                                         {{/if}}
                                     {{/each}}    
