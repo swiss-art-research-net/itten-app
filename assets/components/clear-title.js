@@ -7,8 +7,7 @@ class ClearTitleComponent extends HTMLElement {
       // Clear titles after a delay of 2 seconds (2000 milliseconds)
       const delay = 2000;
       setTimeout(() => {
-        const elementsWithMatchingTitle = document.querySelectorAll('[title="title"]');
-        console.log(`Found ${elementsWithMatchingTitle.length} elements with title="title"`);
+        const elementsWithMatchingTitle = document.querySelectorAll('[title="title"], [title*="&lt;"]');
         elementsWithMatchingTitle.forEach(element => {
           element.setAttribute('title', '');
         });
