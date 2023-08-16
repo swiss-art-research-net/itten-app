@@ -7,7 +7,7 @@
     <semantic-search-query-constant 
         domain='<[[resolvePrefix "crm:E39_Actor"]]>'
         query='SELECT ?subject WHERE { 
-            ?subject a/rdfs:subClassOf* crm:E39_Actor  .
+            ?subject a search:Person .
         }'
     ></semantic-search-query-constant>
     
@@ -32,7 +32,7 @@
                 min-search-term-length='3' 
                 debounce='600'
                 default-query='SELECT ?subject WHERE {
-                    ?subject a/rdfs:subClassOf* crm:E39_Actor .
+                    ?subject a search:Person .
                     {
                         FILTER EXISTS {
                             {
