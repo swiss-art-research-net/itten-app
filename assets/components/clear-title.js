@@ -2,14 +2,17 @@ class ClearTitleComponent extends HTMLElement {
     constructor() {
       super();
     }
-    
+  
     connectedCallback() {
-      const elementsWithMatchingTitle = document.querySelectorAll('[title="title"]');
-      console.log("Hello from ClearTitleComponent")
-      
-      elementsWithMatchingTitle.forEach(element => {
-        element.removeAttribute('title');
-      });
+      // Clear titles after a delay of 2 seconds (2000 milliseconds)
+      const delay = 2000;
+      setTimeout(() => {
+        const elementsWithMatchingTitle = document.querySelectorAll('[title="title"]');
+        console.log(`Found ${elementsWithMatchingTitle.length} elements with title="title"`);
+        elementsWithMatchingTitle.forEach(element => {
+          element.setAttribute('title', '');
+        });
+      }, delay);
     }
   }
   
