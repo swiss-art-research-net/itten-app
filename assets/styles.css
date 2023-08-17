@@ -277,7 +277,7 @@ p {
   border-radius: 6px;
 }
 .jila-component .tag.actor > span {
-  background-color: #fb644d;
+  background-color: #e44343;
 }
 .jila-component .tag.collection > span {
   background-color: #FFD966;
@@ -289,7 +289,7 @@ p {
   background-color: #0099FF;
 }
 .jila-component .tag.group > span {
-  background-color: #fb644d;
+  background-color: #f9987e;
 }
 .jila-component .tag.object > span {
   background-color: #B0927A;
