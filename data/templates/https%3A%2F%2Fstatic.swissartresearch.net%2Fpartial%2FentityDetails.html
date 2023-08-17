@@ -276,7 +276,7 @@
           <details class="jila-component details">
             <summary>
               <semantic-query
-                query="SELECT DISTINCT ?type WHERE {
+                query="SELECT DISTINCT ?type ?typeClass WHERE {
                   ?entity a ?type .
                   ?type rdfs:subClassOf* crm:E1_CRM_Entity .
                   VALUES (?entity) {
@@ -284,11 +284,24 @@
                       (<{{this}}>)
                     {{/each}}
                   }
+                  VALUES(?type ?typeClass) {
+                    (crm:E21_Person 'person')
+                    (crm:E39_Actor 'actor')
+                    (crm:E74_Group 'group')
+                    (crm:E5_Event 'event')
+                    (crm:E22_Human-Made_Object 'object')
+                    (crm:E53_Place 'place')
+                    (crm:E78_Curated_Holding 'collection')
+                  }
                 }"
                 template="{{> template-types}}"
               >
                 <template id="template-types">
-                  <div>
+                  {{#ifCond bindings.length "==" 1 }}
+                    <div class="{{bindings.0.typeClass.value}}">
+                  {{else}}
+                    <div>
+                  {{/ifCond}}
                     {{#each bindings}}
                       <mp-label iri="{{type.value}}"></mp-label>{{#if @last}}{{else}}, {{/if}}
                     {{/each}} ({{numEntities}})
