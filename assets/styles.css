@@ -112,6 +112,13 @@ p {
 .jila-component.card-container .semantic-table-holder {
   width: 100%;
 }
+.jila-component.details summary > div {
+  padding: 4px;
+  border-radius: 6px;
+  background-color: #e6eef5;
+  cursor: pointer;
+  display: inline-block;
+}
 .jila-component.entities-list {
   padding: 0;
   margin-top: 1rem;
