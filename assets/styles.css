@@ -119,6 +119,27 @@ p {
   cursor: pointer;
   display: inline-block;
 }
+.jila-component.details summary > div.collection {
+  background-color: #FFD966;
+}
+.jila-component.details summary > div.event {
+  background-color: #0099FF;
+}
+.jila-component.details summary > div.group {
+  background-color: #f9987e;
+}
+.jila-component.details summary > div.object {
+  background-color: #B0927A;
+}
+.jila-component.details summary > div.person {
+  background-color: #FF66B3;
+}
+.jila-component.details summary > div.place {
+  background-color: #00CC66;
+}
+.jila-component.details[open] summary > div {
+  background-color: transparent;
+}
 .jila-component.entities-list {
   padding: 0;
   margin-top: 1rem;

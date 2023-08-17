@@ -158,6 +158,27 @@ p {
       background-color: @col-bg-med;
       cursor: pointer;
       display: inline-block;
+      &.collection {
+        background-color: @col-collection;
+      }
+      &.event {
+        background-color: @col-event;
+      }
+      &.group {
+        background-color: @col-group;
+      }
+      &.object {
+        background-color: @col-object;
+      }
+      &.person {
+        background-color: @col-person;
+      }
+      &.place {
+        background-color: @col-place;
+      }
+    }
+    &[open] summary > div {
+      background-color: transparent;
     }
   }
   &.entities-list {
