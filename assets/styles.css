@@ -255,6 +255,7 @@ p {
 }
 .jila-component.image-license {
   font-size: 1rem;
+  word-wrap: break-word;
 }
 .jila-component.jila-logo.header {
   height: 4rem;
