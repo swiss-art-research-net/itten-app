@@ -55,7 +55,7 @@
             OPTIONAL {
                 ?object crm:P46_is_composed_of/crm:P138i_has_representation ?image .
             }
-            BIND(BOUND(?image) AS ?literal)
+            BIND(IF(BOUND(?image), \"yes\", \"no\") AS ?literal)
             FILTER(?literal = ?__literal__)
         }"
     }],
