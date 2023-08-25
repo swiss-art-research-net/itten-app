@@ -341,6 +341,9 @@ p {
 .form-control {
   width: 95%;
 }
+.notification-action-wrapper {
+  text-align: right;
+}
 ol.page-breadcrumb {
   position: static;
 }
