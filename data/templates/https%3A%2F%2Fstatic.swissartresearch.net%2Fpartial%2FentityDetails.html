@@ -7,7 +7,9 @@
         <h2><mp-label iri="{{entityiri}}"></mp-label>
           {{#if initial}}
           {{else}}
-              &nbsp;<a href="/resource/?uri={{entityiri}}"><i title="Fokussieren" class="fa fa-dot-circle-o"></i></a>
+              &nbsp;<a class="jila-component focus-button" href="/resource/?uri={{entityiri}}">
+                <i title="Fokussieren" class="fa fa-dot-circle-o"></i><i18n>button_focus</i18n>
+              </a>
           {{/if}}
         </h2>
       </bs-col>

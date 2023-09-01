@@ -28,6 +28,7 @@
 @col-person: #FF66B3;
 @col-place: #00CC66;
 
+@col-link: rgb(29, 10, 110);
 @col-external-link: #ced8e3;
 
 html, body {
@@ -253,6 +254,16 @@ p {
         padding-right: 4px;
       }
     }
+  }
+  &.focus-button {
+    background-color: @col-link;
+    border-radius: 4px;
+    color: @col-white;
+    font-size: 14px;
+    padding: 2px 4px;
+     > i {
+      margin-right: 3px;
+     }
   }
   &.footer {
     background-color: @col-white;
