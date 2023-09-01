@@ -211,6 +211,7 @@ p {
   color: #fefefe;
   font-size: 14px;
   padding: 2px 4px;
+  white-space: nowrap;
 }
 .jila-component.focus-button > i {
   margin-right: 3px;
