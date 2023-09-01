@@ -205,6 +205,17 @@ p {
   padding-left: 4px;
   padding-right: 4px;
 }
+.jila-component.focus-button {
+  background-color: #1d0a6e;
+  border-radius: 4px;
+  color: #fefefe;
+  font-size: 14px;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+.jila-component.focus-button > i {
+  margin-right: 3px;
+}
 .jila-component.footer {
   background-color: #fefefe;
   color: #0c0c0c;
