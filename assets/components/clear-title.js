@@ -4,7 +4,6 @@ class ClearTitleComponent extends HTMLElement {
     }
 
     clearTitles() {
-      console.log("Hello")
       const elementsWithMatchingTitle = document.querySelectorAll('[title="title"], [title*="&lt;"], [title*="https://"], [title*="http://"]');
         elementsWithMatchingTitle.forEach(element => {
         element.setAttribute('title', '');
