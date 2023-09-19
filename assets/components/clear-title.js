@@ -11,10 +11,12 @@ class ClearTitleComponent extends HTMLElement {
     }
   
     connectedCallback() {
-      // Clear titles after a delay of 2 seconds (2000 milliseconds)
-      const delay = 2000;
+      // Clear titles after a delay 
+      const delay1 = 2000;
+      const delay2 = 3000;
       this.clearTitles();
-      setTimeout(this.clearTitles, delay);
+      setTimeout(this.clearTitles, delay1);
+      setTimeout(this.clearTitles, delay2);
     }
   }
   
