@@ -227,7 +227,7 @@
     <template id="templateThumbnailWithViewer">
         <mp-overlay-dialog title="Image Viewer" type="modal" bs-size="large">
             <mp-overlay-dialog-trigger>
-              <a href="#" class="jila-component card">{{> partial:entityCard subject=iri onlybody=true}}</a>
+              <a href="{{iri}}/full/max/0/default.jpg" class="jila-component card">{{> partial:entityCard subject=iri onlybody=true}}</a>
             </mp-overlay-dialog-trigger>
             <mp-overlay-dialog-content
                 id="image-modal">
