@@ -227,7 +227,7 @@
     <template id="templateThumbnailWithViewer">
         <mp-overlay-dialog title="Image Viewer" type="modal" bs-size="large">
             <mp-overlay-dialog-trigger>
-              <a href="#" class="jila-component card">{{> partial:entityCard subject=iri onlybody=true}}</a>
+              <a href="{{iri}}/full/max/0/default.jpg" class="jila-component card">{{> partial:entityCard subject=iri onlybody=true}}</a>
             </mp-overlay-dialog-trigger>
             <mp-overlay-dialog-content
                 id="image-modal">
@@ -439,13 +439,13 @@
     {{#each bindings}}
       {{#if dateOfBirth.value}}
         {{#if dateOfDeath.value}}
-          <p>{{dateTimeFormat dateOfBirth.value "DD.MM.YYYY"}}{{#if placeOfBirth.value}} (<mp-label iri="{{placeOfBirth.value}}"></mp-label>){{/if}} - {{dateTimeFormat dateOfDeath.value "DD.MM.YYYY"}}{{#if placeOfDeath.value}} (<mp-label iri="{{placeOfDeath.value}}"></mp-label>){{/if}}</p>
+          <p>{{#ifCond (dateTimeFormat dateOfBirth.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfBirth.value}}{{else}}{{#ifCond dateOfBirth.value.length ">" 4}}{{dateTimeFormat dateOfBirth.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfBirth.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfBirth.value}} (<mp-label iri="{{placeOfBirth.value}}"></mp-label>){{/if}} - {{#ifCond (dateTimeFormat dateOfDeath.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfDeath.value}}{{else}}{{#ifCond dateOfDeath.value.length ">" 4}}{{dateTimeFormat dateOfDeath.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfDeath.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfDeath.value}} (<mp-label iri="{{placeOfDeath.value}}"></mp-label>){{/if}}</p>
         {{else}}
-          <p>{{dateTimeFormat dateOfBirth.value "DD.MM.YYYY"}}{{#if placeOfBirth.value}} (<mp-label iri="{{placeOfBirth.value}}"></mp-label>){{/if}} - </p>
+          <p>{{#ifCond (dateTimeFormat dateOfBirth.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfBirth.value}}{{else}}{{#ifCond dateOfBirth.value.length ">" 4}}{{dateTimeFormat dateOfBirth.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfBirth.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfBirth.value}} (<mp-label iri="{{placeOfBirth.value}}"></mp-label>){{/if}} - </p>
         {{/if}}
       {{else}}
         {{#if dateOfDeath.value}}
-          - {{dateTimeFormat dateOfDeath.value "DD.MM.YYYY"}}{{#if placeOfDeath.value}} (<mp-label iri="{{placeOfDeath.value}}"></mp-label>){{/if}}
+          - {{#ifCond (dateTimeFormat dateOfDeath.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfDeath.value}}{{else}}{{#ifCond dateOfDeath.value.length ">" 4}}{{dateTimeFormat dateOfDeath.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfDeath.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfDeath.value}} (<mp-label iri="{{placeOfDeath.value}}"></mp-label>){{/if}}
         {{/if}}
       {{/if}}
       {{#if professions.value}}
@@ -478,7 +478,7 @@
                         type="JILA.PanelNodeClicked"
                         data='{"node": "{{this}}"}'
                       >
-                        <a href="#">
+                        <a href="?uri={{this}}">
                           <mp-label iri="{{this}}"></mp-label>
                         </a>
                       </mp-event-trigger>
@@ -606,7 +606,7 @@
           type="JILA.PanelNodeClicked"
           data='{"node": "{{bindings.0.entity.value}}"}'
         >
-          <a href="#" class="jila-component tag {{bindings.0.typeClass.value}}">
+          <a href="?uri={{bindings.0.entity.value}}" class="jila-component tag {{bindings.0.typeClass.value}}">
             <mp-label iri="{{bindings.0.entity.value}}"></mp-label>
           </a>
       </mp-event-trigger>
