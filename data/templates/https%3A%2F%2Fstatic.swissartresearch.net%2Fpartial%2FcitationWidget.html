@@ -6,7 +6,8 @@
 
         <semantic-query
             query="SELECT
-                    ?year
+                    ?publication_year
+                    ?document_date
                     ?ownerLabel
                     ?placeLabel
                     ?link
@@ -26,17 +27,17 @@
                 OPTIONAL {
                     ?subject a crm:E78_Curated_Holding .
                     OPTIONAL {
-                        ?subject crm:P108i_was_produced_by/crm:P9_consists_of/crm:P14_carried_out_by/rdfs:label ?author_label .
+                        ?subject crm:P108i_was_produced_by/crm:P9_consists_of/crm:P14_carried_out_by/rdfs:label ?authorLabel .
                     }
                 }
                 OPTIONAL {
                     ?subject crm:P108i_was_produced_by/crm:P4_has_time-span/rdfs:label ?document_date .
                 }
-                BIND(COALESCE(?author_label, 'JILA') as ?authorLabel)
-                BIND(COALESCE(?document_date, '[[currentDateTime format='YYYY']]') as ?year)
+                BIND('[[currentDateTime format='YYYY']]' as ?publication_year)
             } 
             GROUP BY 
-                ?year
+                ?publication_year
+                ?document_date
                 ?ownerLabel
                 ?placeLabel
                 ?link
@@ -45,23 +46,20 @@
             template="{{> citationTemplate}}">
 
             <template id="citationTemplate">
-                {{> citationHTML author=bindings.0.authorLabel.value year=bindings.0.year.value owner=bindings.0.ownerLabel.value place=bindings.0.placeLabel.value link=bindings.0.link.value}}
+                {{> citationHTML author=bindings.0.authorLabel.value documentDate=bindings.0.document_date.value publicationDate=bindings.0.publication_year.value  owner=bindings.0.ownerLabel.value place=bindings.0.placeLabel.value link=bindings.0.link.value}}
                 <mp-copy-to-clipboard 
-                    text="{{bindings.0.authorLabel.value}}, {{bindings.0.year.value}}. {{bindings.0.subjectLabel.value}}. In Johannes Itten Linked Archive. {{#if bindings.0.ownerLabel.value}}{{#if bindings.0.placeLabel.value}}{{bindings.0.placeLabel.value}}: {{/if}}{{bindings.0.ownerLabel.value}}. {{/if}}Available at: {{bindings.0.link.value}}. Accessed [[currentDateTime format='dd.MM.YYYY']]"
+                    text="{{#if bindings.0.authorLabel.value}}{{bindings.0.authorLabel.value}}: {{/if}}{{bindings.0.subjectLabel.value}}. {{#if bindings.0.publication_year.value}}{{bindings.0.publication_year.value}}. {{/if}}In JILA: Johannes Itten Linked Archive {{bindings.0.publication_year.value}}. {{bindings.0.placeLabel.value}}: {{bindings.0.ownerLabel.value}}. Available at: {{bindings.0.link.value}}. Accessed [[currentDateTime format='dd.MM.YYYY']]."
                     message="Citation copied to clipboard"
                 >
                     <button class="btn btn-secondary"><i class="fa fa-copy"></i></button>
                   </mp-copy-to-clipboard>&nbsp;
-                <a download='{{bindings.0.identifier.value}}.bib' href='data:text/plain;utf8,@misc{ {{bindings.0.identifier.value}}, title = { {{bindings.0.subjectLabel.value}} }, url = { {{bindings.0.link.value}} }, publisher = { {{#if bindings.0.ownerLabel.value}}{{bindings.0.ownerLabel.value}}{{else}}JILA{{/if}} }, author = { {{bindings.0.authorLabel.value}} }, year = { {{bindings.0.year.value }} }}'>
+                <a download='{{bindings.0.identifier.value}}.bib' href='data:text/plain;utf8,@misc{ {{bindings.0.identifier.value}}, title = { {{bindings.0.subjectLabel.value}} }, url = { {{bindings.0.link.value}} }, publisher = { {{#if bindings.0.ownerLabel.value}}{{bindings.0.ownerLabel.value}}{{else}}JILA{{/if}} }, author = { {{bindings.0.authorLabel.value}} }, year = { {{#if bindings.0.document_date.value}}{{bindings.0.document_date.value}}{{else}}{{bindings.0.publication_year.value }}{{/if}} }}'>
                     <button class="btn btn-secondary"><i class="fa fa-download"></i></button>
                 </a>
             </template>
 
             <template id="citationHTML">
-                {{author}}, {{year}}. <mp-label iri='{{entityiri}}'></mp-label>. In <em>Johannes Itten Linked Archive</em>.                 
-                {{#if owner}}{{#if place}}{{place}}: {{/if}}
-                {{owner}}.{{/if}}
-                Available at: <a href="{{link}}">{{link}}</a>. Accessed [[currentDateTime format='dd.MM.YYYY']]
+                {{#if author}}{{author}}: {{/if}} <mp-label iri='{{entityiri}}'></mp-label>. {{#if documentDate}}{{documentDate}}. {{/if}} In <em>JILA: Johannes Itten Linked Archive</em> {{publicationDate}}. {{place}}: {{owner}}. Available at: <a href="{{link}}">{{link}}</a>. Accessed [[currentDateTime format='dd.MM.YYYY']].
             </template>
 
         </semantic-query>
