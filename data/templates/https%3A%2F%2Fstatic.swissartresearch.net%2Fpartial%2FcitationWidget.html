@@ -33,7 +33,7 @@
                 OPTIONAL {
                     ?subject crm:P108i_was_produced_by/crm:P4_has_time-span/rdfs:label ?document_date .
                 }
-                BIND('[[currentDateTime format='YYYY']]' as ?publication_year)
+                BIND('2024' as ?publication_year)
             } 
             GROUP BY 
                 ?publication_year
