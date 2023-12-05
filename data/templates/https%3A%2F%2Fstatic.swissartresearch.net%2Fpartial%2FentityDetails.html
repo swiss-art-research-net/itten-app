@@ -212,10 +212,12 @@
   <semantic-table
     query="SELECT DISTINCT ?image WHERE {
         BIND(<{{entityiri}}> as ?subject)
-        ?subject crm:P46_is_composed_of/crm:P138i_has_representation/la:digitally_shown_by/la:digitally_available_via/la:access_point ?image .
-        ?image rdfs:label ?label .
-        BIND(strdt(REPLACE(?label, '\\D',''), xsd:integer) as ?digit)
-    } ORDER BY ?image ?digit"
+        ?subject crm:P46_is_composed_of/crm:P138i_has_representation ?visual_item .
+        ?visual_item crm:P1_is_identified_by ?position_identifier ;
+          la:digitally_shown_by/la:digitally_available_via/la:access_point ?image .
+        ?position_identifier crm:P2_has_type aat:300194222 ;
+          crm:P190_has_symbolic_content ?position .
+    } ORDER BY ?position"
     options='{
       "showFilter": false
     }'
