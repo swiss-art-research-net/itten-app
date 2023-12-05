@@ -389,29 +389,29 @@
     OPTIONAL {
       ?subject crmdig:L54_is_same-as ?gndEntity .
       ?gndEntity a gndo:AuthorityResource .
+      OPTIONAL {
+        ?gndEntity gndo:professionOrOccupation ?profession .
+      }
+      OPTIONAL {
+        ?gndEntity gndo:biographicalOrHistoricalInformation ?description .
+      }
+      OPTIONAL {
+        ?gndEntity gndo:dateOfBirth ?dateOfBirth .
+      }
+      OPTIONAL {
+        ?gndEntity gndo:dateOfDeath ?dateOfDeath .
+      }
+      OPTIONAL {
+        ?gndEntity gndo:placeOfBirth ?placeOfBirth .
+      }
+      OPTIONAL {
+        ?gndEntity gndo:placeOfDeath ?placeOfDeath .
+      }
     }
     OPTIONAL {
       ?subject crm:P129i_is_subject_of ?contentDescription .
       ?contentDescription crm:P2_has_type aat:300435416 ;
         crm:P190_has_symbolic_content ?content .
-    }
-    OPTIONAL {
-      ?subject crmdig:L54_is_same-as/gndo:professionOrOccupation ?profession .
-    }
-    OPTIONAL {
-      ?subject crmdig:L54_is_same-as/gndo:biographicalOrHistoricalInformation ?description .
-    }
-    OPTIONAL {
-      ?subject crmdig:L54_is_same-as/gndo:dateOfBirth ?dateOfBirth .
-    }
-    OPTIONAL {
-      ?subject crmdig:L54_is_same-as/gndo:dateOfDeath ?dateOfDeath .
-    }
-    OPTIONAL {
-      ?subject crmdig:L54_is_same-as/gndo:placeOfBirth ?placeOfBirth .
-    }
-    OPTIONAL {
-      ?subject crmdig:L54_is_same-as/gndo:placeOfDeath ?placeOfDeath .
     }
     OPTIONAL {
       ?assignment crm:P141_assigned ?subject ;
@@ -511,6 +511,9 @@
         SERVICE secondary:sparql {
           ?sameAs owl:sameAs ?gndEntity.
         }
+      } UNION {
+        <{{entityiri}}> a gndo:AuthorityResource .
+        BIND(<{{entityiri}}> as ?sameAs)
       }
       BIND(
         IF(
