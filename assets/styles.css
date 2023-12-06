@@ -31,11 +31,11 @@ p {
 .jila-component.beta-marker {
   display: inline-block;
   position: relative;
-  top: -37px;
-  left: -21px;
+  top: 0;
+  left: -18px;
   font-weight: bold;
-  font-size: 17px;
-  color: #6d9cc6;
+  font-size: 31px;
+  color: #00CC66;
   transform: rotate(-49deg);
 }
 .jila-component.card-container {
