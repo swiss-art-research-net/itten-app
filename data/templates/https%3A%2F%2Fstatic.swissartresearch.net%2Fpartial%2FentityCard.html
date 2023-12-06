@@ -60,7 +60,7 @@
             </semantic-query>
         {{/ifCond}}
     <semantic-if
-        query="ASK { { <{{subject}}> crmdig:L54_is_same-as/(gndo:biographicalOrHistoricalInformation|gndo:professionOrOccupation) ?information . } UNION { ?assignment crm:P141_assigned <{{subject}}> ; crm:P129i_is_subject_of/crm:P3_has_note ?comment .  } }"
+        query="ASK { { <{{subject}}> crmdig:L54_is_same-as/(gndo:biographicalOrHistoricalInformation|gndo:professionOrOccupation|gndo:professionOrOccupationAsLiteral|gndo:dateOfBirthAndDeath|gndo:periodOfActivity) ?information . } UNION { ?assignment crm:P141_assigned <{{subject}}> ; crm:P129i_is_subject_of/crm:P3_has_note ?comment .  } }"
         then="{{> template-info-popup}}"
     >
         <template id="template-info-popup">
@@ -74,8 +74,10 @@
                         <semantic-query
                             query="SELECT 
                                     ?subject 
+                                    ?periodOfActivity
                                     ?dateOfBirth
                                     ?dateOfDeath
+                                    ?dateOfBirthAndDeath
                                     (GROUP_CONCAT(DISTINCT ?description; SEPARATOR='/') as ?descriptions)
                                     (GROUP_CONCAT(DISTINCT ?profession; SEPARATOR='/') as ?professions)
                                     (GROUP_CONCAT(DISTINCT ?assignment_comment; SEPARATOR='/') as ?assignment_comments)
@@ -85,7 +87,7 @@
                                     ?subject crmdig:L54_is_same-as/gndo:biographicalOrHistoricalInformation ?description .
                                 }
                                 OPTIONAL {
-                                    ?subject crmdig:L54_is_same-as/gndo:professionOrOccupation/rdfs:label ?profession .
+                                    ?subject crmdig:L54_is_same-as/(gndo:professionOrOccupation/rdfs:label)|gndo:professionOrOccupationAsLiteral ?profession .
                                 }
                                 OPTIONAL {
                                     ?subject crmdig:L54_is_same-as/gndo:dateOfBirth ?dateOfBirth .
@@ -94,26 +96,39 @@
                                     ?subject crmdig:L54_is_same-as/gndo:dateOfDeath ?dateOfDeath .
                                 }
                                 OPTIONAL {
+                                    ?subject crmdig:L54_is_same-as/gndo:periodOfActivity ?periodOfActivity .
+                                }
+                                OPTIONAL {
+                                    ?subject crmdig:L54_is_same-as/gndo:dateOfBirthAndDeath ?dateOfBirthAndDeath .
+                                }
+                                OPTIONAL {
                                     ?assignment crm:P141_assigned ?subject ;
                                     crm:P129i_is_subject_of/crm:P3_has_note ?assignment_comment ;
                                 }
                             } 
-                            GROUP BY ?subject ?dateOfBirth ?dateOfDeath
+                            GROUP BY ?subject ?dateOfBirth ?dateOfDeath ?dateOfBirthAndDeath ?periodOfActivity
                             LIMIT 1"
                             template="{{> template-info}}"
                         >
                             <template id="template-info">
                                 <div>
                                     {{#each bindings}}
-                                    {{#if dateOfBirth.value}}
-                                        {{#if dateOfDeath.value}}
-                                            <p>{{#ifCond (dateTimeFormat dateOfBirth.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfBirth.value}}{{else}}{{#ifCond dateOfBirth.value.length ">" 4}}{{dateTimeFormat dateOfBirth.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfBirth.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfBirth.value}} (<mp-label iri="{{placeOfBirth.value}}"></mp-label>){{/if}} - {{#ifCond (dateTimeFormat dateOfDeath.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfDeath.value}}{{else}}{{#ifCond dateOfDeath.value.length ">" 4}}{{dateTimeFormat dateOfDeath.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfDeath.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfDeath.value}} (<mp-label iri="{{placeOfDeath.value}}"></mp-label>){{/if}}</p>
+                                        {{#if dateOfBirth.value}}
+                                            {{#if dateOfDeath.value}}
+                                                <p>{{#ifCond (dateTimeFormat dateOfBirth.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfBirth.value}}{{else}}{{#ifCond dateOfBirth.value.length ">" 4}}{{dateTimeFormat dateOfBirth.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfBirth.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfBirth.value}} (<mp-label iri="{{placeOfBirth.value}}"></mp-label>){{/if}} - {{#ifCond (dateTimeFormat dateOfDeath.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfDeath.value}}{{else}}{{#ifCond dateOfDeath.value.length ">" 4}}{{dateTimeFormat dateOfDeath.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfDeath.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfDeath.value}} (<mp-label iri="{{placeOfDeath.value}}"></mp-label>){{/if}}</p>
                                             {{else}}
-                                            <p>{{#ifCond (dateTimeFormat dateOfBirth.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfBirth.value}}{{else}}{{#ifCond dateOfBirth.value.length ">" 4}}{{dateTimeFormat dateOfBirth.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfBirth.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfBirth.value}} (<mp-label iri="{{placeOfBirth.value}}"></mp-label>){{/if}} - </p>
+                                                <p>{{#ifCond (dateTimeFormat dateOfBirth.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfBirth.value}}{{else}}{{#ifCond dateOfBirth.value.length ">" 4}}{{dateTimeFormat dateOfBirth.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfBirth.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfBirth.value}} (<mp-label iri="{{placeOfBirth.value}}"></mp-label>){{/if}} - </p>
                                             {{/if}}
                                         {{else}}
                                             {{#if dateOfDeath.value}}
                                             - {{#ifCond (dateTimeFormat dateOfDeath.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfDeath.value}}{{else}}{{#ifCond dateOfDeath.value.length ">" 4}}{{dateTimeFormat dateOfDeath.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfDeath.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfDeath.value}} (<mp-label iri="{{placeOfDeath.value}}"></mp-label>){{/if}}
+                                            {{/if}}
+                                        {{/if}}
+                                        {{#if dateOfBirthAndDeath.value}}
+                                            <p>{{dateOfBirthAndDeath.value}}</p>
+                                        {{else}}
+                                            {{#if periodOfActivity.value}}
+                                                <p><i18n>label_active</i18n>: {{periodOfActivity.value}}</p>
                                             {{/if}}
                                         {{/if}}
                                         {{#if descriptions.value}}
