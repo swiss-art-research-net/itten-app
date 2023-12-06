@@ -334,6 +334,27 @@ p {
       height: 8rem;
     }
   }
+  &.legend {
+    th {
+      padding: 0 8px;
+      padding-bottom:10px;
+    }
+    td {
+      padding: 0 8px;
+    
+    }
+  }
+  &.legend-button {
+    position: relative;
+    top:-10px;
+  }
+  &.legend-popover {
+    .popover-content {
+      background-color: @col-white;
+      color: @col-black;
+      border:none;
+    }
+  }
   &.page-title {
     margin-top: 5rem;
     margin-bottom: 2rem;
@@ -365,6 +386,33 @@ p {
         display: block !important;
       }
     }
+  }
+  &.swab {
+    display: inline-block;
+    width: 3em;
+    height: 2em;
+    &.actor {
+      background-color: @col-actor;
+    }
+    &.collection {
+      background-color: @col-collection;
+    }
+    &.event {
+      background-color: @col-event;
+    }
+    &.group {
+      background-color: @col-group;
+    }
+    &.object {
+      background-color: @col-object;
+    }
+    &.person {
+      background-color: @col-person;
+    }
+    &.place {
+      background-color: @col-place;
+    }
+
   }
   .tag {
     text-decoration: none;
@@ -433,13 +481,18 @@ p {
 ol.page-breadcrumb {
     position: static;
 }
-
 #mp-popover {
-  .arrow {
-    left: 20px !important;
+  &.legend-popover {
+    .arrow {
+     left: 55px !important;
+    }
+  }
+  &.info {
+    .arrow {
+     left: 20px !important;
+    }
   }
 }
-
 .navbar {
   height: 6rem;
   min-height: 6rem;

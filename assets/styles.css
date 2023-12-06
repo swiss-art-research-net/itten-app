@@ -278,6 +278,22 @@ p {
 .jila-component.jila-logo.login {
   height: 8rem;
 }
+.jila-component.legend th {
+  padding: 0 8px;
+  padding-bottom: 10px;
+}
+.jila-component.legend td {
+  padding: 0 8px;
+}
+.jila-component.legend-button {
+  position: relative;
+  top: -10px;
+}
+.jila-component.legend-popover .popover-content {
+  background-color: #fefefe;
+  color: #0c0c0c;
+  border: none;
+}
 .jila-component.page-title {
   margin-top: 5rem;
   margin-bottom: 2rem;
@@ -302,6 +318,32 @@ p {
 }
 .jila-component .relations-table .griddle-container .griddle-custom-row {
   display: block !important;
+}
+.jila-component.swab {
+  display: inline-block;
+  width: 3em;
+  height: 2em;
+}
+.jila-component.swab.actor {
+  background-color: #e44343;
+}
+.jila-component.swab.collection {
+  background-color: #FFD966;
+}
+.jila-component.swab.event {
+  background-color: #0099FF;
+}
+.jila-component.swab.group {
+  background-color: #f9987e;
+}
+.jila-component.swab.object {
+  background-color: #B0927A;
+}
+.jila-component.swab.person {
+  background-color: #FF66B3;
+}
+.jila-component.swab.place {
+  background-color: #00CC66;
 }
 .jila-component .tag {
   text-decoration: none;
@@ -359,7 +401,10 @@ p {
 ol.page-breadcrumb {
   position: static;
 }
-#mp-popover .arrow {
+#mp-popover.legend-popover .arrow {
+  left: 55px !important;
+}
+#mp-popover.info .arrow {
   left: 20px !important;
 }
 .navbar {
