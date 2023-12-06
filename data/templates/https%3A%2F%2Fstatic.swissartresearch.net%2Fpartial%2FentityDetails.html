@@ -380,6 +380,7 @@
       ?gndEntity
       ?dateOfBirth
       ?dateOfDeath
+      ?dateOfBirthAndDeath
       ?placeOfBirth
       ?placeOfDeath
       ?hasGndInformation
@@ -408,6 +409,9 @@
         ?gndEntity gndo:dateOfDeath ?dateOfDeath .
       }
       OPTIONAL {
+        ?gndEntity gndo:dateOfBirthAndDeath ?dateOfBirthAndDeath .
+      }
+      OPTIONAL {
         ?gndEntity gndo:placeOfBirth ?placeOfBirth .
       }
       OPTIONAL {
@@ -428,13 +432,14 @@
         }
         BIND(COALESCE(?collection, ?expression_or_collection) as ?assignment_collection)
     }
-    BIND(COALESCE(?profession, ?description, ?dateOfBirth, ?dateOfDeath, ?placeOfBirth, ?placeOfDeath) as ?hasGndInformation)
+    BIND(COALESCE(?profession, ?description, ?dateOfBirth, ?dateOfDeath, ?dateOfBirthAndDeath, ?placeOfDeath) as ?hasGndInformation)
   } GROUP BY 
   ?content
   ?description 
   ?gndEntity
   ?dateOfBirth
   ?dateOfDeath
+  ?dateOfBirthAndDeath
   ?placeOfBirth
   ?placeOfDeath
   ?hasGndInformation
@@ -453,6 +458,9 @@
         {{#if dateOfDeath.value}}
           - {{#ifCond (dateTimeFormat dateOfDeath.value "DD.MM.YYYY") "==" "Invalid date"}}{{dateOfDeath.value}}{{else}}{{#ifCond dateOfDeath.value.length ">" 4}}{{dateTimeFormat dateOfDeath.value "DD.MM.YYYY"}}{{else}}{{dateTimeFormat dateOfDeath.value "YYYY"}}{{/ifCond}}{{/ifCond}}{{#if placeOfDeath.value}} (<mp-label iri="{{placeOfDeath.value}}"></mp-label>){{/if}}
         {{/if}}
+      {{/if}}
+      {{#if dateOfBirthAndDeath.value}}
+        <p>{{dateOfBirthAndDeath.value}}</p>
       {{/if}}
       {{#if professions.value}}
         <p>
