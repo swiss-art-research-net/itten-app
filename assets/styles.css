@@ -303,6 +303,32 @@ p {
 .jila-component .relations-table .griddle-container .griddle-custom-row {
   display: block !important;
 }
+.jila-component.swab {
+  display: inline-block;
+  width: 3em;
+  height: 2em;
+}
+.jila-component.swab.actor {
+  background-color: #e44343;
+}
+.jila-component.swab.collection {
+  background-color: #FFD966;
+}
+.jila-component.swab.event {
+  background-color: #0099FF;
+}
+.jila-component.swab.group {
+  background-color: #f9987e;
+}
+.jila-component.swab.object {
+  background-color: #B0927A;
+}
+.jila-component.swab.person {
+  background-color: #FF66B3;
+}
+.jila-component.swab.place {
+  background-color: #00CC66;
+}
 .jila-component .tag {
   text-decoration: none;
 }

@@ -2,6 +2,7 @@
 
 <div class="jila-component panel-entity-details">
   <div class="container-fluid">
+    [[> component-legend]]
     <bs-row>
       <bs-col sm="12">
         <h2><mp-label iri="{{entityiri}}"></mp-label>
@@ -245,6 +246,57 @@
 </div>
 [[/inline]]
 
+[[#*inline "component-legend"]]
+
+  <mp-popover title="Legend">
+    <mp-popover-trigger placement="bottom"  trigger='["hover","focus"]'> 
+      <span>Legend</span>
+    </mp-popover-trigger>
+    <mp-popover-content>
+      <div>
+        <table class="jila-component legend">
+          <thead>
+            <tr>
+              <th>Color</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="jila-component swab actor"></span></td>
+              <td>Actor</td>
+            </tr>
+            <tr>
+              <td><span class="jila-component swab person"></span></td>
+              <td>Person</td>
+            </tr>
+            <tr>
+              <td><span class="jila-component swab group"></span></td>
+              <td>Group</td>
+            </tr>
+            <tr>
+              <td><span class="jila-component swab collection"></span></td>
+              <td>Collection</td>
+            </tr>
+            <tr>
+              <td><span class="jila-component swab event"></span></td>
+              <td>Event</td>
+            </tr>
+            <tr>
+              <td><span class="jila-component swab object"></span></td>
+              <td>Object</td>
+            </tr>
+            <tr>
+              <td><span class="jila-component swab place"></span></td>
+              <td>Place</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mp-popover-content>
+  </mp-popover>
+[[/inline]]
+
 [[#*inline "component-relations-table"]]
   <semantic-query
     query="SELECT 
@@ -456,6 +508,10 @@
             <mp-label iri="{{this}}"></mp-label>{{#unless @last}}, {{/unless}}
           {{/each}}
         </p>
+      {{else}}
+        {{#if professionStrings.value}}
+          <p>{{professionStrings.value}}</p>
+        {{/if}}
       {{/if}}
       {{#if description.value}}
         <p>{{description.value}}</p>
