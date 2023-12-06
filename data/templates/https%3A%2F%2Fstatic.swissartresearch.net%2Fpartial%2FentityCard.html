@@ -60,7 +60,7 @@
             </semantic-query>
         {{/ifCond}}
     <semantic-if
-        query="ASK { { <{{subject}}> crmdig:L54_is_same-as/(gndo:biographicalOrHistoricalInformation|gndo:professionOrOccupation|gndo:professionOrOccupationAsLiteral|gndo:dateOfBirthAndDeath) ?information . } UNION { ?assignment crm:P141_assigned <{{subject}}> ; crm:P129i_is_subject_of/crm:P3_has_note ?comment .  } }"
+        query="ASK { { <{{subject}}> crmdig:L54_is_same-as/(gndo:biographicalOrHistoricalInformation|gndo:professionOrOccupation|gndo:professionOrOccupationAsLiteral|gndo:dateOfBirthAndDeath|gndo:periodOfActivity) ?information . } UNION { ?assignment crm:P141_assigned <{{subject}}> ; crm:P129i_is_subject_of/crm:P3_has_note ?comment .  } }"
         then="{{> template-info-popup}}"
     >
         <template id="template-info-popup">
@@ -74,6 +74,7 @@
                         <semantic-query
                             query="SELECT 
                                     ?subject 
+                                    ?periodOfActivity
                                     ?dateOfBirth
                                     ?dateOfDeath
                                     ?dateOfBirthAndDeath
@@ -95,6 +96,9 @@
                                     ?subject crmdig:L54_is_same-as/gndo:dateOfDeath ?dateOfDeath .
                                 }
                                 OPTIONAL {
+                                    ?subject crmdig:L54_is_same-as/gndo:periodOfActivity ?periodOfActivity .
+                                }
+                                OPTIONAL {
                                     ?subject crmdig:L54_is_same-as/gndo:dateOfBirthAndDeath ?dateOfBirthAndDeath .
                                 }
                                 OPTIONAL {
@@ -102,7 +106,7 @@
                                     crm:P129i_is_subject_of/crm:P3_has_note ?assignment_comment ;
                                 }
                             } 
-                            GROUP BY ?subject ?dateOfBirth ?dateOfDeath ?dateOfBirthAndDeath
+                            GROUP BY ?subject ?dateOfBirth ?dateOfDeath ?dateOfBirthAndDeath ?periodOfActivity
                             LIMIT 1"
                             template="{{> template-info}}"
                         >
@@ -122,6 +126,10 @@
                                         {{/if}}
                                         {{#if dateOfBirthAndDeath.value}}
                                             <p>{{dateOfBirthAndDeath.value}}</p>
+                                        {{else}}
+                                            {{#if periodOfActivity.value}}
+                                                <p>{{periodOfActivity.value}}</p>
+                                            {{/if}}
                                         {{/if}}
                                         {{#if descriptions.value}}
                                             <p>{{descriptions.value}}</p>
