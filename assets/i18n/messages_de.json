@@ -24,6 +24,7 @@
   "explanation_facet_person_relations_num_persons": "Filter Sie nach der Anzahl von Personen, mit denen eine Person in JILA in Beziehung steht. Beachten Sie, dass die Datenbasis nicht repräsentativ für das Itten-Archiv ist.",
   "explanation_facet_person_role": "Filtern Sie hier Personen nach ihrer Rolle in Bezug auf Dokumente und Dossiers im Itten-Archiv. Grundsätzlich finden Sie Personen innerhalb der Metadaten eines Dokuments oder Dossiers. Für über 2800 Dokumentenseiten finden Sie auch in den Dokumenten erwähnte und abgebildete Personen.",
   "home_tagline": "Entdecken Sie das Itten-Archiv über Personen und ihre Netzwerke",
+  "label_active": "Aktiv",
   "label_details": "Details",
   "label_external_data": "Externe Daten",
   "label_field": "Feld",
