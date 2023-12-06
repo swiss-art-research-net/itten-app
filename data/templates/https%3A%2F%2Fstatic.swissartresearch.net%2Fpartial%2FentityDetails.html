@@ -381,6 +381,7 @@
       ?dateOfBirth
       ?dateOfDeath
       ?dateOfBirthAndDeath
+      ?periodOfActivity
       ?placeOfBirth
       ?placeOfDeath
       ?hasGndInformation
@@ -412,6 +413,9 @@
         ?gndEntity gndo:dateOfBirthAndDeath ?dateOfBirthAndDeath .
       }
       OPTIONAL {
+        ?gndEntity gndo:periodOfActivity ?periodOfActivity .
+      }
+      OPTIONAL {
         ?gndEntity gndo:placeOfBirth ?placeOfBirth .
       }
       OPTIONAL {
@@ -432,7 +436,7 @@
         }
         BIND(COALESCE(?collection, ?expression_or_collection) as ?assignment_collection)
     }
-    BIND(COALESCE(?profession, ?description, ?dateOfBirth, ?dateOfDeath, ?dateOfBirthAndDeath, ?placeOfDeath) as ?hasGndInformation)
+    BIND(COALESCE(?profession, ?description, ?dateOfBirth, ?dateOfDeath, ?dateOfBirthAndDeath, ?periodOfActivity, ?placeOfDeath) as ?hasGndInformation)
   } GROUP BY 
   ?content
   ?description 
@@ -440,6 +444,7 @@
   ?dateOfBirth
   ?dateOfDeath
   ?dateOfBirthAndDeath
+  ?periodOfActivity
   ?placeOfBirth
   ?placeOfDeath
   ?hasGndInformation
@@ -461,6 +466,10 @@
       {{/if}}
       {{#if dateOfBirthAndDeath.value}}
         <p>{{dateOfBirthAndDeath.value}}</p>
+      {{else}}
+        {{#if periodOfActivity.value}}
+            <p><i18n>label_active</i18n>: {{periodOfActivity.value}}</p>
+        {{/if}}
       {{/if}}
       {{#if professions.value}}
         <p>
