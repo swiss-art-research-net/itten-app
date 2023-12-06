@@ -401,6 +401,9 @@ p {
 ol.page-breadcrumb {
   position: static;
 }
+#mp-popover.legend-popover .arrow {
+  left: 55px !important;
+}
 #mp-popover.info .arrow {
   left: 20px !important;
 }
