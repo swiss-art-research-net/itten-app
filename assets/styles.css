@@ -278,6 +278,22 @@ p {
 .jila-component.jila-logo.login {
   height: 8rem;
 }
+.jila-component.legend th {
+  padding: 0 8px;
+  padding-bottom: 10px;
+}
+.jila-component.legend td {
+  padding: 0 8px;
+}
+.jila-component.legend-button {
+  position: relative;
+  top: -10px;
+}
+.jila-component.legend-popover .popover-content {
+  background-color: #fefefe;
+  color: #0c0c0c;
+  border: none;
+}
 .jila-component.page-title {
   margin-top: 5rem;
   margin-bottom: 2rem;
@@ -385,7 +401,7 @@ p {
 ol.page-breadcrumb {
   position: static;
 }
-#mp-popover .arrow {
+#mp-popover.info .arrow {
   left: 20px !important;
 }
 .navbar {

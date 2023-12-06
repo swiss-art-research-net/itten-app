@@ -334,6 +334,27 @@ p {
       height: 8rem;
     }
   }
+  &.legend {
+    th {
+      padding: 0 8px;
+      padding-bottom:10px;
+    }
+    td {
+      padding: 0 8px;
+    
+    }
+  }
+  &.legend-button {
+    position: relative;
+    top:-10px;
+  }
+  &.legend-popover {
+    .popover-content {
+      background-color: @col-white;
+      color: @col-black;
+      border:none;
+    }
+  }
   &.page-title {
     margin-top: 5rem;
     margin-bottom: 2rem;
@@ -461,9 +482,9 @@ ol.page-breadcrumb {
     position: static;
 }
 
-#mp-popover {
+#mp-popover.info {
   .arrow {
-    left: 20px !important;
+   left: 20px !important;
   }
 }
 
