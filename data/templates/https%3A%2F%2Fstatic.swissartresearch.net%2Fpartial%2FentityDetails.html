@@ -386,6 +386,7 @@
       (GROUP_CONCAT(DISTINCT ?assignment_comment; SEPARATOR='||') as ?assignment_comments)
       (GROUP_CONCAT(DISTINCT ?assignment_collection; SEPARATOR=',') as ?assignment_collections)
       (GROUP_CONCAT(?profession; SEPARATOR=',') as ?professions) 
+      (GROUP_CONCAT(?professionString; SEPARATOR=',') as ?professionStrings) 
     WHERE {
     BIND(<{{entityiri}}> as ?subject)
     OPTIONAL {
@@ -393,6 +394,9 @@
       ?gndEntity a gndo:AuthorityResource .
       OPTIONAL {
         ?gndEntity gndo:professionOrOccupation ?profession .
+      } 
+      OPTIONAL {
+        ?gndEntity gndo:professionOrOccupationAsLiteral ?professionString
       }
       OPTIONAL {
         ?gndEntity gndo:biographicalOrHistoricalInformation ?description .
@@ -456,6 +460,9 @@
             <mp-label iri="{{this}}"></mp-label>{{#unless @last}}, {{/unless}}
           {{/each}}
         </p>
+      {{/if}}
+      {{#if professionStrings.value}}
+        <p>{{professionStrings.value}}</p>
       {{/if}}
       {{#if description.value}}
         <p>{{description.value}}</p>
