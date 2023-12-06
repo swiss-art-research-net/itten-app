@@ -217,7 +217,7 @@
           la:digitally_shown_by/la:digitally_available_via/la:access_point ?image .
         ?position_identifier crm:P2_has_type aat:300194222 ;
           crm:P190_has_symbolic_content ?position .
-    } ORDER BY ?position"
+    } ORDER BY xsd:integer(?position)"
     options='{
       "showFilter": false
     }'
