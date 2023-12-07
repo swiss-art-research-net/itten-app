@@ -88,11 +88,7 @@
     "<https://platform.jila.zb.uzh.ch/search/Person_has_count>": [{
         "kind": "literal",
         "queryPattern": "{
-            ?subject rdf:type ?type.
-            VALUES (?type) {
-              (search:Group)
-              (search:Person)
-            }
+            ?subject a/rdfs:subClassOf* crm:E39_Actor .
             BIND(aat:300404433 as ?type_count)
             OPTIONAL {
                 ?subject crm:P1_is_identified_by ?identifier .
