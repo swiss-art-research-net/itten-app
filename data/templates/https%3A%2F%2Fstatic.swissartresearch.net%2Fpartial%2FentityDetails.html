@@ -438,19 +438,24 @@
       ?periodOfActivity
       ?placeOfBirth
       ?placeOfDeath
+      ?professions
       ?hasGndInformation
       (GROUP_CONCAT(DISTINCT ?assignment_comment; SEPARATOR='||') as ?assignment_comments)
       (GROUP_CONCAT(DISTINCT ?assignment_collection; SEPARATOR=',') as ?assignment_collections)
-      (GROUP_CONCAT(?profession; SEPARATOR=',') as ?professions) 
       (GROUP_CONCAT(?professionString; SEPARATOR=',') as ?professionStrings) 
     WHERE {
     BIND(<{{entityiri}}> as ?subject)
     OPTIONAL {
       ?subject crmdig:L54_is_same-as ?gndEntity .
       ?gndEntity a gndo:AuthorityResource .
-      OPTIONAL {
-        ?gndEntity gndo:professionOrOccupation ?profession .
-      } 
+      OPTIONAL { 
+        { 
+          SELECT ?gndEntity (GROUP_CONCAT(?profession; SEPARATOR=',') AS ?professions) WHERE {
+            ?gndEntity gndo:professionOrOccupation ?profession . 
+          } 
+          GROUP BY ?gndEntity
+        } 
+      }
       OPTIONAL {
         ?gndEntity gndo:professionOrOccupationAsLiteral ?professionString
       }
@@ -501,6 +506,7 @@
   ?periodOfActivity
   ?placeOfBirth
   ?placeOfDeath
+  ?professions
   ?hasGndInformation
   LIMIT 1"
   template="{{> template-description}}"
