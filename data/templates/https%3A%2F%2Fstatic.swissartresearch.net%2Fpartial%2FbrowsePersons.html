@@ -7,7 +7,11 @@
     <semantic-search-query-constant 
         domain='<[[resolvePrefix "crm:E39_Actor"]]>'
         query='SELECT ?subject WHERE { 
-            ?subject a search:Person .
+            ?subject a ?type .
+            VALUES (?type) {
+                (search:Person)
+                (search:Group)
+            }                
         }'
     ></semantic-search-query-constant>
     
@@ -32,7 +36,11 @@
                 min-search-term-length='3' 
                 debounce='600'
                 default-query='SELECT ?subject WHERE {
-                    ?subject a search:Person .
+                    ?subject a ?type .
+                    VALUES (?type) {
+                        (search:Person)
+                        (search:Group)
+                    }    
                     {
                         FILTER EXISTS {
                             {
