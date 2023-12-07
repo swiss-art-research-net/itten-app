@@ -24,6 +24,7 @@
   "explanation_facet_person_relations_num_persons": "Filter by the number of persons a person is related to in JILA. Note that the database is not representative of the Itten archive.",
   "explanation_facet_person_role": "Filter persons here according to their role in relation to documents and dossiers in the Itten archive. Basically, you will find persons within the metadata of a document or dossier. For over 2800 document pages you will also find persons mentioned and depicted in the documents",
   "home_tagline": "Discover the Itten archive through people and their networks",
+  "label_active": "Associated Date",
   "label_details": "Details",
   "label_color": "Color",
   "label_type": "Type",
