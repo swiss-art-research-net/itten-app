@@ -101,8 +101,8 @@
                                 id='grid-result'
                                 query='SELECT DISTINCT ?subject ?sortLabel ?searchToken (MIN(?displayAltLabel) as ?displayAltLabel) WHERE {
                                     ?subject rdfs:label ?sortLabelRaw .
-                                    BIND(xsd:string(?sortLabelRaw) AS ?sortLabelPre)
-                                    BIND(IF(REGEX(?sortLabelPre, "^[0-9]"), CONCAT("ZZZ", ?sortLabelPre), ?sortLabelPre) as ?sortLabel)
+                                    BIND(LCASE(xsd:string(?sortLabelRaw)) AS ?sortLabelPre)
+                                    BIND(IF(REGEX(?sortLabelPre, "^[0-9]"), CONCAT("zzz", ?sortLabelPre), ?sortLabelPre) as ?sortLabel)
                                 }
                                 GROUP BY ?subject ?sortLabel ?searchToken
                                 ORDER BY ?sortLabel'
