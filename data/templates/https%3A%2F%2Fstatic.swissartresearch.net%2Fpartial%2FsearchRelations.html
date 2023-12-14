@@ -48,22 +48,17 @@
     "<https://platform.jila.zb.uzh.ch/search/Person_has_associated_digitised_object>": [{
         "kind": "literal",
         "queryPattern": "{
-            ?subject a/rdfs:subClassOf* crm:E39_Actor .
-            GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
-                ?object ?predicate ?subject .
-            }
             OPTIONAL {
-                ?object crm:P46_is_composed_of/crm:P138i_has_representation ?image .
+                ?subject (^loc:ann|^loc:art|^loc:aut|^loc:ctb|^loc:pht|^loc:rcp|^loc:scr|^crm:P62_depicts|^crm:67_refers_to)/crm:P46_is_composed_of/crm:P138i_has_representation ?image .
             }
-            BIND(IF(BOUND(?image), \"yes\", \"no\") AS ?literal)
+            BIND(IF(BOUND(?image),\"yes\",\"no\") as ?literal)
             FILTER(?literal = ?__literal__)
         }"
     }],
     "<https://platform.jila.zb.uzh.ch/search/Person_has_been_identified>": [{
         "kind": "literal",
         "queryPattern": "{
-            ?subject rdfs:label ?label .
-            FILTER(STRSTARTS(STR(?subject), \"https://resource.jila.zb.uzh.ch/\"))
+            ?subject a ?dummy .
             OPTIONAL {
                 ?subject crm:P1_is_identified_by ?identifier .
                 FILTER(CONTAINS(str(?identifier), \"register-id\"))
@@ -75,12 +70,16 @@
     "<https://platform.jila.zb.uzh.ch/search/Person_has_entry_in_Heidelberg>": [{
         "kind": "literal",
         "queryPattern": "{
-            ?subject crmdig:L54_is_same-as ?gndEntity .
-            ?gndEntity a gndo:AuthorityResource .
-            SERVICE secondary:sparql {
-                ?externalEntity owl:sameAs ?gndEntity .
-                FILTER(STRSTARTS(STR(?externalEntity), \"http://lod.ub.uni-heidelberg.de\"))
+            ?subject a ?dummy .
+            OPTIONAL {
+                ?subject crmdig:L54_is_same-as ?gndEntity .
+                ?gndEntity a gndo:AuthorityResource .
+                SERVICE secondary:sparql {
+                    ?externalEntity owl:sameAs ?gndEntity .
+                    FILTER(STRSTARTS(STR(?externalEntity), \"http://lod.ub.uni-heidelberg.de\"))
+                }
             }
+            
             BIND(BOUND(?externalEntity) AS ?literal)
             FILTER(?literal = ?__literal__)
         }"
@@ -121,7 +120,14 @@
     "<https://platform.jila.zb.uzh.ch/search/Person_has_gender>": [{
         "kind": "resource",
         "queryPattern": "{
-            ?subject crmdig:L54_is_same-as/gndo:gender ?__value__ .
+            {
+                ?subject crmdig:L54_is_same-as/gndo:gender ?__value__ .
+            } UNION {
+                BIND(<https://d-nb.info/standards/vocab/gnd/gender#notKnown> as ?__value__)
+                FILTER NOT EXISTS {
+                    ?subject crmdig:L54_is_same-as/gndo:gender ?gender .
+                }
+            }
         }"
     }],
     "<https://platform.jila.zb.uzh.ch/search/Person_has_number_of_appearances>": [{
