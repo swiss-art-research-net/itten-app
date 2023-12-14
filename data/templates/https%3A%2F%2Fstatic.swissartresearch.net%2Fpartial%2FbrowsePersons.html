@@ -89,13 +89,7 @@
                     <semantic-search-facet-breadcrumbs></semantic-search-facet-breadcrumbs>
                     <semantic-search-result id='semantic-search-result'>
                         <mp-sparql-result-counts id='semantic-search-result-count' 
-                            query='SELECT DISTINCT ?subject ?sortLabel ?searchToken (MIN(?displayAltLabel) as ?displayAltLabel) WHERE {
-                                    ?subject rdfs:label|gndo:preferredName ?sortLabelRaw .
-                                    BIND(LCASE(xsd:string(?sortLabelRaw)) AS ?sortLabelPre)
-                                    BIND(IF(REGEX(?sortLabelPre, "^[0-9]"), CONCAT("zzz", ?sortLabelPre), ?sortLabelPre) as ?sortLabel)
-                                }
-                                GROUP BY ?subject ?sortLabel ?searchToken
-                                ORDER BY ?sortLabel'
+                            query='SELECT DISTINCT ?subject WHERE {}'
                             template='{{> template}}'
                         >
                         <template id='template'>
