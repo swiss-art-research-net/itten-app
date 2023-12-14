@@ -48,14 +48,10 @@
     "<https://platform.jila.zb.uzh.ch/search/Person_has_associated_digitised_object>": [{
         "kind": "literal",
         "queryPattern": "{
-            ?subject a/rdfs:subClassOf* crm:E39_Actor .
-            GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
-                ?object ?predicate ?subject .
-            }
             OPTIONAL {
-                ?object crm:P46_is_composed_of/crm:P138i_has_representation ?image .
+                ?subject (^loc:ann|^loc:art|^loc:aut|^loc:ctb|^loc:pht|^loc:rcp|^loc:scr|^crm:P62_depicts|^crm:67_refers_to)/crm:P46_is_composed_of/crm:P138i_has_representation ?image .
             }
-            BIND(IF(BOUND(?image), \"yes\", \"no\") AS ?literal)
+            BIND(IF(BOUND(?image),\"yes\",\"no\") as ?literal)
             FILTER(?literal = ?__literal__)
         }"
     }],
