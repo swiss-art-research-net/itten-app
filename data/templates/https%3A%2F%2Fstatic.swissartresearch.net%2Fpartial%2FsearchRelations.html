@@ -58,8 +58,7 @@
     "<https://platform.jila.zb.uzh.ch/search/Person_has_been_identified>": [{
         "kind": "literal",
         "queryPattern": "{
-            ?subject rdfs:label ?label .
-            FILTER(STRSTARTS(STR(?subject), \"https://resource.jila.zb.uzh.ch/\"))
+            ?subject a ?dummy .
             OPTIONAL {
                 ?subject crm:P1_is_identified_by ?identifier .
                 FILTER(CONTAINS(str(?identifier), \"register-id\"))
