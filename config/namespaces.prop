@@ -9,6 +9,7 @@ platform=https://platform.jila.zb.uzh.ch/
 search=https://platform.jila.zb.uzh.ch/search/
 aat=http://vocab.getty.edu/aat/
 gndo=https://d-nb.info/standards/elementset/gnd#
+gnd=https://d-nb.info/gnd/
 agrelon=https://d-nb.info/standards/elementset/agrelon#
 la=https://linked.art/ns/terms/
 loc=http://id.loc.gov/vocabulary/relators/
