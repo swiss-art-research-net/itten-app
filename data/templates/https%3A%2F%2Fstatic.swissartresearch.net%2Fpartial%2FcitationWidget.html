@@ -18,7 +18,7 @@
                 OPTIONAL {
                     ?subject rdfs:label ?entityLabel .
                 }
-                BIND(STR(?subject) as ?link)
+                BIND(IF(STRSTARTS(STR(?subject), 'https://resource.jila.zb.uzh.ch'), STR(?subject), CONCAT('https://jila.zb.uzh.ch/resource/?uri=', STR(?subject))) as ?link)
                 BIND(REPLACE(STR(?subject), CONCAT(REPLACE( STR(?subject) , '\\/[^/]*$', '' ),'/'), '') AS ?identifier )
                 BIND(IF(BOUND(?entityLabel), ?entityLabel, ?identifier) as ?subjectLabel)
                 BIND(<https://d-nb.info/gnd/1012546-2> as ?owner)
@@ -59,7 +59,7 @@
             </template>
 
             <template id="citationHTML">
-                {{#if author}}{{author}}: {{/if}} <mp-label iri='{{entityiri}}'></mp-label>. {{#if documentDate}}{{documentDate}}. {{/if}} In <em>JILA: Johannes Itten Linked Archive</em> {{publicationDate}}. {{place}}: {{owner}}. Available at: <a href="{{link}}">{{link}}</a>. Accessed [[currentDateTime format='dd.MM.YYYY']].
+                {{#if author}}{{author}}: {{/if}} <mp-label iri='{{entityiri}}'></mp-label>. {{#if documentDate}}{{documentDate}}. {{/if}} In <em>JILA: Johannes Itten Linked Archive</em> {{publicationDate}}. {{place}}: {{owner}}. Available at: <a href="{{{link}}}">{{link}}</a>. Accessed [[currentDateTime format='dd.MM.YYYY']].
             </template>
 
         </semantic-query>
