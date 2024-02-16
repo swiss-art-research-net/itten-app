@@ -492,3 +492,6 @@ ol.page-breadcrumb {
 .griddle-footer .pagination > li.active > a {
   border-radius: 0.4rem;
 }
+.window-manifest-navigation a:nth-child(2) {
+  display: none !important;
+}
