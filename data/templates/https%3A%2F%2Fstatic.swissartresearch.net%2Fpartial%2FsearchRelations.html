@@ -120,14 +120,7 @@
     "<https://platform.jila.zb.uzh.ch/search/Person_has_gender>": [{
         "kind": "resource",
         "queryPattern": "{
-            {
-                ?subject crmdig:L54_is_same-as/gndo:gender ?__value__ .
-            } UNION {
-                BIND(<https://d-nb.info/standards/vocab/gnd/gender#notKnown> as ?__value__)
-                FILTER NOT EXISTS {
-                    ?subject crmdig:L54_is_same-as/gndo:gender ?gender .
-                }
-            }
+            ?subject crmdig:L54_is_same-as?/gndo:gender ?__value__ .
         }"
     }],
     "<https://platform.jila.zb.uzh.ch/search/Person_has_number_of_appearances>": [{
