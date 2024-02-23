@@ -1,0 +1,125 @@
+<h2>What is JILA?</h2>
+
+<p>The Johannes Itten Linked Archive is a linked open-data application for researchers in the fields of history and cultural studies. It enables users to browse and search for sources in the Zentralbibliothek’s Itten archive, the written estate of the Bauhaus master and Swiss art theorist Johannes Itten (1888–1967).</p>
+
+<p>It focuses on personal details and a network of relationships consisting of people and documents from the estate. JILA merges archival indexing information from the Zentralbibliothek with biographical information from external data sources, such as the <a href="https://www.dnb.de/DE/Professionell/Standardisierung/GND/gnd_node.html">GND</a>,&nbsp;<a href="https://www.wikidata.org/wiki/Wikidata:Main_Page">Wikidata</a>, the&nbsp;<a href="https://www.sik-isea.ch/de-ch/Online-Best%C3%A4nde/Online-Best%C3%A4nde/SIKART-Lexikon">SIKART lexicon</a>&nbsp;and the catalogue of Itten’s works. This paves the way for new search queries and visualisations, and enables contextual information to be integrated.</p>
+
+<p>JILA also provides the application’s underlying semantic data via a SPARQL endpoint.</p>
+
+<h2>Instructions for use</h2>
+
+<p>As a research tool, the Johannes Itten Linked Archive complements&nbsp;<a href="https://zbcollections.ch/home/#/">ZBcollections</a>, the Zentralbibliothek’s archive portal.</p>
+
+<p>Document searches in JILA are conducted solely with reference to people and personal characteristics. On the ‘People’ page, you can search for people via a name, place of birth, year of death, profession or other characteristics. Every person in JILA has a minimum of one definite connection to at least one document within the Itten archive: they could be the writer or the addressee, for instance, or they could be mentioned or depicted in documents.</p>
+
+<p>Selecting a person takes you to a graph view that depicts the network of people and documents, with your chosen person at its centre. The relationships between the person and the document, and between two people, are depicted here. You can expand the graphs and use them as the starting point for your search, during which you may also stumble across unexpected hits. On the right-hand side, next to the graph, there is a table view and additional information.</p>
+
+<p>A unique feature of JILA is that you can search for people not mentioned by name, such as the ‘pretty citizen’ mentioned by Itten in his diary of his trip to Italy; a sketched portrait of this lady has even been preserved. The list of non-identified individuals can be viewed in full via the relevant filter.</p>
+
+<p>If you would like to search for particular documents and document characteristics, you can do so via <a href="https://zbcollections.ch/home/#/content/43a2ab3eb18841db9ec1af3669b74f39">ZBcollections</a>.</p>
+
+<p>The data inventory of the Johannes Itten Linked Archive (JILA) contains all the data recorded during the project through to December 2023. The semantic information is based on the archival indexing of 421 digitised documents consisting of 6,637 digitised pages of documents from the physical archive of the Itten estate. The biographical information integrated into the JILA from external data sources may be subject to continual updates and additions.</p>
+
+<p>The Itten estate, kept in the manuscript collection at the Zentralbibliothek Zürich, is not all held within the JILA. The selection of documents in the JILA represents a cross-section of the entire contents of the archive, which consists of around 60,000 physical document pages.</p>
+
+<p>You can view the originals in the Manuscripts Reading Room or order reproductions, subject to the legal and conservation-related conditions and as per the applicable terms of use. To do so, please contact the <a href="mailto:handschriften@zb.uzh.ch">Manuscript Department</a>, stating the shelf mark of your desired document. Further information about the Manuscript Department can be found <a href="https://www.zb.uzh.ch/de/collections/handschriften-nachlasse-und-archivalien">here</a>.</p>
+
+<p>The selection of data for the JILA was made under consideration of various criteria. Apart from the aim of portraying a representative cross-section through the contents and showing an array of different document types, one of the goals was to focus on key areas of the Itten estate in terms of both content and themes. Well-known and context-rich documents from the library’s holdings were also integrated.</p>
+
+<p>At the same time, when making these documents available, a methodical interpretation of the semantically structured information was consciously avoided. This meant that, for example, people identified by name and people not identified by name were treated equally and integrated into the network of relationships on equal terms.</p>
+
+<p>The Zentralbibliothek Zürich thanks the Itten family for surrendering the rights required for the JILA to be established.</p>
+
+<h2>Technical overview</h2>
+
+<p><a href="https://www.sari.uzh.ch/">SARI</a>&nbsp;solely uses open technologies and data standards to create the JILA platform. The front-end is based on <a href="https://researchspace.org/">ResearchSpace</a>, which was adapted for JILA and equipped with a dedicated network visualisation component based on&nbsp;<a href="https://www.sigmajs.org/">sigma.js</a>. In the background, the data is provided in&nbsp;<a href="https://www.w3.org/RDF/">RDF</a>&nbsp;format within a <a href="https://blazegraph.com/">Blazegraph</a>&nbsp;triple store.</p>
+
+<p>The original data from the <a href="https://zbcollections.ch/">CMI system</a>&nbsp;at the Zentralbibliothek Zürich and the&nbsp;<a href="https://iiif.io/">IIIF</a>&nbsp;data from&nbsp;<a href="https://www.e-manuscripta.ch/">e-manuscripta</a>&nbsp;are converted via a proprietary pipeline; this is publicly accessible on&nbsp;<a href="https://github.com/swiss-art-research-net/itten-pipeline">GitHub</a>. The data is rendered in a data model based on&nbsp;<a href="https://cidoc-crm.org/">CIDOC-CRM</a>, which was created and <a href="https://zellij.pythonanywhere.com/docs/list/appKwSQCuPZqI2icl">documented</a>&nbsp;with Zellij.</p>
+
+<h2>Project</h2>
+
+<p>JILA was developed from 2021 to 2023 as part of the ‘Itten vernetzt’ (‘Networking Itten&#39;) project by the Zentralbibliothek Zürich in collaboration with the Swiss Art Research Infrastructure (SARI) at the University of Zurich. We were in close contact with the team that maintains the digital catalogue of Itten’s works, led by Professor Christoph Wagner at the University of Regensburg, and Dr Maria Effinger at Heidelberg University Library, throughout the entire project.</p>
+
+<h3>ZB team</h3>
+
+<p><b>Joëlle Fischer</b></p>
+<p>Data supply since August 2023</p>
+
+<p><b>Myriam Schmidt-Müller</b></p>
+<p>Data supply until July 2023, project manager since August 2023</p>
+
+<p><b>Christine Baur</b></p>
+<p>Project manager until July 2023</p>
+
+<p><b>Kiki Lutz</b></p>
+<p>Data supply until March 2023</p>
+
+<p><b>Barbara Vogel</b></p>
+<p>Data supply until December 2021</p>
+
+<p><b>Numerous members of staff from the Manuscript, Conservation and Digital Production and Platforms Departments.</b></p>
+
+<h3>SARI team</h3>
+
+<p><b>Florian Kräutli</b></p>
+<p>Design, technical direction</p>
+
+<p><b>Thomas Hänsli</b></p>
+<p>Project management</p>
+
+<p><b>Olya Nicolaeva</b></p>
+<p>Software development</p>
+
+<p><b>André Ghattas</b></p>
+<p>Data engineering</p>
+
+<p><b>Andrea Notroff</b></p>
+<p>Project development</p>
+
+<p><b>Stephanie Santschi</b></p>
+<p>Project coordinator until March 2022</p>
+
+<h2>Data protection</h2>
+
+<p>The JILA website only uses technically necessary cookies. No user data is collected and no third-party services are used.</p>
+
+<h2>Legal terms of use for digital copies</h2>
+
+<p>Digital copies of documents where the copyright is held by Johannes Itten were published with the consent of the rightsholder under the CC-BY-NC-SA 4.0 licence. Further information on the usage rights associated with this can be obtained via <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">https://creativecommons.org/licenses/by-nc-sa/4.0/</a>.</p>
+
+<p>Digital copies of documents where the copyright is held by other individuals are in the public domain. Further information can be obtained via&nbsp;<a href="https://creativecommons.org/share-your-work/public-domain/pdm">https://creativecommons.org/share-your-work/public-domain/pdm</a>.</p>
+
+<p>The licence is stated under the ‘Details’ tab in the document view.</p>
+
+<h2>Legal terms of use for metadata</h2>
+
+<p>The metadata available on this website is in the public domain. Further information can be obtained via&nbsp;<a href="https://creativecommons.org/share-your-work/public-domain/pdm">https://creativecommons.org/share-your-work/public-domain/pdm</a>.</p>
+
+<h2>Legal notice</h2>
+
+<h3>Publisher</h3>
+
+<p>Zentralbibliothek Zürich</p>
+
+<p>Zähringerplatz 6</p>
+
+<p>8001 Zurich</p>
+
+<p>Tel:&nbsp;<a href="tel:+41%2044%20268%2031%2000">+41 44 268 31 00</a></p>
+
+<p><a href="mailto:zb@zb.uzh.ch">zb@zb.uzh.ch</a></p>
+
+<p>Responsible for content: Zentralbibliothek Zürich, Manuscript Department</p>
+
+<h3>Technical implementation</h3>
+
+<p>Swiss Art Research Infrastructure (SARI), University of Zurich</p>
+
+<p>Culmannstrasse 1</p>
+
+<p>8006 Zurich</p>
+
+<p><a href="mailto:info@swissartresearch.net">info@swissartresearch.net</a></p>
+<p><a href="https://www.sari.uzh.ch/">www.sari.uzh.ch</a></p>
+
+
