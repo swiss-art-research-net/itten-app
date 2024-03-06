@@ -21,6 +21,16 @@
     {{/each}}
     <!-- app extensions header content -->
     <script src="/assets/components/clear-title.js"></script>
+
+    <script type="text/javascript"> 
+            setTimeout(function() {
+                if (location.hash) { 
+                    var requested_hash = location.hash.slice(1); 
+                    location.hash = ''; 
+                    location.hash = requested_hash; 
+                } 
+            }, 500); 
+    </script>
 </head>
 
 <body>
