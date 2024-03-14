@@ -454,6 +454,9 @@ ol.page-breadcrumb {
 .semantic-facet-holder .facet-relations {
   width: auto;
 }
+.SparqlEditor--sparqlEditor .fullscreenToggleBtns {
+  display: none;
+}
 .system-spinner {
   font-weight: bold;
   color: #6d9cc6;
